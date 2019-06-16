@@ -3,9 +3,10 @@
     <h2>DNCA Forms</h2>
     <div class="forms">
       <div class="form-single card" v-for="form in forms" :key="form.id">
-        <li>
-          <p>{{form.stringDate}}</p>
-        </li>
+        <ul>
+          <li>Assessment Date: {{form.stringDate}}</li>
+          <li>Assessment Date: {{form.stringDate}}</li>
+        </ul>
       </div>
     </div>
     <!-- Accent-colored raised button with ripple -->
@@ -67,7 +68,7 @@ export default {
   padding: 0;
 }
 .forms-list li {
-  display: inline-block;
+  text-align: justify;
   margin: 0 10px;
 }
 .forms-list a {
