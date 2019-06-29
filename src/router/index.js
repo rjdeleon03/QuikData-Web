@@ -4,6 +4,8 @@ import Home from "@/components/home/Home";
 import About from "@/components/about/About";
 import SignUp from "@/components/auth/SignUp";
 import Login from "@/components/auth/Login";
+import Logout from "@/components/auth/Logout";
+import Forms from "@/components/forms/Forms";
 
 Vue.use(Router);
 
@@ -29,6 +31,16 @@ const router = new Router({
       path: "/login",
       name: "Login",
       component: Login
+    },
+    {
+      path: "/logout",
+      name: "Logout",
+      component: Logout
+    },
+    {
+      path: "/forms",
+      name: "Forms",
+      component: Forms
     }
   ]
 });
