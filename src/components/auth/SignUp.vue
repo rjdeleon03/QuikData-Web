@@ -1,5 +1,5 @@
 <template>
-  <div class="sign-up container">
+  <div class="auth container">
     <form @submit.prevent="signup" class="card-panel">
       <h2 class="center teal-text text-darken-1">Sign Up</h2>
       <div class="field">
@@ -42,21 +42,21 @@ export default {
 </script>
 
 <style>
-.sign-up {
+.auth {
   max-width: 400px;
   margin-top: 60px;
 }
-.sign-up h2 {
+.auth h2 {
   font-size: 2.4em;
   margin-top: 15px;
 }
-.sign-up .field {
-  margin-bottom: 16px;
+.auth .field {
+  margin-bottom: 6px;
 }
-.sign-up .card-panel {
+.auth .card-panel {
   border-radius: 16px;
 }
-.sign-up .submit {
+.auth .submit {
   margin-top: 30px;
 }
 </style>

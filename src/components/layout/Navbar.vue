@@ -2,16 +2,16 @@
   <div class="navbar">
     <nav class="teal darken-1">
       <div class="container">
-        <a href class="brand-logo left">Quik Data</a>
+        <router-link :to="{ name: 'Home'}" class="brand-logo left">Quik Data</router-link>
         <ul class="right">
           <li>
-            <a href>About</a>
+            <router-link :to="{ name: 'About'}">About</router-link>
           </li>
           <li>
-            <a href>Sign Up</a>
+            <router-link :to="{ name: 'SignUp'}">Sign Up</router-link>
           </li>
           <li>
-            <a href>Login</a>
+            <router-link :to="{ name: 'Login'}">Login</router-link>
           </li>
         </ul>
       </div>
