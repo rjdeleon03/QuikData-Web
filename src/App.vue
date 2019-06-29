@@ -1,15 +1,22 @@
 <template>
   <div id="app">
+    <Navbar />
     <router-view />
   </div>
 </template>
 
 <script>
+import Navbar from "@/components/layout/Navbar";
 export default {
   name: "app",
-  components: {}
+  components: {
+    Navbar
+  }
 };
 </script>
 
 <style>
+body {
+  font-family: "Nunito Sans", sans-serif;
+}
 </style>

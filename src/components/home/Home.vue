@@ -14,6 +14,15 @@ export default {
 </script>
 
 <style>
+.home {
+  background-image: url("~@/assets/temp_bg.jpg");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: flex;
+  height: 800px;
+}
 </style>
 
 
