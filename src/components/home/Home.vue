@@ -1,15 +1,19 @@
 <template>
-  <div id="app">
-    <router-view />
+  <div class="home">
+    <h2>Home</h2>
   </div>
 </template>
 
 <script>
 export default {
-  name: "app",
-  components: {}
+  name: "Home",
+  data() {
+    return {};
+  }
 };
 </script>
 
 <style>
 </style>
+
+
