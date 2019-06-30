@@ -3,6 +3,11 @@ import App from "./App.vue";
 
 import router from "./router";
 
+import Material from "materialize-css";
+import "materialize-css/dist/css/materialize.css";
+import "materialize-css";
+Vue.use(Material);
+
 Vue.config.productionTip = false;
 
 new Vue({

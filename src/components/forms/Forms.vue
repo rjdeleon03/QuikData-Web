@@ -42,7 +42,6 @@ export default {
         data.stringDate = new Date(
           data.formDetails[0].assessmentDate
         ).toLocaleDateString("en-US");
-        console.log(data);
         this.forms.push(data);
       });
     });
