@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <div class="container footer">
     <hr />
     <p class="center">Quik Data (c) 2019</p>
   </div>
@@ -18,8 +18,6 @@ export default {
 .footer {
   margin-top: 60px;
   margin-bottom: 60px;
-  margin-left: 40px;
-  margin-right: 40px;
 }
 </style>
 

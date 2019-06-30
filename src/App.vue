@@ -23,4 +23,15 @@ body {
   font-family: "Nunito Sans", sans-serif;
   color: #424242;
 }
+body h2 {
+  font-size: 2.4em;
+  margin: 30px;
+}
+body .container {
+  width: 80%;
+  max-width: 1100px;
+}
+body .row {
+  margin-bottom: 5px;
+}
 </style>

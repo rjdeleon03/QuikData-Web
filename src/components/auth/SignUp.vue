@@ -47,8 +47,7 @@ export default {
   margin-top: 60px;
 }
 .auth h2 {
-  font-size: 2.4em;
-  margin-top: 15px;
+  margin: 10px 0px 20px 0px;
 }
 .auth .field {
   margin-bottom: 6px;

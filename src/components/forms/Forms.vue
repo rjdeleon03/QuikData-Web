@@ -27,7 +27,6 @@
 
 <script>
 import db from "@/firebase/init";
-
 export default {
   name: "Forms",
   data() {
@@ -52,10 +51,6 @@ export default {
 </script>
 
 <style>
-.forms h2 {
-  font-size: 2.4em;
-  margin: 30px;
-}
 .forms h6 {
   font-size: 1em;
   text-transform: uppercase;
