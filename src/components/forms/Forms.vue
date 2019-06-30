@@ -1,16 +1,20 @@
 <template>
   <div class="forms">
-    <h2>Forms</h2>
+    <h2 class="center teal-text text-darken-1">Forms</h2>
     <div class="forms-list">
       <div class="form-single card-panel" v-for="form in forms" :key="form.id">
-        <ul>
-          <li>Assessment Date: {{form.stringDate}}</li>
-          <li>Sitio: {{form.baselineData[0].sitio}}</li>
-          <li>Barangay: {{form.baselineData[0].barangay}}</li>
-          <li>City / Municipality: {{form.baselineData[0].city}}</li>
-          <li>Province: {{form.baselineData[0].province}}</li>
-          <li>Calamity: {{form.calamityInfo[0].calamityType}}</li>
-        </ul>
+        <div class="form-header grey lighten-1">
+          <h6 class="center">Assessment Date: {{form.stringDate}}</h6>
+        </div>
+        <div class="form-contents">
+          <ul>
+            <li>Sitio: {{form.baselineData[0].sitio}}</li>
+            <li>Barangay: {{form.baselineData[0].barangay}}</li>
+            <li>City / Municipality: {{form.baselineData[0].city}}</li>
+            <li>Province: {{form.baselineData[0].province}}</li>
+            <li>Calamity: {{form.calamityInfo[0].calamityType}}</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -43,13 +47,31 @@ export default {
 </script>
 
 <style>
+.forms h2 {
+  font-size: 2.4em;
+  margin: 30px;
+}
+.forms h6 {
+  font-size: 1em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
 .forms .forms-list {
   max-width: 700px;
   margin: auto;
 }
 .forms .card-panel {
-  padding: 5px 20px 5px 20px;
   border-radius: 8px;
+  padding: 0px;
+}
+.forms .form-header {
+  border-radius: 8px 8px 0 0;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+.forms .form-contents {
+  padding: 5px 20px 5px 20px;
 }
 </style>
 
