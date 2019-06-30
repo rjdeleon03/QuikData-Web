@@ -14,6 +14,11 @@
             <li>Province: {{form.baselineData[0].province}}</li>
             <li>Calamity: {{form.calamityInfo[0].calamityType}}</li>
           </ul>
+          <router-link
+            :to="{name: 'SingleForm', params : {
+              form_id: form.form.id
+          }}"
+          >View</router-link>
         </div>
       </div>
     </div>
