@@ -86,71 +86,7 @@
         </div>
         <div>
           <div id="test1" class="form-contents">
-            <p class="center title">General Information</p>
-            <!-- Calamity Description  -->
-            <div>
-              <div class="row">
-                <p class="col s12 subsection-title">Description of the Calamity</p>
-              </div>
-              <div class="row">
-                <div class="col s12 m3 l3">Type of Calamity:</div>
-                <div class="col s12 m9 l9">Hello</div>
-              </div>
-              <div class="row">
-                <div class="col s12 m3 l3">Date of Occurrence:</div>
-                <div class="col s12 m9 l9">Hello</div>
-              </div>
-              <div class="row">
-                <div class="col s12 m3 l3">Description of the Event:</div>
-                <div class="col s12 m9 l9">Hello</div>
-              </div>
-            </div>
-
-            <!-- Affected Area -->
-            <div>
-              <div class="row">
-                <p class="col s12 subsection-title">Brief Description of the Affected Area</p>
-              </div>
-              <div class="row">
-                <div class="col s12">Hello</div>
-              </div>
-            </div>
-
-            <!-- Population -->
-            <div v-if="population != null">
-              <div class="row">
-                <p class="col s12 subsection-title">Population</p>
-              </div>
-              <div class="row">
-                <div class="col s12">
-                  <table>
-                    <tr>
-                      <th rowspan="2">Age</th>
-                      <th colspan="2">Total Population (Baseline)</th>
-                      <th colspan="2">Affected Population</th>
-                      <th colspan="2">Displaced Population</th>
-                    </tr>
-                    <tr>
-                      <th>Male</th>
-                      <th>Female</th>
-                      <th>Male</th>
-                      <th>Female</th>
-                      <th>Male</th>
-                      <th>Female</th>
-                    </tr>
-                    <tr v-for="row in population" :key="row.type">
-                      <td>{{ row.type }}</td>
-                      <td>{{ row.affectedMale }}</td>
-                      <td>{{ row.affectedFemale }}</td>
-                      <td>{{ row.affectedMale }}</td>
-                      <td>{{ row.affectedFemale }}</td>
-                      <td>{{ row.displacedMale }}</td>
-                      <td>{{ row.displacedFemale }}</td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
+            <GeneralInformation :formId="formId" :form="formDetailsSection" />
           </div>
           <div id="test2" class="form-contents">Test 2</div>
           <div id="test3" class="form-contents">Test 3</div>
@@ -167,10 +103,14 @@
 
 <script>
 import db from "@/firebase/init";
+import constants from "@/constants";
+import GeneralInformation from "@/components/form/GeneralInformation";
 export default {
   name: "SingleForm",
+  components: { GeneralInformation },
   data() {
     return {
+      constants: constants,
       formId: this.$route.params.form_id,
       formDetailsSection: null,
       population: null
@@ -195,13 +135,6 @@ export default {
           baselineData: data.baselineData[0],
           calamityInfo: data.calamityInfo[0]
         };
-      });
-    db.collection("population")
-      .doc(this.formId)
-      .get()
-      .then(doc => {
-        this.population = doc.data().list;
-        console.log(this.population);
       });
   },
   mounted() {
@@ -237,6 +170,7 @@ export default {
   border-radius: 8px 8px 0 0;
   height: 40px;
   background-color: #ffa000;
+  margin-bottom: 0;
 }
 
 .form .form-header p {
@@ -271,6 +205,7 @@ export default {
 .form .form-contents p.title {
   text-transform: uppercase;
   font-weight: 600;
+  margin-top: 0;
 }
 
 .form .col-no-padding {
@@ -304,8 +239,22 @@ export default {
   overflow-y: scroll !important;
 }
 
-.form .td {
-  padding: 5px;
+.form table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.form th,
+.form td {
+  border: 1px solid gray;
+  padding: 3px 8px;
+}
+
+.form th {
+  background: #ffecb3;
+  /* color: white; */
+  font-weight: 600;
 }
 </style>
 
