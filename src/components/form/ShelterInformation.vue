@@ -79,182 +79,104 @@
       </div>
     </div>
 
-    <!-- Vulnerable -->
-    <div v-if="vulnerable != null">
+    <!-- Needs -->
+    <div v-if="shelterNeeds != null">
       <div class="row subsection-container">
-        <p class="col s12 subsection-title">Vulnerable Population</p>
+        <p class="col s12 subsection-title">Needs</p>
       </div>
       <div class="row">
         <div class="col s12">
           <table>
-            <tr class="topmost">
-              <th rowspan="2">Age</th>
-              <th rowspan="2">Pregnant Women</th>
-              <th rowspan="2">Lactating Mothers</th>
-              <th rowspan="2">LGBT</th>
-              <th rowspan="2">Female-headed Households</th>
-              <th colspan="2">Child-headed Households</th>
-              <th colspan="2">Indigenous People</th>
-              <th colspan="2">Persons with Disabilities</th>
-              <th rowspan="2">Remarks</th>
-            </tr>
             <tr>
-              <th class="exception">Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
+              <th>Materials</th>
+              <th>Specific Items</th>
+              <th>Number of Families in Need</th>
             </tr>
-            <tr v-for="row in vulnerable" :key="row.type">
-              <td class="exception">{{ constants.ageGroup[row.type] }}</td>
-              <td>{{ row.pregnant }}</td>
-              <td>{{ row.lactating }}</td>
-              <td>{{ row.lgbt }}</td>
-              <td>{{ row.femaleHeaded }}</td>
-              <td>{{ row.childHeadedMale }}</td>
-              <td>{{ row.childHeadedFemale }}</td>
-              <td>{{ row.indigenousMale }}</td>
-              <td>{{ row.indigenousFemale }}</td>
-              <td>{{ row.disabledMale }}</td>
-              <td>{{ row.disabledFemale }}</td>
-              <td>{{ row.remarks }}</td>
+            <tr v-for="row in shelterNeeds" :key="row.type">
+              <td class="exception">{{ constants.needsType[row.type] }}</td>
+              <td>{{ row.specificItems }}</td>
+              <td>{{ row.familiesInNeed }}</td>
             </tr>
           </table>
         </div>
       </div>
     </div>
 
-    <!-- Casualties -->
-    <div v-if="casualties != null">
+    <!-- Assistance -->
+    <div v-if="shelterAssistance != null">
       <div class="row subsection-container">
-        <p class="col s12 subsection-title">Casualties</p>
+        <p class="col s12 subsection-title">Assistance</p>
       </div>
       <div class="row">
         <div class="col s12">
           <table>
             <tr class="topmost">
-              <th rowspan="2">Age</th>
-              <th colspan="2">Dead</th>
-              <th colspan="2">Missing</th>
-              <th colspan="2">Injured</th>
+              <th rowspan="2">Organization / Agency</th>
+              <th rowspan="2">Type of Assistance Received</th>
+              <th rowspan="2">Date Received</th>
+              <th rowspan="2">Quantity / Amount</th>
+              <th colspan="4">Beneficiaries</th>
             </tr>
             <tr>
-              <th class="exception">Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
+              <th>Men</th>
+              <th>Women</th>
+              <th>Boys</th>
+              <th>Girls</th>
             </tr>
-            <tr v-for="row in casualties" :key="row.type">
-              <td class="exception">{{ constants.ageGroup[row.type] }}</td>
-              <td>{{ row.deadMale }}</td>
-              <td>{{ row.deadFemale }}</td>
-              <td>{{ row.missingMale }}</td>
-              <td>{{ row.missingFemale }}</td>
-              <td>{{ row.injuredMale }}</td>
-              <td>{{ row.injuredFemale }}</td>
+            <tr v-for="row in shelterAssistance" :key="row.type">
+              <td>{{ row.organizationAgency }}</td>
+              <td>{{ row.assistanceType }}</td>
+              <td>{{ row.dateReceived }}</td>
+              <td>{{ row.quantity }}</td>
+              <td>{{ row.beneficiariesMen }}</td>
+              <td>{{ row.beneficiariesWomen }}</td>
+              <td>{{ row.beneficiariesBoys }}</td>
+              <td>{{ row.beneficiariesGirls }}</td>
             </tr>
           </table>
         </div>
       </div>
     </div>
 
-    <!-- Cause of Death -->
-    <div v-if="causeOfDeath != null">
+    <!-- Gaps  -->
+    <div v-if="shelterGaps != null">
       <div class="row subsection-container">
-        <p class="col s12 subsection-title">Cause of Death</p>
+        <p class="col s12 subsection-title">Gaps</p>
       </div>
       <div class="row">
         <div class="col s12">
           <table>
-            <tr class="topmost">
-              <th rowspan="2">Age</th>
-              <th colspan="2">Measles</th>
-              <th colspan="2">Diarrhea</th>
-              <th colspan="2">Pneumonia</th>
-              <th colspan="2">Dengue</th>
-              <th colspan="2">Drowning</th>
-              <th colspan="2">Heart Attack</th>
-              <th colspan="2">Electrocution</th>
-              <th colspan="2">Collapsed Building</th>
-              <th colspan="2">Others</th>
+            <tr>
+              <th>Are there any separate cubicles and/or partitions for male and female with the assistance provided?</th>
+              <td>{{shelterGaps.cubicles}}</td>
             </tr>
             <tr>
-              <th class="exception">Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-            </tr>
-            <tr v-for="row in causeOfDeath" :key="row.type">
-              <td class="exception">{{ constants.ageGroup[row.type] }}</td>
-              <td>{{ row.measlesMale }}</td>
-              <td>{{ row.measlesFemale }}</td>
-              <td>{{ row.diarrheaMale }}</td>
-              <td>{{ row.diarrheaFemale }}</td>
-              <td>{{ row.pneumoniaMale }}</td>
-              <td>{{ row.pneumoniaFemale }}</td>
-              <td>{{ row.dengueMale }}</td>
-              <td>{{ row.dengueFemale }}</td>
-              <td>{{ row.drowningMale }}</td>
-              <td>{{ row.drowningFemale }}</td>
-              <td>{{ row.heartAttackMale }}</td>
-              <td>{{ row.heartAttackFemale }}</td>
-              <td>{{ row.electrocutionMale }}</td>
-              <td>{{ row.electrocutionFemale }}</td>
-              <td>{{ row.collapsedBldgMale }}</td>
-              <td>{{ row.collapsedBldgFemale }}</td>
-              <td>{{ row.othersMale }}</td>
-              <td>{{ row.othersFemale }}</td>
-            </tr>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- Infrastructure -->
-    <div v-if="infrastructureDamage != null">
-      <div class="row subsection-container">
-        <p class="col s12 subsection-title">Damage to Infrastructures</p>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          <table>
-            <tr class="topmost">
-              <th rowspan="2">Infrastructure</th>
-              <th rowspan="2">Number of Infrastructure</th>
-              <th colspan="2">Status</th>
-              <th rowspan="2">Remarks</th>
+              <th>Is the given assistance appropriate to their cultural practices?</th>
+              <td>{{shelterGaps.culturalPracticeAssistance}}</td>
             </tr>
             <tr>
-              <th class="exception">Functional</th>
-              <th>Not Functional</th>
+              <th>Is the construction of shelter appropriate for its location and size of the family as beneficiaries?</th>
+              <td>{{shelterGaps.shelterAppropriate}}</td>
             </tr>
-            <tr v-for="row in infrastructureDamage" :key="row.type">
-              <td class="exception">{{ constants.infraType[row.type] }}</td>
-              <td>{{ row.numberOfInfrastructure }}</td>
-              <td>
-                <span v-if="row.functional">O</span>
-              </td>
-              <td>
-                <span v-if="!row.functional">O</span>
-              </td>
-              <td>{{ row.remarks }}</td>
+            <tr>
+              <th>Does it have access to basic services and economic activities?</th>
+              <td>{{shelterGaps.servicesAccess}}</td>
+            </tr>
+            <tr>
+              <th>Are there any able-bodied in the family/community who can participate in resource mobilization, construction of the shelter?</th>
+              <td>{{shelterGaps.anyAbleBodied}}</td>
+            </tr>
+            <tr>
+              <th>Is there a referral pathway for incidents of Gender Based Violence (GBV)?</th>
+              <td>{{shelterGaps.gbvReferralPathway}}</td>
+            </tr>
+            <tr>
+              <th>Are there GBV protection services available?</th>
+              <td>{{shelterGaps.gbvProtectionServices}}</td>
+            </tr>
+            <tr>
+              <th>Is there GBV protection focal point?</th>
+              <td>{{shelterGaps.gbvProtectionFocalPoint}}</td>
             </tr>
           </table>
         </div>
@@ -274,10 +196,9 @@ export default {
       constants: constants,
       houseDamage: null,
       shelterCoping: null,
-      vulnerable: null,
-      casualties: null,
-      causeOfDeath: null,
-      infrastructureDamage: null
+      shelterNeeds: null,
+      shelterAssistance: null,
+      shelterGaps: null
     };
   },
   mounted() {
@@ -294,30 +215,24 @@ export default {
         this.shelterCoping = doc.docs[0].data();
         console.log(this.shelterCoping);
       });
-    db.collection("vulnerable")
+    db.collection("shelterNeeds")
       .doc(this.formId)
       .get()
       .then(doc => {
-        this.vulnerable = doc.data().list;
+        this.shelterNeeds = doc.data().list;
       });
-    db.collection("casualties")
+    db.collection("shelterAssistance")
       .doc(this.formId)
       .get()
       .then(doc => {
-        this.casualties = doc.data().list;
+        this.shelterAssistance = doc.data().list;
       });
-    db.collection("causeOfDeath")
-      .doc(this.formId)
+    db.collection("shelterGaps")
+      .where("formId", "==", this.formId)
       .get()
       .then(doc => {
-        this.causeOfDeath = doc.data().list;
-      });
-    db.collection("infrastructureDamage")
-      .doc(this.formId)
-      .get()
-      .then(doc => {
-        this.infrastructureDamage = doc.data().list;
-        console.log(this.infrastructureDamage);
+        this.shelterGaps = doc.docs[0].data();
+        console.log(this.shelterGaps);
       });
   }
 };
