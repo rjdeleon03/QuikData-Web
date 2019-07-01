@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="form">
+    <div class="form" v-if="formDetailsSection != null">
       <h2 class="center teal-text text-darken-1">Damage, Needs, and Capacities Assessment Form</h2>
       <p
         class="center"
@@ -51,30 +51,49 @@
       </div>
 
       <div class="form-details card-panel">
-        <div class="form-header">Hello</div>
-        <div class="form-contents">
-          <div class="row">
-            <div class="col s12">
-              <ul class="tabs">
-                <li class="tab col s3">
-                  <a class="active" href="#test1">Test 1</a>
-                </li>
-                <li class="tab col s3">
-                  <a href="#test2">Test 2</a>
-                </li>
-                <li class="tab col s3">
-                  <a href="#test3">Test 3</a>
-                </li>
-                <li class="tab col s3">
-                  <a href="#test4">Test 4</a>
-                </li>
-              </ul>
-            </div>
-            <div id="test1" class="col s12">Test 1</div>
-            <div id="test2" class="col s12">Test 2</div>
-            <div id="test3" class="col s12">Test 3</div>
-            <div id="test4" class="col s12">Test 3</div>
+        <div class="row form-header">
+          <div class="col s2 col-no-padding">
+            <p>Sections</p>
           </div>
+          <div class="col s10 col-no-padding">
+            <ul class="tabs">
+              <li class="tab col s1 offset-s4">
+                <a href="#test1" class="#active">1</a>
+              </li>
+              <li class="tab col s1">
+                <a href="#test2">2</a>
+                </li>
+              <li class="tab col s1">
+                <a href="#test3">3</a>
+              </li>
+              <li class="tab col s1">
+                <a href="#test4">4</a>
+              </li>
+              <li class="tab col s1">
+                <a href="#test5">5</a>
+              </li>
+              <li class="tab col s1">
+                <a href="#test6">6</a>
+              </li>
+              <li class="tab col s1">
+                <a href="#test7">7</a>
+              </li>
+              <li class="tab col s1">
+                <a href="#test8">8</a>
+                </li>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div id="test1" class="form-contents">Test 1</div>
+          <div id="test2" class="form-contents">Test 2</div>
+          <div id="test3" class="form-contents">Test 3</div>
+          <div id="test4" class="form-contents">Test 4</div>
+          <div id="test5" class="form-contents">Test 5</div>
+          <div id="test6" class="form-contents">Test 6</div>
+          <div id="test7" class="form-contents">Test 7</div>
+          <div id="test8" class="form-contents">Test 8</div>
         </div>
       </div>
     </div>
@@ -110,16 +129,21 @@ export default {
           baselineData: data.baselineData[0],
           calamityInfo: data.calamityInfo[0]
         };
-
-        var tabs = document.querySelectorAll(".container");
-        if (typeof M == "undefined") {
-          var M = {};
-        }
-        console.log(tabs.length);
-        for (var i = 0; i < tabs.length; i++) {
-          M.Tabs.init(tabs[i]);
-        }
       });
+  },
+  mounted() {
+    var doc = document.querySelectorAll(".container")[1];
+    doc.addEventListener(
+      "DOMNodeInserted",
+      function() {
+        var tabs = doc
+          .querySelector(".form")
+          .querySelectorAll(".form-details")[1]
+          .querySelector("div div ul");
+        M.Tabs.init(tabs, { swipeable: true });
+      },
+      false
+    );
   }
 };
 </script>
@@ -138,6 +162,7 @@ export default {
 
 .form .form-header {
   border-radius: 8px 8px 0 0;
+  height: 40px;
   background-color: #ffa000;
 }
 
@@ -146,11 +171,11 @@ export default {
   text-transform: uppercase;
   font-weight: 700;
   color: white;
-  margin: 0px;
+  margin: 0 10px 0 10px;
 }
 
 .form .form-contents {
-  padding: 10px;
+  padding: 10px !important;
 }
 
 .form .field-label {
@@ -163,6 +188,33 @@ export default {
 
 .form .section .divider {
   margin: 10px 0;
+}
+
+.form .col-no-padding {
+  padding: 0px !important;
+}
+
+.form .tabs {
+  background-color: transparent;
+  height: 40px;
+}
+
+.form .tabs .tab {
+  line-height: 40px;
+}
+
+.form .tabs .tab a {
+  color: white;
+}
+
+.form .tabs .tab a.active,
+.form .tabs .tab a:hover {
+  color: teal;
+}
+
+.form .tabs .indicator {
+  background-color: teal;
+  /*Custom Color Of Indicator*/
 }
 </style>
 

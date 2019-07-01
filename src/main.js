@@ -5,7 +5,7 @@ import router from "./router";
 
 import Material from "materialize-css";
 import "materialize-css/dist/css/materialize.css";
-import "materialize-css";
+import "materialize-css/dist/js/materialize.min.js";
 Vue.use(Material);
 
 Vue.config.productionTip = false;
