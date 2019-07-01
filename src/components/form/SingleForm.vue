@@ -3,7 +3,7 @@
     <div class="form" v-if="formDetailsSection != null">
       <h2 class="center teal-text text-darken-1">Damage, Needs, and Capacities Assessment Form</h2>
       <p
-        class="center"
+        class="center subtitle"
       >Assessed on YYYY / MM / DD by {{ formDetailsSection.baselineData.organization }}</p>
       <div class="form-details card-panel">
         <div class="form-header">
@@ -62,7 +62,7 @@
               </li>
               <li class="tab col s1">
                 <a href="#test2">2</a>
-                </li>
+              </li>
               <li class="tab col s1">
                 <a href="#test3">3</a>
               </li>
@@ -80,13 +80,78 @@
               </li>
               <li class="tab col s1">
                 <a href="#test8">8</a>
-                </li>
               </li>
             </ul>
           </div>
         </div>
         <div>
-          <div id="test1" class="form-contents">Test 1</div>
+          <div id="test1" class="form-contents">
+            <p class="center title">General Information</p>
+            <!-- Calamity Description  -->
+            <div>
+              <div class="row">
+                <p class="col s12 subsection-title">Description of the Calamity</p>
+              </div>
+              <div class="row">
+                <div class="col s12 m3 l3">Type of Calamity:</div>
+                <div class="col s12 m9 l9">Hello</div>
+              </div>
+              <div class="row">
+                <div class="col s12 m3 l3">Date of Occurrence:</div>
+                <div class="col s12 m9 l9">Hello</div>
+              </div>
+              <div class="row">
+                <div class="col s12 m3 l3">Description of the Event:</div>
+                <div class="col s12 m9 l9">Hello</div>
+              </div>
+            </div>
+
+            <!-- Affected Area -->
+            <div>
+              <div class="row">
+                <p class="col s12 subsection-title">Brief Description of the Affected Area</p>
+              </div>
+              <div class="row">
+                <div class="col s12">Hello</div>
+              </div>
+            </div>
+
+            <!-- Population -->
+            <div v-if="population != null">
+              <div class="row">
+                <p class="col s12 subsection-title">Population</p>
+              </div>
+              <div class="row">
+                <div class="col s12">
+                  <table>
+                    <tr>
+                      <th rowspan="2">Age</th>
+                      <th colspan="2">Total Population (Baseline)</th>
+                      <th colspan="2">Affected Population</th>
+                      <th colspan="2">Displaced Population</th>
+                    </tr>
+                    <tr>
+                      <th>Male</th>
+                      <th>Female</th>
+                      <th>Male</th>
+                      <th>Female</th>
+                      <th>Male</th>
+                      <th>Female</th>
+                    </tr>
+                    <tr v-for="row in population" :key="row.type">
+                      <td>{{ row.type }}</td>
+                      <td>{{ row.affectedMale }}</td>
+                      <td>{{ row.affectedFemale }}</td>
+                      <td>{{ row.affectedMale }}</td>
+                      <td>{{ row.affectedFemale }}</td>
+                      <td>{{ row.displacedMale }}</td>
+                      <td>{{ row.displacedFemale }}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
           <div id="test2" class="form-contents">Test 2</div>
           <div id="test3" class="form-contents">Test 3</div>
           <div id="test4" class="form-contents">Test 4</div>
@@ -107,7 +172,8 @@ export default {
   data() {
     return {
       formId: this.$route.params.form_id,
-      formDetailsSection: null
+      formDetailsSection: null,
+      population: null
     };
   },
   methods: {
@@ -129,6 +195,13 @@ export default {
           baselineData: data.baselineData[0],
           calamityInfo: data.calamityInfo[0]
         };
+      });
+    db.collection("population")
+      .doc(this.formId)
+      .get()
+      .then(doc => {
+        this.population = doc.data().list;
+        console.log(this.population);
       });
   },
   mounted() {
@@ -154,7 +227,7 @@ export default {
   padding: 0px;
 }
 
-.form p {
+.form p.subtitle {
   margin-top: -20px;
   margin-bottom: 30px;
   font-weight: 600;
@@ -190,6 +263,16 @@ export default {
   margin: 10px 0;
 }
 
+.form .subsection-title {
+  font-weight: 600;
+  margin-bottom: 0px;
+}
+
+.form .form-contents p.title {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
 .form .col-no-padding {
   padding: 0px !important;
 }
@@ -214,7 +297,15 @@ export default {
 
 .form .tabs .indicator {
   background-color: teal;
-  /*Custom Color Of Indicator*/
+}
+
+.form .carousel {
+  height: 800px;
+  overflow-y: scroll !important;
+}
+
+.form .td {
+  padding: 5px;
 }
 </style>
 
