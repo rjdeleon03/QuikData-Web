@@ -102,7 +102,7 @@
       </div>
 
       <!-- Assistance -->
-      <div v-if="shelterAssistance != null">
+      <div v-if="shelterAssistance != null & shelterAssistance.length > 0">
         <div class="row subsection-container">
           <p class="col s12 subsection-title">Assistance</p>
         </div>
@@ -213,7 +213,6 @@ export default {
       .get()
       .then(doc => {
         this.shelterCoping = doc.docs[0].data();
-        console.log(this.shelterCoping);
       });
     db.collection("shelterNeeds")
       .doc(this.formId)
@@ -232,7 +231,6 @@ export default {
       .get()
       .then(doc => {
         this.shelterGaps = doc.docs[0].data();
-        console.log(this.shelterGaps);
       });
   }
 };

@@ -110,7 +110,7 @@
       </div>
 
       <!-- Assistance -->
-      <div v-if="foodAssistance != null">
+      <div v-if="foodAssistance != null && foodAssistance.length > 0">
         <div class="row subsection-container">
           <p class="col s12 subsection-title">Assistance</p>
         </div>

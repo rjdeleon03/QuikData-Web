@@ -28,5 +28,30 @@ export default {
     "Clothes",
     "Jerry Can / Water Filter",
     "Others"
+  ],
+  livelihoodType: [
+    "Farming",
+    "Fishing",
+    "Transportation",
+    "Entrepreneurship",
+    "Workers"
+  ],
+  livelihoodSubtype: [
+    "Rice",
+    "Corn",
+    "Vegetables",
+    "Fruits",
+    "Livestock",
+    "Others",
+    "Boat",
+    "Fishing Equipment",
+    "Aquacultures",
+    "Others",
+    "Jeepney",
+    "Tricycle",
+    "Van",
+    "Others",
+    "Employees",
+    "Laborers"
   ]
 };

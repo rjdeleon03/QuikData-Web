@@ -53,6 +53,7 @@
       <GeneralInformation :formId="formId" :form="formDetailsSection" />
       <ShelterInformation :formId="formId" :form="formDetailsSection" />
       <FoodSecurity :formId="formId" :form="formDetailsSection" />
+      <Livelihoods :formId="formId" :form="formDetailsSection" />
       <!--
       <div class="form-details card-panel">
         <div class="row form-header">
@@ -110,9 +111,15 @@ import constants from "@/constants";
 import GeneralInformation from "@/components/form/GeneralInformation";
 import ShelterInformation from "@/components/form/ShelterInformation";
 import FoodSecurity from "@/components/form/FoodSecurity";
+import Livelihoods from "@/components/form/Livelihoods";
 export default {
   name: "SingleForm",
-  components: { GeneralInformation, ShelterInformation, FoodSecurity },
+  components: {
+    GeneralInformation,
+    ShelterInformation,
+    FoodSecurity,
+    Livelihoods
+  },
   data() {
     return {
       constants: constants,
