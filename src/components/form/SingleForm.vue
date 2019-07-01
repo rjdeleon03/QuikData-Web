@@ -88,7 +88,9 @@
           <div id="test1" class="form-contents">
             <GeneralInformation :formId="formId" :form="formDetailsSection" />
           </div>
-          <div id="test2" class="form-contents">Test 2</div>
+          <div id="test2" class="form-contents">
+            <ShelterInformation :formId="formId" :form="formDetailsSection" />
+          </div>
           <div id="test3" class="form-contents">Test 3</div>
           <div id="test4" class="form-contents">Test 4</div>
           <div id="test5" class="form-contents">Test 5</div>
@@ -105,15 +107,15 @@
 import db from "@/firebase/init";
 import constants from "@/constants";
 import GeneralInformation from "@/components/form/GeneralInformation";
+import ShelterInformation from "@/components/form/ShelterInformation";
 export default {
   name: "SingleForm",
-  components: { GeneralInformation },
+  components: { GeneralInformation, ShelterInformation },
   data() {
     return {
       constants: constants,
       formId: this.$route.params.form_id,
-      formDetailsSection: null,
-      population: null
+      formDetailsSection: null
     };
   },
   methods: {

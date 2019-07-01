@@ -17,5 +17,6 @@ export default {
     "Communication Lines",
     "Livelihood Facilities",
     "Others"
-  ]
+  ],
+  houseType: ["Concrete", "Semi-Concrete", "Light Materials"]
 };
