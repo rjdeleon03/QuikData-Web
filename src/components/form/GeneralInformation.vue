@@ -1,39 +1,54 @@
 <template>
   <div class="general-information">
-    <p class="center title">General Information</p>
+    <div class="section">
+      <h6>General Information</h6>
+      <div class="divider"></div>
+    </div>
 
     <!-- Calamity Description  -->
     <div>
-      <div class="row">
+      <div class="row subsection-container">
         <p class="col s12 subsection-title">Description of the Calamity</p>
       </div>
       <div class="row">
-        <div class="col s12 m3 l3">Type of Calamity:</div>
-        <div class="col s12 m9 l9">Hello</div>
-      </div>
-      <div class="row">
-        <div class="col s12 m3 l3">Date of Occurrence:</div>
-        <div class="col s12 m9 l9">Hello</div>
-      </div>
-      <div class="row">
-        <div class="col s12 m3 l3">Description of the Event:</div>
-        <div class="col s12 m9 l9">Hello</div>
+        <div class="col s12">
+          <table>
+            <tr>
+              <th>Type of Calamity:</th>
+              <td>Hello</td>
+            </tr>
+            <tr>
+              <th>Date of Occurrence:</th>
+              <td>Hello</td>
+            </tr>
+            <tr>
+              <th>Description of the Event:</th>
+              <td>Hello</td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
 
     <!-- Affected Area -->
     <div>
-      <div class="row">
+      <div class="row subsection-container">
         <p class="col s12 subsection-title">Brief Description of the Affected Area</p>
       </div>
       <div class="row">
-        <div class="col s12">Hello</div>
+        <div class="col s12">
+          <table>
+            <tr>
+              <td>Hello</td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
 
     <!-- Population -->
     <div v-if="population != null">
-      <div class="row">
+      <div class="row subsection-container">
         <p class="col s12 subsection-title">Population</p>
       </div>
       <div class="row">
@@ -69,7 +84,7 @@
 
     <!-- Families -->
     <div v-if="families != null">
-      <div class="row">
+      <div class="row subsection-container">
         <p class="col s12 subsection-title">Family and Household Data</p>
       </div>
       <div class="row">
@@ -100,7 +115,7 @@
 
     <!-- Vulnerable -->
     <div v-if="vulnerable != null">
-      <div class="row">
+      <div class="row subsection-container">
         <p class="col s12 subsection-title">Vulnerable Population</p>
       </div>
       <div class="row">
@@ -146,7 +161,7 @@
 
     <!-- Casualties -->
     <div v-if="casualties != null">
-      <div class="row">
+      <div class="row subsection-container">
         <p class="col s12 subsection-title">Casualties</p>
       </div>
       <div class="row">
@@ -182,7 +197,7 @@
 
     <!-- Cause of Death -->
     <div v-if="causeOfDeath != null">
-      <div class="row">
+      <div class="row subsection-container">
         <p class="col s12 subsection-title">Cause of Death</p>
       </div>
       <div class="row">
@@ -248,7 +263,7 @@
 
     <!-- Infrastructure -->
     <div v-if="infrastructureDamage != null">
-      <div class="row">
+      <div class="row subsection-container">
         <p class="col s12 subsection-title">Damage to Infrastructures</p>
       </div>
       <div class="row">
@@ -344,5 +359,9 @@ export default {
 <style>
 .general-information {
   padding-bottom: 20px;
+}
+.general-information .section h6 {
+  text-transform: uppercase;
+  font-weight: 600;
 }
 </style>

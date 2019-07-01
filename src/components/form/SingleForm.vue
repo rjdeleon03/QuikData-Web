@@ -188,6 +188,9 @@ export default {
 .form .field-label {
   font-weight: 600;
 }
+.form .subsection-container {
+  margin-bottom: 0;
+}
 
 .form .section {
   padding: 0 0.75rem;
@@ -200,6 +203,7 @@ export default {
 .form .subsection-title {
   font-weight: 600;
   margin-bottom: 0px;
+  margin-top: 10px;
 }
 
 .form .form-contents p.title {
@@ -235,7 +239,7 @@ export default {
 }
 
 .form .carousel {
-  height: 800px;
+  height: 1200px;
   overflow-y: scroll !important;
 }
 
