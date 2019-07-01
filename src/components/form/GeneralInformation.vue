@@ -1,296 +1,332 @@
 <template>
-  <div class="general-information">
-    <div class="section">
-      <h6>General Information</h6>
-      <div class="divider"></div>
+  <div class="form-details card-panel">
+    <!--
+    <div class="row form-header">
+      <div class="col s4 col-no-padding">
+        <p>General Information</p>
+      </div>
+      <div class="col s8 col-no-padding">
+        <ul class="tabs">
+          <li class="tab col s1 offset-s2">
+            <a href="#test1" class="#active">1</a>
+          </li>
+          <li class="tab col s1">
+            <a href="#test2">2</a>
+          </li>
+          <li class="tab col s1">
+            <a href="#test3">3</a>
+          </li>
+          <li class="tab col s1">
+            <a href="#test4">4</a>
+          </li>
+          <li class="tab col s1">
+            <a href="#test5">5</a>
+          </li>
+          <li class="tab col s1">
+            <a href="#test6">6</a>
+          </li>
+          <li class="tab col s1">
+            <a href="#test7">7</a>
+          </li>
+          <li class="tab col s1">
+            <a href="#test8">8</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    -->
+    <div class="form-header">
+      <p class="center">General Information</p>
     </div>
 
-    <!-- Calamity Description  -->
-    <div>
-      <div class="row subsection-container">
-        <p class="col s12 subsection-title">Description of the Calamity</p>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          <table>
-            <tr>
-              <th>Type of Calamity:</th>
-              <td>Hello</td>
-            </tr>
-            <tr>
-              <th>Date of Occurrence:</th>
-              <td>Hello</td>
-            </tr>
-            <tr>
-              <th>Description of the Event:</th>
-              <td>Hello</td>
-            </tr>
-          </table>
+    <div class="general-information form-contents">
+      <!-- Calamity Description  -->
+      <div>
+        <div class="row subsection-container">
+          <p class="col s12 subsection-title">Description of the Calamity</p>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <table>
+              <tr>
+                <th>Type of Calamity:</th>
+                <td>Hello</td>
+              </tr>
+              <tr>
+                <th>Date of Occurrence:</th>
+                <td>Hello</td>
+              </tr>
+              <tr>
+                <th>Description of the Event:</th>
+                <td>Hello</td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Affected Area -->
-    <div>
-      <div class="row subsection-container">
-        <p class="col s12 subsection-title">Brief Description of the Affected Area</p>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          <table>
-            <tr>
-              <td>Hello</td>
-            </tr>
-          </table>
+      <!-- Affected Area -->
+      <div>
+        <div class="row subsection-container">
+          <p class="col s12 subsection-title">Brief Description of the Affected Area</p>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <table>
+              <tr>
+                <td>Hello</td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Population -->
-    <div v-if="population != null">
-      <div class="row subsection-container">
-        <p class="col s12 subsection-title">Population</p>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          <table>
-            <tr class="topmost">
-              <th rowspan="2">Age</th>
-              <th colspan="2">Total Population (Baseline)</th>
-              <th colspan="2">Affected Population</th>
-              <th colspan="2">Displaced Population</th>
-            </tr>
-            <tr>
-              <th class="exception">Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-            </tr>
-            <tr v-for="row in population" :key="row.type">
-              <td class="exception">{{ constants.ageGroup[row.type] }}</td>
-              <td>{{ row.affectedMale }}</td>
-              <td>{{ row.affectedFemale }}</td>
-              <td>{{ row.affectedMale }}</td>
-              <td>{{ row.affectedFemale }}</td>
-              <td>{{ row.displacedMale }}</td>
-              <td>{{ row.displacedFemale }}</td>
-            </tr>
-          </table>
+      <!-- Population -->
+      <div v-if="population != null">
+        <div class="row subsection-container">
+          <p class="col s12 subsection-title">Population</p>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <table>
+              <tr class="topmost">
+                <th rowspan="2">Age</th>
+                <th colspan="2">Total Population (Baseline)</th>
+                <th colspan="2">Affected Population</th>
+                <th colspan="2">Displaced Population</th>
+              </tr>
+              <tr>
+                <th class="exception">Male</th>
+                <th>Female</th>
+                <th>Male</th>
+                <th>Female</th>
+                <th>Male</th>
+                <th>Female</th>
+              </tr>
+              <tr v-for="row in population" :key="row.type">
+                <td class="exception">{{ constants.ageGroup[row.type] }}</td>
+                <td>{{ row.affectedMale }}</td>
+                <td>{{ row.affectedFemale }}</td>
+                <td>{{ row.affectedMale }}</td>
+                <td>{{ row.affectedFemale }}</td>
+                <td>{{ row.displacedMale }}</td>
+                <td>{{ row.displacedFemale }}</td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Families -->
-    <div v-if="families != null">
-      <div class="row subsection-container">
-        <p class="col s12 subsection-title">Family and Household Data</p>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          <table>
-            <tr class="topmost">
-              <th></th>
-              <th>Total Number (Baseline)</th>
-              <th>Number of Affected</th>
-              <th>Number of Displaced</th>
-            </tr>
-            <tr>
-              <td>Families</td>
-              <td>{{form.baselineData.totalFamilies}}</td>
-              <td>{{families.affectedFamilies}}</td>
-              <td>{{families.displacedFamilies}}</td>
-            </tr>
-            <tr>
-              <td>Households</td>
-              <td>{{form.baselineData.totalHouseholds}}</td>
-              <td>{{families.affectedHouseholds}}</td>
-              <td>{{families.displacedHouseholds}}</td>
-            </tr>
-          </table>
+      <!-- Families -->
+      <div v-if="families != null">
+        <div class="row subsection-container">
+          <p class="col s12 subsection-title">Family and Household Data</p>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <table>
+              <tr class="topmost">
+                <th></th>
+                <th>Total Number (Baseline)</th>
+                <th>Number of Affected</th>
+                <th>Number of Displaced</th>
+              </tr>
+              <tr>
+                <td>Families</td>
+                <td>{{form.baselineData.totalFamilies}}</td>
+                <td>{{families.affectedFamilies}}</td>
+                <td>{{families.displacedFamilies}}</td>
+              </tr>
+              <tr>
+                <td>Households</td>
+                <td>{{form.baselineData.totalHouseholds}}</td>
+                <td>{{families.affectedHouseholds}}</td>
+                <td>{{families.displacedHouseholds}}</td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Vulnerable -->
-    <div v-if="vulnerable != null">
-      <div class="row subsection-container">
-        <p class="col s12 subsection-title">Vulnerable Population</p>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          <table>
-            <tr class="topmost">
-              <th rowspan="2">Age</th>
-              <th rowspan="2">Pregnant Women</th>
-              <th rowspan="2">Lactating Mothers</th>
-              <th rowspan="2">LGBT</th>
-              <th rowspan="2">Female-headed Households</th>
-              <th colspan="2">Child-headed Households</th>
-              <th colspan="2">Indigenous People</th>
-              <th colspan="2">Persons with Disabilities</th>
-              <th rowspan="2">Remarks</th>
-            </tr>
-            <tr>
-              <th class="exception">Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-            </tr>
-            <tr v-for="row in vulnerable" :key="row.type">
-              <td class="exception">{{ constants.ageGroup[row.type] }}</td>
-              <td>{{ row.pregnant }}</td>
-              <td>{{ row.lactating }}</td>
-              <td>{{ row.lgbt }}</td>
-              <td>{{ row.femaleHeaded }}</td>
-              <td>{{ row.childHeadedMale }}</td>
-              <td>{{ row.childHeadedFemale }}</td>
-              <td>{{ row.indigenousMale }}</td>
-              <td>{{ row.indigenousFemale }}</td>
-              <td>{{ row.disabledMale }}</td>
-              <td>{{ row.disabledFemale }}</td>
-              <td>{{ row.remarks }}</td>
-            </tr>
-          </table>
+      <!-- Vulnerable -->
+      <div v-if="vulnerable != null">
+        <div class="row subsection-container">
+          <p class="col s12 subsection-title">Vulnerable Population</p>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <table>
+              <tr class="topmost">
+                <th rowspan="2">Age</th>
+                <th rowspan="2">Pregnant Women</th>
+                <th rowspan="2">Lactating Mothers</th>
+                <th rowspan="2">LGBT</th>
+                <th rowspan="2">Female-headed Households</th>
+                <th colspan="2">Child-headed Households</th>
+                <th colspan="2">Indigenous People</th>
+                <th colspan="2">Persons with Disabilities</th>
+                <th rowspan="2">Remarks</th>
+              </tr>
+              <tr>
+                <th class="exception">Male</th>
+                <th>Female</th>
+                <th>Male</th>
+                <th>Female</th>
+                <th>Male</th>
+                <th>Female</th>
+              </tr>
+              <tr v-for="row in vulnerable" :key="row.type">
+                <td class="exception">{{ constants.ageGroup[row.type] }}</td>
+                <td>{{ row.pregnant }}</td>
+                <td>{{ row.lactating }}</td>
+                <td>{{ row.lgbt }}</td>
+                <td>{{ row.femaleHeaded }}</td>
+                <td>{{ row.childHeadedMale }}</td>
+                <td>{{ row.childHeadedFemale }}</td>
+                <td>{{ row.indigenousMale }}</td>
+                <td>{{ row.indigenousFemale }}</td>
+                <td>{{ row.disabledMale }}</td>
+                <td>{{ row.disabledFemale }}</td>
+                <td>{{ row.remarks }}</td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Casualties -->
-    <div v-if="casualties != null">
-      <div class="row subsection-container">
-        <p class="col s12 subsection-title">Casualties</p>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          <table>
-            <tr class="topmost">
-              <th rowspan="2">Age</th>
-              <th colspan="2">Dead</th>
-              <th colspan="2">Missing</th>
-              <th colspan="2">Injured</th>
-            </tr>
-            <tr>
-              <th class="exception">Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-            </tr>
-            <tr v-for="row in casualties" :key="row.type">
-              <td class="exception">{{ constants.ageGroup[row.type] }}</td>
-              <td>{{ row.deadMale }}</td>
-              <td>{{ row.deadFemale }}</td>
-              <td>{{ row.missingMale }}</td>
-              <td>{{ row.missingFemale }}</td>
-              <td>{{ row.injuredMale }}</td>
-              <td>{{ row.injuredFemale }}</td>
-            </tr>
-          </table>
+      <!-- Casualties -->
+      <div v-if="casualties != null">
+        <div class="row subsection-container">
+          <p class="col s12 subsection-title">Casualties</p>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <table>
+              <tr class="topmost">
+                <th rowspan="2">Age</th>
+                <th colspan="2">Dead</th>
+                <th colspan="2">Missing</th>
+                <th colspan="2">Injured</th>
+              </tr>
+              <tr>
+                <th class="exception">Male</th>
+                <th>Female</th>
+                <th>Male</th>
+                <th>Female</th>
+                <th>Male</th>
+                <th>Female</th>
+              </tr>
+              <tr v-for="row in casualties" :key="row.type">
+                <td class="exception">{{ constants.ageGroup[row.type] }}</td>
+                <td>{{ row.deadMale }}</td>
+                <td>{{ row.deadFemale }}</td>
+                <td>{{ row.missingMale }}</td>
+                <td>{{ row.missingFemale }}</td>
+                <td>{{ row.injuredMale }}</td>
+                <td>{{ row.injuredFemale }}</td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Cause of Death -->
-    <div v-if="causeOfDeath != null">
-      <div class="row subsection-container">
-        <p class="col s12 subsection-title">Cause of Death</p>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          <table>
-            <tr class="topmost">
-              <th rowspan="2">Age</th>
-              <th colspan="2">Measles</th>
-              <th colspan="2">Diarrhea</th>
-              <th colspan="2">Pneumonia</th>
-              <th colspan="2">Dengue</th>
-              <th colspan="2">Drowning</th>
-              <th colspan="2">Heart Attack</th>
-              <th colspan="2">Electrocution</th>
-              <th colspan="2">Collapsed Building</th>
-              <th colspan="2">Others</th>
-            </tr>
-            <tr>
-              <th class="exception">Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-              <th>Male</th>
-              <th>Female</th>
-            </tr>
-            <tr v-for="row in causeOfDeath" :key="row.type">
-              <td class="exception">{{ constants.ageGroup[row.type] }}</td>
-              <td>{{ row.measlesMale }}</td>
-              <td>{{ row.measlesFemale }}</td>
-              <td>{{ row.diarrheaMale }}</td>
-              <td>{{ row.diarrheaFemale }}</td>
-              <td>{{ row.pneumoniaMale }}</td>
-              <td>{{ row.pneumoniaFemale }}</td>
-              <td>{{ row.dengueMale }}</td>
-              <td>{{ row.dengueFemale }}</td>
-              <td>{{ row.drowningMale }}</td>
-              <td>{{ row.drowningFemale }}</td>
-              <td>{{ row.heartAttackMale }}</td>
-              <td>{{ row.heartAttackFemale }}</td>
-              <td>{{ row.electrocutionMale }}</td>
-              <td>{{ row.electrocutionFemale }}</td>
-              <td>{{ row.collapsedBldgMale }}</td>
-              <td>{{ row.collapsedBldgFemale }}</td>
-              <td>{{ row.othersMale }}</td>
-              <td>{{ row.othersFemale }}</td>
-            </tr>
-          </table>
+      <!-- Cause of Death -->
+      <div v-if="causeOfDeath != null">
+        <div class="row subsection-container">
+          <p class="col s12 subsection-title">Cause of Death</p>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <table>
+              <tr class="topmost">
+                <th rowspan="2">Age</th>
+                <th colspan="2">Measles</th>
+                <th colspan="2">Diarrhea</th>
+                <th colspan="2">Pneumonia</th>
+                <th colspan="2">Dengue</th>
+                <th colspan="2">Drowning</th>
+                <th colspan="2">Heart Attack</th>
+                <th colspan="2">Electrocution</th>
+                <th colspan="2">Collapsed Building</th>
+                <th colspan="2">Others</th>
+              </tr>
+              <tr>
+                <th class="exception">Male</th>
+                <th>Female</th>
+                <th>Male</th>
+                <th>Female</th>
+                <th>Male</th>
+                <th>Female</th>
+                <th>Male</th>
+                <th>Female</th>
+                <th>Male</th>
+                <th>Female</th>
+                <th>Male</th>
+                <th>Female</th>
+                <th>Male</th>
+                <th>Female</th>
+                <th>Male</th>
+                <th>Female</th>
+                <th>Male</th>
+                <th>Female</th>
+              </tr>
+              <tr v-for="row in causeOfDeath" :key="row.type">
+                <td class="exception">{{ constants.ageGroup[row.type] }}</td>
+                <td>{{ row.measlesMale }}</td>
+                <td>{{ row.measlesFemale }}</td>
+                <td>{{ row.diarrheaMale }}</td>
+                <td>{{ row.diarrheaFemale }}</td>
+                <td>{{ row.pneumoniaMale }}</td>
+                <td>{{ row.pneumoniaFemale }}</td>
+                <td>{{ row.dengueMale }}</td>
+                <td>{{ row.dengueFemale }}</td>
+                <td>{{ row.drowningMale }}</td>
+                <td>{{ row.drowningFemale }}</td>
+                <td>{{ row.heartAttackMale }}</td>
+                <td>{{ row.heartAttackFemale }}</td>
+                <td>{{ row.electrocutionMale }}</td>
+                <td>{{ row.electrocutionFemale }}</td>
+                <td>{{ row.collapsedBldgMale }}</td>
+                <td>{{ row.collapsedBldgFemale }}</td>
+                <td>{{ row.othersMale }}</td>
+                <td>{{ row.othersFemale }}</td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Infrastructure -->
-    <div v-if="infrastructureDamage != null">
-      <div class="row subsection-container">
-        <p class="col s12 subsection-title">Damage to Infrastructures</p>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          <table>
-            <tr class="topmost">
-              <th rowspan="2">Infrastructure</th>
-              <th rowspan="2">Number of Infrastructure</th>
-              <th colspan="2">Status</th>
-              <th rowspan="2">Remarks</th>
-            </tr>
-            <tr>
-              <th class="exception">Functional</th>
-              <th>Not Functional</th>
-            </tr>
-            <tr v-for="row in infrastructureDamage" :key="row.type">
-              <td class="exception">{{ constants.infraType[row.type] }}</td>
-              <td>{{ row.numberOfInfrastructure }}</td>
-              <td>
-                <span v-if="row.functional">O</span>
-              </td>
-              <td>
-                <span v-if="!row.functional">O</span>
-              </td>
-              <td>{{ row.remarks }}</td>
-            </tr>
-          </table>
+      <!-- Infrastructure -->
+      <div v-if="infrastructureDamage != null">
+        <div class="row subsection-container">
+          <p class="col s12 subsection-title">Damage to Infrastructures</p>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <table>
+              <tr class="topmost">
+                <th rowspan="2">Infrastructure</th>
+                <th rowspan="2">Number of Infrastructure</th>
+                <th colspan="2">Status</th>
+                <th rowspan="2">Remarks</th>
+              </tr>
+              <tr>
+                <th class="exception">Functional</th>
+                <th>Not Functional</th>
+              </tr>
+              <tr v-for="row in infrastructureDamage" :key="row.type">
+                <td class="exception">{{ constants.infraType[row.type] }}</td>
+                <td>{{ row.numberOfInfrastructure }}</td>
+                <td>
+                  <span v-if="row.functional">O</span>
+                </td>
+                <td>
+                  <span v-if="!row.functional">O</span>
+                </td>
+                <td>{{ row.remarks }}</td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
     </div>

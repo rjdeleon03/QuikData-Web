@@ -50,6 +50,10 @@
         </div>
       </div>
 
+      <GeneralInformation :formId="formId" :form="formDetailsSection" />
+      <ShelterInformation :formId="formId" :form="formDetailsSection" />
+      <FoodSecurity :formId="formId" :form="formDetailsSection" />
+      <!--
       <div class="form-details card-panel">
         <div class="row form-header">
           <div class="col s2 col-no-padding">
@@ -85,12 +89,8 @@
           </div>
         </div>
         <div>
-          <div id="test1" class="form-contents">
-            <GeneralInformation :formId="formId" :form="formDetailsSection" />
-          </div>
-          <div id="test2" class="form-contents">
-            <ShelterInformation :formId="formId" :form="formDetailsSection" />
-          </div>
+          <div id="test1" class="form-contents"></div>
+          <div id="test2" class="form-contents"></div>
           <div id="test3" class="form-contents">Test 3</div>
           <div id="test4" class="form-contents">Test 4</div>
           <div id="test5" class="form-contents">Test 5</div>
@@ -99,6 +99,7 @@
           <div id="test8" class="form-contents">Test 8</div>
         </div>
       </div>
+      -->
     </div>
   </div>
 </template>
@@ -108,9 +109,10 @@ import db from "@/firebase/init";
 import constants from "@/constants";
 import GeneralInformation from "@/components/form/GeneralInformation";
 import ShelterInformation from "@/components/form/ShelterInformation";
+import FoodSecurity from "@/components/form/FoodSecurity";
 export default {
   name: "SingleForm",
-  components: { GeneralInformation, ShelterInformation },
+  components: { GeneralInformation, ShelterInformation, FoodSecurity },
   data() {
     return {
       constants: constants,
@@ -160,6 +162,7 @@ export default {
 .form .form-details {
   border-radius: 8px;
   padding: 0px;
+  font-size: 0.82em !important;
 }
 
 .form p.subtitle {
@@ -184,7 +187,9 @@ export default {
 }
 
 .form .form-contents {
-  padding: 10px !important;
+  padding: 10px 10px 20px 10px !important;
+  display: block;
+  overflow: auto;
 }
 
 .form .field-label {
@@ -241,8 +246,7 @@ export default {
 }
 
 .form .carousel {
-  height: 1200px;
-  overflow-y: scroll !important;
+  overflow: hidden;
 }
 
 .form table {
