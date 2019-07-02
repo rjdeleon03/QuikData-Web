@@ -53,5 +53,15 @@ export default {
     "Others",
     "Employees",
     "Laborers"
+  ],
+  specialNeedsType: [
+    "Pregnant Women",
+    "Lactating Mothers",
+    "Physically Challenged",
+    "Mentally Challenged",
+    "Children",
+    "Senior Citizens",
+    "Infants",
+    "Others"
   ]
 };
