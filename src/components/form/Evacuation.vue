@@ -19,13 +19,13 @@
           :key="index"
           v-bind:id="'evacuation' + (index + 1)"
         >
-          <div class="row subsection-container">
+          <div class="subsection-container">
             <p
               class="col s12 subsection-title"
             >Situations in Evacuation Centers or Temporary Shelters</p>
           </div>
           <div>
-            <div class="col s12">
+            <div class="col s12 evacuation-wrapper">
               <table>
                 <tr>
                   <th colspan="4">Name of Evacuation Center or Temporary Shelter</th>
@@ -322,10 +322,8 @@ export default {
     doc.addEventListener(
       "DOMNodeInserted",
       function() {
-        var tabs = doc
-          .querySelector(".form")
-          .querySelectorAll(".form-details")[1]
-          .querySelector("div div div ul");
+        var tabs = doc.querySelector(".form #evacuation div div div ul");
+        console.log(tabs);
         M.Tabs.init(tabs, { swipeable: true });
       },
       false
@@ -337,6 +335,15 @@ export default {
 <style>
 .evacuation {
   padding-bottom: 20px;
+}
+#evacuation .form-contents {
+  padding: 10px 0 0 0 !important;
+}
+.evacuation .carousel {
+  overflow: scroll !important;
+}
+.evacuation .carousel.carousel-slider .carousel-item p {
+  font-size: 0.82rem;
 }
 .evacuation .tabs {
   margin-top: -10px;
