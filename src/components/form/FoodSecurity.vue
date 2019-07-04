@@ -199,7 +199,6 @@ export default {
       .get()
       .then(doc => {
         this.foodImpact = doc.docs[0].data();
-        console.log(this.foodImpact);
       });
     db.collection("foodCoping")
       .where("formId", "==", this.formId)
@@ -224,7 +223,6 @@ export default {
       .get()
       .then(doc => {
         this.foodGaps = doc.docs[0].data();
-        console.log(this.foodGaps);
       });
   }
 };

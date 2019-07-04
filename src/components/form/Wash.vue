@@ -236,7 +236,7 @@
 import db from "@/firebase/init";
 import constants from "@/constants";
 export default {
-  name: "FoodSecurity",
+  name: "Wash",
   props: ["formId", "form"],
   data() {
     return {
@@ -267,7 +267,6 @@ export default {
       .get()
       .then(doc => {
         this.psychosocial = doc.data().list;
-        console.log(this.psychosocial);
       });
     db.collection("washCoping")
       .where("formId", "==", this.formId)

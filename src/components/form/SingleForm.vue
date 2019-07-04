@@ -50,12 +50,13 @@
         </div>
       </div>
 
-      <GeneralInformation :formId="formId" :form="formDetailsSection" />
+      <!-- <GeneralInformation :formId="formId" :form="formDetailsSection" />
       <ShelterInformation :formId="formId" :form="formDetailsSection" />
       <FoodSecurity :formId="formId" :form="formDetailsSection" />
       <Livelihoods :formId="formId" :form="formDetailsSection" />
       <Health :formId="formId" :form="formDetailsSection" />
-      <Wash :formId="formId" :form="formDetailsSection" />
+      <Wash :formId="formId" :form="formDetailsSection" />-->
+      <CaseStories :formId="formId" :form="formDetailsSection" />
       <!--
       <div class="form-details card-panel">
         <div class="row form-header">
@@ -108,7 +109,7 @@
 </template>
 
 <script>
-import db from "@/firebase/init";
+import firebase from "@/firebase/init";
 import constants from "@/constants";
 import GeneralInformation from "@/components/form/GeneralInformation";
 import ShelterInformation from "@/components/form/ShelterInformation";
@@ -116,6 +117,7 @@ import FoodSecurity from "@/components/form/FoodSecurity";
 import Livelihoods from "@/components/form/Livelihoods";
 import Health from "@/components/form/Health";
 import Wash from "@/components/form/Wash";
+import CaseStories from "@/components/form/CaseStories";
 export default {
   name: "SingleForm",
   components: {
@@ -124,7 +126,8 @@ export default {
     FoodSecurity,
     Livelihoods,
     Health,
-    Wash
+    Wash,
+    CaseStories
   },
   data() {
     return {
@@ -142,7 +145,8 @@ export default {
     $route: "updateId"
   },
   created() {
-    db.collection("form")
+    firebase.db
+      .collection("form")
       .doc(this.formId)
       .get()
       .then(doc => {

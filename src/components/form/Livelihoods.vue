@@ -47,7 +47,7 @@
       </div>
 
       <!-- Income After -->
-      <div v-if="incomeAfter != null && incomeBefore.length > 0">
+      <div v-if="incomeAfter != null && incomeAfter.length > 0">
         <div class="row subsection-container">
           <p
             class="col s12 subsection-title"
@@ -253,7 +253,7 @@
 import db from "@/firebase/init";
 import constants from "@/constants";
 export default {
-  name: "FoodSecurity",
+  name: "Livelihoods",
   props: ["formId", "form"],
   data() {
     return {
@@ -284,7 +284,6 @@ export default {
       .get()
       .then(doc => {
         this.estimatedDamage = doc.data().list;
-        console.log(this.estimatedDamage[0].types);
       });
     db.collection("livelihoodsCoping")
       .where("formId", "==", this.formId)

@@ -386,7 +386,6 @@ export default {
       .get()
       .then(doc => {
         this.infrastructureDamage = doc.data().list;
-        console.log(this.infrastructureDamage);
       });
   }
 };
