@@ -160,20 +160,6 @@ export default {
           calamityInfo: data.calamityInfo[0]
         };
       });
-  },
-  mounted() {
-    var doc = document.querySelectorAll(".container")[1];
-    doc.addEventListener(
-      "DOMNodeInserted",
-      function() {
-        var tabs = doc
-          .querySelector(".form")
-          .querySelectorAll(".form-details")[1]
-          .querySelector("div div ul");
-        M.Tabs.init(tabs, { swipeable: true });
-      },
-      false
-    );
   }
 };
 </script>
@@ -259,20 +245,20 @@ export default {
 
 .form .tabs {
   background-color: transparent;
-  height: 40px;
-}
-
-.form .tabs .tab {
-  line-height: 40px;
 }
 
 .form .tabs .tab a {
   color: white;
 }
 
-.form .tabs .tab a.active,
+.form .tabs .tab a:focus.active,
+.form .tabs .tab a.active {
+  color: white;
+  background: #00796b;
+}
 .form .tabs .tab a:hover {
-  color: teal;
+  color: #00796b;
+  background-color: #ffc107;
 }
 
 .form .tabs .indicator {

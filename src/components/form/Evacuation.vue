@@ -6,7 +6,19 @@
     <div class="evacuation form-contents">
       <!-- Evacuation Sites -->
       <div v-if="evacuationSites != null && evacuationSites.length > 0">
-        <div class="row" v-for="(row, index) in evacuationSites" :key="index">
+        <div class="tabs-wrapper">
+          <ul class="tabs center" style="margin-top:-10px; background: #ffa000">
+            <li class="tab" v-for="(row, index) in evacuationSites" :key="index">
+              <a v-bind:href="'#evacuation' + (index + 1)">{{ index + 1 }}</a>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="row"
+          v-for="(row, index) in evacuationSites"
+          :key="index"
+          v-bind:id="'evacuation' + (index + 1)"
+        >
           <div class="row subsection-container">
             <p
               class="col s12 subsection-title"
@@ -306,6 +318,18 @@ export default {
       .then(doc => {
         this.evacuationSites = doc.data().list;
       });
+    var doc = document.querySelectorAll(".container")[1];
+    doc.addEventListener(
+      "DOMNodeInserted",
+      function() {
+        var tabs = doc
+          .querySelector(".form")
+          .querySelectorAll(".form-details")[1]
+          .querySelector("div div div ul");
+        M.Tabs.init(tabs, { swipeable: true });
+      },
+      false
+    );
   }
 };
 </script>
@@ -313,6 +337,20 @@ export default {
 <style>
 .evacuation {
   padding-bottom: 20px;
+}
+.evacuation .tabs {
+  margin-top: -10px;
+  background: #ffa000;
+  height: 30px;
+  display: flex;
+}
+.evacuation .tabs .tab {
+  line-height: 30px;
+  width: 100%;
+}
+.evacuation .tabs .tab a {
+  font-size: 0.9em;
+  font-weight: 600;
 }
 .evacuation .section h6 {
   text-transform: uppercase;
