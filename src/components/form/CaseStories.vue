@@ -1,5 +1,5 @@
 <template>
-  <div class="form-details card-panel">
+  <div class="form-details card-panel" id="case-stories">
     <div class="form-header">
       <p class="center">Case Stories</p>
     </div>
@@ -9,13 +9,29 @@
         <div class="row subsection-container">
           <p class="col s12 subsection-title">Images</p>
         </div>
-        <div class="row">
+        <div class="row" id="imageRow">
           <div class="col s12">
             <table>
               <tr>
                 <td v-for="(row, index) in caseStoriesImages" :key="index">
-                  <img v-bind:src="row" alt />
+                  <img class="card-panel" v-bind:src="row" alt />
                 </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Images -->
+      <div v-if="caseStoriesText != null">
+        <div class="row subsection-container">
+          <p class="col s12 subsection-title">Stories</p>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <table>
+              <tr>
+                <td>{{ caseStoriesText }}</td>
               </tr>
             </table>
           </div>
@@ -55,6 +71,22 @@ export default {
         });
         console.log(data);
       });
+    var doc = document.querySelectorAll(".container")[1];
+    doc.addEventListener(
+      "DOMNodeInserted",
+      function() {
+        var carousel = doc
+          .querySelector(".form #case-stories .form-contents")
+          .querySelectorAll(".row")[1]
+          .querySelector(".col .carousel");
+        M.Carousel.init(carousel, {
+          indicators: true,
+          noWrap: true,
+          fullWidth: true
+        });
+      },
+      false
+    );
   }
 };
 </script>
@@ -67,9 +99,19 @@ export default {
   text-transform: uppercase;
   font-weight: 600;
 }
+.case-stories #imageRow tr,
+.case-stories #imageRow td {
+  border: none !important;
+}
 .case-stories img {
-  object-fit: contain;
-  height: 200px;
+  object-fit: cover;
   width: 100%;
+  height: 300px;
+  border-radius: 8px;
+  padding: 0;
+}
+.case-stories .carousel .carousel-item {
+  width: 100%;
+  height: 300px;
 }
 </style>

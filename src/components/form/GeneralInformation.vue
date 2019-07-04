@@ -334,7 +334,7 @@
 </template>
 
 <script>
-import db from "@/firebase/init";
+import firebase from "@/firebase/init";
 import constants from "@/constants";
 export default {
   name: "GeneralInformation",
@@ -351,6 +351,7 @@ export default {
     };
   },
   mounted() {
+    const db = firebase.db;
     db.collection("population")
       .doc(this.formId)
       .get()

@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import db from "@/firebase/init";
+import firebase from "@/firebase/init";
 export default {
   name: "Forms",
   data() {
@@ -35,7 +35,7 @@ export default {
     };
   },
   created() {
-    db.collection("form").onSnapshot(doc => {
+    firebase.db.collection("form").onSnapshot(doc => {
       this.forms = [];
       doc.forEach(form => {
         const data = form.data();

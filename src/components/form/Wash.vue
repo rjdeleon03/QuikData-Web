@@ -233,7 +233,7 @@
 </template>
 
 <script>
-import db from "@/firebase/init";
+import firebase from "@/firebase/init";
 import constants from "@/constants";
 export default {
   name: "Wash",
@@ -250,6 +250,7 @@ export default {
     };
   },
   mounted() {
+    const db = firebase.db;
     db.collection("washConditions")
       .where("formId", "==", this.formId)
       .get()

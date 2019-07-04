@@ -178,7 +178,7 @@
 </template>
 
 <script>
-import db from "@/firebase/init";
+import firebase from "@/firebase/init";
 import constants from "@/constants";
 export default {
   name: "FoodSecurity",
@@ -194,6 +194,7 @@ export default {
     };
   },
   mounted() {
+    const db = firebase.db;
     db.collection("foodImpact")
       .where("formId", "==", this.formId)
       .get()

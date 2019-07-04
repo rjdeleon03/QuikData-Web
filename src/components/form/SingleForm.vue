@@ -50,12 +50,12 @@
         </div>
       </div>
 
-      <!-- <GeneralInformation :formId="formId" :form="formDetailsSection" />
+      <GeneralInformation :formId="formId" :form="formDetailsSection" />
       <ShelterInformation :formId="formId" :form="formDetailsSection" />
       <FoodSecurity :formId="formId" :form="formDetailsSection" />
       <Livelihoods :formId="formId" :form="formDetailsSection" />
       <Health :formId="formId" :form="formDetailsSection" />
-      <Wash :formId="formId" :form="formDetailsSection" />-->
+      <Wash :formId="formId" :form="formDetailsSection" />
       <CaseStories :formId="formId" :form="formDetailsSection" />
       <!--
       <div class="form-details card-panel">
