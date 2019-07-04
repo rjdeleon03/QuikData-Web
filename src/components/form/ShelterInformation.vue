@@ -15,8 +15,8 @@
               <tr class="topmost">
                 <th rowspan="2">Type of Houses</th>
                 <th rowspan="2">Number of Houses (Baseline)</th>
-                <th colspan="3">House Ownership</th>
-                <th colspan="3">Land Ownership</th>
+                <th class="center" colspan="3">House Ownership</th>
+                <th class="center" colspan="3">Land Ownership</th>
                 <th rowspan="2">Number of Informal Settler Families</th>
                 <th rowspan="2">Number of Partially-Damaged Houses</th>
                 <th rowspan="2">Number of Totally-Damaged Houses</th>
@@ -114,7 +114,7 @@
                 <th rowspan="2">Type of Assistance Received</th>
                 <th rowspan="2">Date Received</th>
                 <th rowspan="2">Quantity / Amount</th>
-                <th colspan="4">Beneficiaries</th>
+                <th class="center" colspan="4">Beneficiaries</th>
               </tr>
               <tr>
                 <th>Men</th>

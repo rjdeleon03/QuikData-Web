@@ -91,9 +91,9 @@
             <table>
               <tr class="topmost">
                 <th rowspan="2">Age</th>
-                <th colspan="2">Total Population (Baseline)</th>
-                <th colspan="2">Affected Population</th>
-                <th colspan="2">Displaced Population</th>
+                <th class="center" colspan="2">Total Population (Baseline)</th>
+                <th class="center" colspan="2">Affected Population</th>
+                <th class="center" colspan="2">Displaced Population</th>
               </tr>
               <tr>
                 <th class="exception">Male</th>
@@ -157,15 +157,15 @@
           <div class="col s12">
             <table>
               <tr class="topmost">
-                <th rowspan="2">Age</th>
+                <th class="w70" rowspan="2">Age</th>
                 <th rowspan="2">Pregnant Women</th>
                 <th rowspan="2">Lactating Mothers</th>
                 <th rowspan="2">LGBT</th>
                 <th rowspan="2">Female-headed Households</th>
-                <th colspan="2">Child-headed Households</th>
-                <th colspan="2">Indigenous People</th>
-                <th colspan="2">Persons with Disabilities</th>
-                <th rowspan="2">Remarks</th>
+                <th class="center" colspan="2">Child-headed Households</th>
+                <th class="center" colspan="2">Indigenous People</th>
+                <th class="center" colspan="2">Persons with Disabilities</th>
+                <th rowspan="2" colspan="2">Remarks</th>
               </tr>
               <tr>
                 <th class="exception">Male</th>
@@ -187,7 +187,7 @@
                 <td>{{ row.indigenousFemale }}</td>
                 <td>{{ row.disabledMale }}</td>
                 <td>{{ row.disabledFemale }}</td>
-                <td>{{ row.remarks }}</td>
+                <td colspan="2">{{ row.remarks }}</td>
               </tr>
             </table>
           </div>
@@ -204,9 +204,9 @@
             <table>
               <tr class="topmost">
                 <th rowspan="2">Age</th>
-                <th colspan="2">Dead</th>
-                <th colspan="2">Missing</th>
-                <th colspan="2">Injured</th>
+                <th class="center" colspan="2">Dead</th>
+                <th class="center" colspan="2">Missing</th>
+                <th class="center" colspan="2">Injured</th>
               </tr>
               <tr>
                 <th class="exception">Male</th>
@@ -239,58 +239,45 @@
           <div class="col s12">
             <table>
               <tr class="topmost">
-                <th rowspan="2">Age</th>
-                <th colspan="2">Measles</th>
-                <th colspan="2">Diarrhea</th>
-                <th colspan="2">Pneumonia</th>
-                <th colspan="2">Dengue</th>
-                <th colspan="2">Drowning</th>
-                <th colspan="2">Heart Attack</th>
-                <th colspan="2">Electrocution</th>
-                <th colspan="2">Collapsed Building</th>
-                <th colspan="2">Others</th>
+                <th class="w70">Age</th>
+                <th class="w60">Gender</th>
+                <th>Measles</th>
+                <th>Diarrhea</th>
+                <th>Pneumonia</th>
+                <th>Dengue</th>
+                <th>Drowning</th>
+                <th>Heart Attack</th>
+                <th>Electrocution</th>
+                <th>Collapsed Building</th>
+                <th>Others</th>
               </tr>
-              <tr>
-                <th class="exception">Male</th>
-                <th>Female</th>
-                <th>Male</th>
-                <th>Female</th>
-                <th>Male</th>
-                <th>Female</th>
-                <th>Male</th>
-                <th>Female</th>
-                <th>Male</th>
-                <th>Female</th>
-                <th>Male</th>
-                <th>Female</th>
-                <th>Male</th>
-                <th>Female</th>
-                <th>Male</th>
-                <th>Female</th>
-                <th>Male</th>
-                <th>Female</th>
-              </tr>
-              <tr v-for="row in causeOfDeath" :key="row.type">
-                <td class="exception">{{ constants.ageGroup[row.type] }}</td>
-                <td>{{ row.measlesMale }}</td>
-                <td>{{ row.measlesFemale }}</td>
-                <td>{{ row.diarrheaMale }}</td>
-                <td>{{ row.diarrheaFemale }}</td>
-                <td>{{ row.pneumoniaMale }}</td>
-                <td>{{ row.pneumoniaFemale }}</td>
-                <td>{{ row.dengueMale }}</td>
-                <td>{{ row.dengueFemale }}</td>
-                <td>{{ row.drowningMale }}</td>
-                <td>{{ row.drowningFemale }}</td>
-                <td>{{ row.heartAttackMale }}</td>
-                <td>{{ row.heartAttackFemale }}</td>
-                <td>{{ row.electrocutionMale }}</td>
-                <td>{{ row.electrocutionFemale }}</td>
-                <td>{{ row.collapsedBldgMale }}</td>
-                <td>{{ row.collapsedBldgFemale }}</td>
-                <td>{{ row.othersMale }}</td>
-                <td>{{ row.othersFemale }}</td>
-              </tr>
+              <template v-for="row in causeOfDeath">
+                <tr>
+                  <td class="exception" rowspan="2">{{ constants.ageGroup[row.type] }}</td>
+                  <td>Male</td>
+                  <td>{{ row.measlesMale }}</td>
+                  <td>{{ row.diarrheaMale }}</td>
+                  <td>{{ row.pneumoniaMale }}</td>
+                  <td>{{ row.dengueMale }}</td>
+                  <td>{{ row.drowningMale }}</td>
+                  <td>{{ row.heartAttackMale }}</td>
+                  <td>{{ row.electrocutionMale }}</td>
+                  <td>{{ row.collapsedBldgMale }}</td>
+                  <td>{{ row.othersMale }}</td>
+                </tr>
+                <tr>
+                  <td>Female</td>
+                  <td>{{ row.measlesFemale }}</td>
+                  <td>{{ row.diarrheaFemale }}</td>
+                  <td>{{ row.pneumoniaFemale }}</td>
+                  <td>{{ row.dengueFemale }}</td>
+                  <td>{{ row.drowningFemale }}</td>
+                  <td>{{ row.heartAttackFemale }}</td>
+                  <td>{{ row.electrocutionFemale }}</td>
+                  <td>{{ row.collapsedBldgFemale }}</td>
+                  <td>{{ row.othersFemale }}</td>
+                </tr>
+              </template>
             </table>
           </div>
         </div>
@@ -307,8 +294,8 @@
               <tr class="topmost">
                 <th rowspan="2">Infrastructure</th>
                 <th rowspan="2">Number of Infrastructure</th>
-                <th colspan="2">Status</th>
-                <th rowspan="2">Remarks</th>
+                <th class="center" colspan="2">Status</th>
+                <th rowspan="2" colspan="2">Remarks</th>
               </tr>
               <tr>
                 <th class="exception">Functional</th>
@@ -323,7 +310,7 @@
                 <td>
                   <span v-if="!row.functional">O</span>
                 </td>
-                <td>{{ row.remarks }}</td>
+                <td colspan="2">{{ row.remarks }}</td>
               </tr>
             </table>
           </div>

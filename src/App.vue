@@ -29,7 +29,6 @@ body h2 {
 }
 body .container {
   width: 80%;
-  max-width: 1100px;
 }
 body .row {
   margin-bottom: 5px;

@@ -9,7 +9,7 @@
         <div class="form-header">
           <p class="center">Form Details</p>
         </div>
-        <div class="form-contents">
+        <div class="form-contents default-row">
           <div class="row">
             <div class="col s12 m6 l2 field-label">Sitio / Purok / Zone:</div>
             <div class="col s12 m6 l4">{{ formDetailsSection.baselineData.sitio }}</div>
@@ -179,6 +179,11 @@ export default {
 </script>
 
 <style>
+.form {
+  /* min-width: 1150px; */
+  padding: 0 20px;
+}
+
 .form .form-details {
   border-radius: 8px;
   padding: 0px;
@@ -207,9 +212,18 @@ export default {
 }
 
 .form .form-contents {
-  padding: 10px 10px 20px 10px !important;
+  padding: 10px 0 20px 0 !important;
   display: block;
   overflow: auto;
+}
+
+.form .row {
+  min-width: 900px;
+  padding: 0 10px 0 10px;
+}
+
+.form .default-row .row {
+  min-width: 100px;
 }
 
 .form .field-label {
@@ -278,13 +292,31 @@ export default {
 .form th,
 .form td {
   border: 1px solid gray;
-  padding: 3px 8px;
+  padding: 3px 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .form th {
   background: #ffecb3;
   /* color: white; */
   font-weight: 600;
+}
+
+.form table tr .w40 {
+  width: 40px;
+}
+
+.form table tr .w60 {
+  width: 60px;
+}
+
+.form table tr .w70 {
+  width: 70px;
+}
+
+.form table tr .center {
+  text-align: center;
 }
 </style>
 

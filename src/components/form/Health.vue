@@ -13,10 +13,10 @@
           <div class="col s12">
             <table>
               <tr class="topmost">
-                <th rowspan="2">Age</th>
-                <th rowspan="2">Gender</th>
-                <th colspan="5">Number of Cases of Illnesses</th>
-                <th colspan="4">Medical Needs</th>
+                <th class="w70" rowspan="2">Age</th>
+                <th class="w60" rowspan="2">Gender</th>
+                <th class="center" colspan="5">Number of Cases of Illnesses</th>
+                <th class="center" colspan="4">Medical Needs</th>
               </tr>
               <tr>
                 <th>Diarrhea</th>
@@ -96,9 +96,10 @@
                 <th rowspan="2">Age</th>
                 <th
                   rowspan="2"
+                  colspan="2"
                 >Manifestations of Mental stress / Trauma (Blank stare, nightmares, sleep disorder, violent tendencies, etc.)</th>
-                <th colspan="2">Number of Cases</th>
-                <th rowspan="2">Needs (Counselling, referrals, etc.)</th>
+                <th class="center" colspan="2">Number of Cases</th>
+                <th rowspan="2" colspan="2">Needs (Counselling, referrals, etc.)</th>
               </tr>
               <tr>
                 <th>Male</th>
@@ -106,10 +107,10 @@
               </tr>
               <tr v-for="row in psychosocial" :key="row.type">
                 <td>{{constants.ageGroup[row.type]}}</td>
-                <td>{{row.manifestations}}</td>
+                <td colspan="2">{{row.manifestations}}</td>
                 <td>{{row.casesMale}}</td>
                 <td>{{row.casesFemale}}</td>
-                <td>{{row.needs}}</td>
+                <td colspan="2">{{row.needs}}</td>
               </tr>
             </table>
           </div>
@@ -146,7 +147,7 @@
                 <th rowspan="2">Type of Assistance Received</th>
                 <th rowspan="2">Date Received</th>
                 <th rowspan="2">Quantity / Amount</th>
-                <th colspan="4">Beneficiaries</th>
+                <th class="center" colspan="4">Beneficiaries</th>
               </tr>
               <tr>
                 <th>Men</th>

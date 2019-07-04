@@ -150,7 +150,7 @@
                 <th rowspan="2">Type of Assistance Received</th>
                 <th rowspan="2">Date Received</th>
                 <th rowspan="2">Quantity / Amount</th>
-                <th colspan="4">Beneficiaries</th>
+                <th class="center" colspan="4">Beneficiaries</th>
               </tr>
               <tr>
                 <th>Men</th>
