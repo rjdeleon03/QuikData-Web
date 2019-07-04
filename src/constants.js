@@ -63,5 +63,19 @@ export default {
     "Senior Citizens",
     "Infants",
     "Others"
+  ],
+  evacuationType: [
+    "Evacuation Center Building",
+    "Multi-Purpose Hall",
+    "Church / Place of Worship",
+    "School",
+    "Gym",
+    "Living with Host Family / Friends",
+    "Renting an Apartment",
+    "Living in Damaged House",
+    "Informal Self-Settled Camp",
+    "Emergency Shelter / Makeshift House",
+    "Squatting",
+    "Others"
   ]
 };

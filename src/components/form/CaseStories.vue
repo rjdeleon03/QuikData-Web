@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <!-- Images -->
+      <!-- Stories -->
       <div v-if="caseStoriesText != null">
         <div class="row subsection-container">
           <p class="col s12 subsection-title">Stories</p>
