@@ -7,6 +7,7 @@ import Login from "@/components/auth/Login";
 import Logout from "@/components/auth/Logout";
 import Forms from "@/components/forms/Forms";
 import SingleForm from "@/components/form/SingleForm";
+import PrintSingleForm from "@/components/print-form/PrintSingleForm";
 
 Vue.use(Router);
 
@@ -47,6 +48,11 @@ const router = new Router({
       path: "/forms/:form_id",
       name: "SingleForm",
       component: SingleForm
+    },
+    {
+      path: "/forms/:form_id/print",
+      name: "PrintSingleForm",
+      component: PrintSingleForm
     }
   ]
 });
