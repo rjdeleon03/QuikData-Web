@@ -311,9 +311,8 @@ export default {
     doc.addEventListener(
       "DOMNodeInserted",
       function() {
-        var tabs = doc.querySelector(".form .collapsible");
-        console.log(tabs);
-        M.Collapsible.init(tabs, {});
+        var cards = doc.querySelectorAll(".form .collapsible.card");
+        cards.forEach(card => M.Collapsible.init(card, {}));
       },
       false
     );

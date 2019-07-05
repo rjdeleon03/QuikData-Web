@@ -51,13 +51,13 @@
       </div>
 
       <GeneralInformation :formId="formId" :form="formDetailsSection" />
-      <!-- <ShelterInformation :formId="formId" :form="formDetailsSection" />
+      <ShelterInformation :formId="formId" :form="formDetailsSection" />
       <FoodSecurity :formId="formId" :form="formDetailsSection" />
       <Livelihoods :formId="formId" :form="formDetailsSection" />
-      <Health :formId="formId" :form="formDetailsSection" />-->
-      <!-- <Wash :formId="formId" :form="formDetailsSection" /> -->
+      <Health :formId="formId" :form="formDetailsSection" />
+      <Wash :formId="formId" :form="formDetailsSection" />
       <Evacuation :formId="formId" :form="formDetailsSection" />
-      <!-- <CaseStories :formId="formId" :form="formDetailsSection" /> -->
+      <CaseStories :formId="formId" :form="formDetailsSection" />
       <!--
       <div class="form-details card-panel">
         <div class="row form-header">
@@ -167,7 +167,7 @@ export default {
 <style>
 .form {
   /* min-width: 1150px; */
-  padding: 0 20px;
+  /* padding: 0 20px; */
 }
 .form .collapsible.card {
   border: none;

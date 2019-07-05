@@ -1,43 +1,47 @@
 <template>
   <div class="form-details card-panel" id="case-stories">
-    <div class="form-header">
-      <p class="center">Case Stories</p>
-    </div>
-    <div class="case-stories form-contents">
-      <!-- Images -->
-      <div v-if="caseStoriesImages != null && caseStoriesImages.length > 0">
-        <div class="row subsection-container">
-          <p class="col s12 subsection-title">Images</p>
+    <ul class="collapsible card">
+      <li>
+        <div class="form-header collapsible-header">
+          <p class="center">Case Stories</p>
         </div>
-        <div class="row" id="imageRow">
-          <div class="col s12">
-            <table>
-              <tr>
-                <td v-for="(row, index) in caseStoriesImages" :key="index">
-                  <img class="card-panel" v-bind:src="row" alt />
-                </td>
-              </tr>
-            </table>
+        <div class="collapsible-body case-stories form-contents">
+          <!-- Images -->
+          <div v-if="caseStoriesImages != null && caseStoriesImages.length > 0">
+            <div class="row subsection-container">
+              <p class="col s12 subsection-title">Images</p>
+            </div>
+            <div class="row" id="imageRow">
+              <div class="col s12">
+                <table>
+                  <tr>
+                    <td v-for="(row, index) in caseStoriesImages" :key="index">
+                      <img class="card-panel" v-bind:src="row" alt />
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <!-- Stories -->
-      <div v-if="caseStoriesText != null">
-        <div class="row subsection-container">
-          <p class="col s12 subsection-title">Stories</p>
-        </div>
-        <div class="row">
-          <div class="col s12">
-            <table>
-              <tr>
-                <td>{{ caseStoriesText }}</td>
-              </tr>
-            </table>
+          <!-- Stories -->
+          <div v-if="caseStoriesText != null">
+            <div class="row subsection-container">
+              <p class="col s12 subsection-title">Stories</p>
+            </div>
+            <div class="row">
+              <div class="col s12">
+                <table>
+                  <tr>
+                    <td>{{ caseStoriesText }}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </template>
 
