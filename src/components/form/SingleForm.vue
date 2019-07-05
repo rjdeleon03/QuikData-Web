@@ -169,7 +169,27 @@ export default {
   /* min-width: 1150px; */
   padding: 0 20px;
 }
-
+.form .collapsible.card {
+  border: none;
+  border-radius: 8px;
+  padding-bottom: 15px;
+}
+.form .collapsible {
+  box-shadow: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  margin-top: 0;
+}
+.form .collapsible .collapsible-header {
+  height: 40px;
+  padding: 0;
+}
+.form .collapsible .collapsible-header p {
+  display: block;
+  margin: auto;
+  width: 100%;
+}
 .form .form-details {
   border-radius: 8px;
   padding: 0px;
@@ -198,8 +218,8 @@ export default {
 }
 
 .form .form-contents {
-  padding: 10px 0 20px 0 !important;
-  display: block;
+  padding: 10px 0 15px 0 !important;
+  /* display: block; */
   overflow: auto;
 }
 

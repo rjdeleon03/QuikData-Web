@@ -337,14 +337,8 @@ export default {
 </script>
 
 <style>
-.evacuation .collapsible {
-  box-shadow: none;
-  margin-top: 0;
-  border-left: none;
-  border-right: none;
-}
 .evacuation .collapsible .collapsible-header {
-  height: 30px;
+  height: 30px !important;
   padding: 0;
 }
 .evacuation .collapsible .collapsible-header p {
