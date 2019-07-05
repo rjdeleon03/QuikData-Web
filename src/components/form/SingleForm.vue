@@ -244,7 +244,7 @@ export default {
 }
 
 .form .section .divider {
-  margin: 10px 0;
+  margin: 10px;
 }
 
 .form .subsection-title {
