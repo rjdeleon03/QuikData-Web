@@ -1,47 +1,12 @@
 <template>
   <div class="form-details card-panel">
-    <!--
-    <div class="row form-header">
-      <div class="col s4 col-no-padding">
-        <p>General Information</p>
-      </div>
-      <div class="col s8 col-no-padding">
-        <ul class="tabs">
-          <li class="tab col s1 offset-s2">
-            <a href="#test1" class="#active">1</a>
-          </li>
-          <li class="tab col s1">
-            <a href="#test2">2</a>
-          </li>
-          <li class="tab col s1">
-            <a href="#test3">3</a>
-          </li>
-          <li class="tab col s1">
-            <a href="#test4">4</a>
-          </li>
-          <li class="tab col s1">
-            <a href="#test5">5</a>
-          </li>
-          <li class="tab col s1">
-            <a href="#test6">6</a>
-          </li>
-          <li class="tab col s1">
-            <a href="#test7">7</a>
-          </li>
-          <li class="tab col s1">
-            <a href="#test8">8</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    -->
     <div class="form-header">
       <p class="center">General Information</p>
     </div>
 
     <div class="general-information form-contents">
       <!-- Calamity Description  -->
-      <div>
+      <div v-if="calamityInfo != null">
         <div class="row subsection-container">
           <p class="col s12 subsection-title">Description of the Calamity</p>
         </div>
@@ -50,15 +15,15 @@
             <table>
               <tr>
                 <th>Type of Calamity:</th>
-                <td>Hello</td>
+                <td>{{ calamityInfo.calamityType }}</td>
               </tr>
               <tr>
                 <th>Date of Occurrence:</th>
-                <td>Hello</td>
+                <td>{{ constants.convertDate(calamityInfo.occurrenceDate) }}</td>
               </tr>
               <tr>
                 <th>Description of the Event:</th>
-                <td>Hello</td>
+                <td>{{ calamityInfo.eventDescription }}</td>
               </tr>
             </table>
           </div>
@@ -66,7 +31,7 @@
       </div>
 
       <!-- Affected Area -->
-      <div>
+      <div v-if="calamityInfo != null">
         <div class="row subsection-container">
           <p class="col s12 subsection-title">Brief Description of the Affected Area</p>
         </div>
@@ -74,7 +39,7 @@
           <div class="col s12">
             <table>
               <tr>
-                <td>Hello</td>
+                <td>{{ calamityInfo.affectedAreaDescription }}</td>
               </tr>
             </table>
           </div>
@@ -329,6 +294,7 @@ export default {
   data() {
     return {
       constants: constants,
+      calamityInfo: null,
       population: null,
       families: null,
       vulnerable: null,
@@ -339,6 +305,13 @@ export default {
   },
   mounted() {
     const db = firebase.db;
+    db.collection("calamityInfo")
+      .where("formId", "==", this.formId)
+      .get()
+      .then(doc => {
+        this.calamityInfo = doc.docs[0].data();
+        console.log(this.calamityInfo);
+      });
     db.collection("population")
       .doc(this.formId)
       .get()

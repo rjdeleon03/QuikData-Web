@@ -30,7 +30,7 @@
                           <th colspan="4">Date of Evacuation</th>
                           <td
                             colspan="4"
-                          >{{ new Date(row.siteInfo[0].evacuationDate).toLocaleDateString("en-US") }}</td>
+                          >{{ constants.convertDate(row.siteInfo[0].evacuationDate) }}</td>
                         </tr>
                         <tr>
                           <th colspan="4">Location</th>
@@ -328,7 +328,6 @@ export default {
       "DOMNodeInserted",
       function() {
         var tabs = doc.querySelector(".form #evacuation div div ul");
-        console.log(tabs);
         M.Collapsible.init(tabs, {});
       },
       false

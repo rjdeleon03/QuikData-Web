@@ -4,7 +4,7 @@
       <h2 class="center teal-text text-darken-1">Damage, Needs, and Capacities Assessment Form</h2>
       <p
         class="center subtitle"
-      >Assessed on YYYY / MM / DD by {{ formDetailsSection.baselineData.organization }}</p>
+      >Assessed on {{ constants.convertDate(formDetailsSection.formDetails.assessmentDate) }} by {{ formDetailsSection.baselineData.organization }}</p>
       <div class="form-details card-panel">
         <div class="form-header">
           <p class="center">Form Details</p>
@@ -51,13 +51,13 @@
       </div>
 
       <GeneralInformation :formId="formId" :form="formDetailsSection" />
-      <ShelterInformation :formId="formId" :form="formDetailsSection" />
+      <!-- <ShelterInformation :formId="formId" :form="formDetailsSection" />
       <FoodSecurity :formId="formId" :form="formDetailsSection" />
       <Livelihoods :formId="formId" :form="formDetailsSection" />
-      <Health :formId="formId" :form="formDetailsSection" />
-      <Wash :formId="formId" :form="formDetailsSection" />
+      <Health :formId="formId" :form="formDetailsSection" />-->
+      <!-- <Wash :formId="formId" :form="formDetailsSection" /> -->
       <Evacuation :formId="formId" :form="formDetailsSection" />
-      <CaseStories :formId="formId" :form="formDetailsSection" />
+      <!-- <CaseStories :formId="formId" :form="formDetailsSection" /> -->
       <!--
       <div class="form-details card-panel">
         <div class="row form-header">

@@ -27,6 +27,7 @@
 
 <script>
 import firebase from "@/firebase/init";
+import { constants } from "crypto";
 export default {
   name: "Forms",
   data() {
@@ -39,9 +40,9 @@ export default {
       this.forms = [];
       doc.forEach(form => {
         const data = form.data();
-        data.stringDate = new Date(
+        data.stringDate = constants.convertDate(
           data.formDetails[0].assessmentDate
-        ).toLocaleDateString("en-US");
+        );
         this.forms.push(data);
       });
     });

@@ -69,7 +69,6 @@ export default {
             this.caseStoriesImages.push(url);
           });
         });
-        console.log(data);
       });
     var doc = document.querySelectorAll(".container")[1];
     doc.addEventListener(

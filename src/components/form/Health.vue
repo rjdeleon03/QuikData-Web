@@ -158,7 +158,7 @@
               <tr v-for="row in healthAssistance" :key="row.type">
                 <td>{{ row.organizationAgency }}</td>
                 <td>{{ row.assistanceType }}</td>
-                <td>{{ row.dateReceived }}</td>
+                <td>{{ constants.convertDate(row.dateReceived) }}</td>
                 <td>{{ row.quantity }}</td>
                 <td>{{ row.beneficiariesMen }}</td>
                 <td>{{ row.beneficiariesWomen }}</td>

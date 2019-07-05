@@ -77,5 +77,8 @@ export default {
     "Emergency Shelter / Makeshift House",
     "Squatting",
     "Others"
-  ]
+  ],
+  convertDate: dateLong => {
+    return new Date(dateLong).toLocaleDateString("en-US");
+  }
 };
