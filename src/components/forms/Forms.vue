@@ -17,6 +17,10 @@
                         :to="{name: 'SingleForm', params : { form_id: form.form.id }}"
                         class="waves-effect waves-light btn-flat teal"
                       >View</router-link>
+                      <router-link
+                        :to="{name: 'SingleForm', params : { form_id: form.form.id }}"
+                        class="waves-effect waves-light btn-flat red"
+                      >Delete</router-link>
                     </div>
                   </div>
                 </div>
@@ -29,24 +33,24 @@
             <div class="collapsible-body">
               <div class="container">
                 <div class="row">
-                  <div class="col s2 label">Sitio:</div>
-                  <div class="col s10">{{form.baselineData[0].sitio}}</div>
+                  <div class="col s12 m3 label">Sitio:</div>
+                  <div class="col s12 m9">{{form.baselineData[0].sitio}}&nbsp;</div>
                 </div>
                 <div class="row">
-                  <div class="col s2 label">Barangay:</div>
-                  <div class="col s10">{{form.baselineData[0].barangay}}</div>
+                  <div class="col s12 m3 label">Barangay:</div>
+                  <div class="col s12 m9">{{form.baselineData[0].barangay}}&nbsp;</div>
                 </div>
                 <div class="row">
-                  <div class="col s2 label">City / Municipality:</div>
-                  <div class="col s10">{{form.baselineData[0].city}}</div>
+                  <div class="col s12 m3 label">City / Municipality:</div>
+                  <div class="col s12 m9">{{form.baselineData[0].city}}&nbsp;</div>
                 </div>
                 <div class="row">
-                  <div class="col s2 label">Province:</div>
-                  <div class="col s10">{{form.baselineData[0].province}}</div>
+                  <div class="col s12 m3 label">Province:</div>
+                  <div class="col s12 m9">{{form.baselineData[0].province}}&nbsp;</div>
                 </div>
                 <div class="row">
-                  <div class="col s2 label">Calamity:</div>
-                  <div class="col s10">{{form.baselineData[0].calamityType}}</div>
+                  <div class="col s12 m3 label">Calamity:</div>
+                  <div class="col s12 m9">{{form.baselineData[0].calamityType}}&nbsp;</div>
                 </div>
               </div>
             </div>
@@ -80,7 +84,6 @@ export default {
   },
   mounted() {
     var doc = document.querySelector(".forms .form-contents");
-    console.log(doc);
     doc.addEventListener(
       "DOMNodeInserted",
       function() {
@@ -109,7 +112,7 @@ export default {
   border-right: none;
 }
 .forms .collapsible .collapsible-header {
-  font-weight: 600;
+  font-weight: 700;
   padding-top: 1px;
   padding-bottom: 1px;
   text-transform: uppercase;
@@ -124,6 +127,8 @@ export default {
 }
 .forms .collapsible .collapsible-header .btn-flat {
   height: 35px;
+  border-radius: 8px;
+  margin-left: 5px;
 }
 .forms .collapsible .collapsible-header .row {
   margin: 5px 0;

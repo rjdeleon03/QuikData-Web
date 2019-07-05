@@ -42,9 +42,9 @@ export default {
 </script>
 
 <style>
-.auth {
+.auth.container {
   max-width: 400px;
-  margin-top: 60px;
+  margin-top: 50px;
 }
 .auth h2 {
   margin: 10px 0px 20px 0px;
