@@ -1,25 +1,57 @@
 <template>
-  <div class="forms">
-    <h2 class="center teal-text text-darken-1">Forms</h2>
-    <div class="forms-list">
-      <div class="form-single card-panel" v-for="form in forms" :key="form.id">
-        <div class="form-header grey lighten-1">
-          <h6 class="center">Assessment Date: {{form.stringDate}}</h6>
-        </div>
-        <div class="form-contents">
-          <ul>
-            <li>Sitio: {{form.baselineData[0].sitio}}</li>
-            <li>Barangay: {{form.baselineData[0].barangay}}</li>
-            <li>City / Municipality: {{form.baselineData[0].city}}</li>
-            <li>Province: {{form.baselineData[0].province}}</li>
-            <li>Calamity: {{form.calamityInfo[0].calamityType}}</li>
-          </ul>
-          <router-link
-            :to="{name: 'SingleForm', params : {
-              form_id: form.form.id
-          }}"
-          >View</router-link>
-        </div>
+  <div class="forms container">
+    <h2 class="center teal-text text-darken-1">DNCA Forms</h2>
+    <div class="forms-list card-panel">
+      <div class="form-contents">
+        <ul class="collapsible card">
+          <li v-for="form in forms" :key="form.id">
+            <div class="collapsible-header grey lighten-3">
+              <div class="container">
+                <div class="row">
+                  <div class="col s6 m6 l6 xl6">
+                    <p class="left">Assessed on {{form.stringDate}}</p>
+                  </div>
+                  <div class="col s6 m6 l6 xl6">
+                    <div class="right">
+                      <router-link
+                        :to="{name: 'SingleForm', params : { form_id: form.form.id }}"
+                        class="waves-effect waves-light btn-flat teal"
+                      >View</router-link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <router-link
+                :to="{name: 'SingleForm', params : { form_id: form.form.id }}"
+                class="waves-effect waves-light btn-flat teal"
+              >View</router-link>-->
+            </div>
+            <div class="collapsible-body">
+              <div class="container">
+                <div class="row">
+                  <div class="col s2 label">Sitio:</div>
+                  <div class="col s10">{{form.baselineData[0].sitio}}</div>
+                </div>
+                <div class="row">
+                  <div class="col s2 label">Barangay:</div>
+                  <div class="col s10">{{form.baselineData[0].barangay}}</div>
+                </div>
+                <div class="row">
+                  <div class="col s2 label">City / Municipality:</div>
+                  <div class="col s10">{{form.baselineData[0].city}}</div>
+                </div>
+                <div class="row">
+                  <div class="col s2 label">Province:</div>
+                  <div class="col s10">{{form.baselineData[0].province}}</div>
+                </div>
+                <div class="row">
+                  <div class="col s2 label">Calamity:</div>
+                  <div class="col s10">{{form.baselineData[0].calamityType}}</div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -45,6 +77,18 @@ export default {
         this.forms.push(data);
       });
     });
+  },
+  mounted() {
+    var doc = document.querySelector(".forms .form-contents");
+    console.log(doc);
+    doc.addEventListener(
+      "DOMNodeInserted",
+      function() {
+        var collapsible = doc.querySelector(".collapsible");
+        M.Collapsible.init(collapsible, {});
+      },
+      false
+    );
   }
 };
 </script>
@@ -55,22 +99,49 @@ export default {
   text-transform: uppercase;
   font-weight: 700;
 }
-.forms .forms-list {
-  max-width: 700px;
-  margin: auto;
+.forms .btn-flat {
+  color: white;
+}
+.forms .collapsible {
+  box-shadow: none;
+  margin: 10px 0;
+  border-left: none;
+  border-right: none;
+}
+.forms .collapsible .collapsible-header {
+  font-weight: 600;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  text-transform: uppercase;
+}
+.forms .collapsible .collapsible-header .container,
+.forms .collapsible .collapsible-body .container {
+  margin: 0;
+  width: 100%;
+}
+.forms .collapsible .collapsible-header p {
+  margin: 7px auto;
+}
+.forms .collapsible .collapsible-header .btn-flat {
+  height: 35px;
+}
+.forms .collapsible .collapsible-header .row {
+  margin: 5px 0;
+  width: 100%;
+}
+.forms .collapsible .collapsible-body {
+  margin: 0;
+  padding: 10px 15px;
+}
+.forms .collapsible .row .label {
+  font-weight: 600;
 }
 .forms .card-panel {
   border-radius: 8px;
-  padding: 0px;
+  padding: 0;
 }
-.forms .form-header {
-  border-radius: 8px 8px 0 0;
-  padding-top: 1px;
-  padding-bottom: 1px;
-}
-
 .forms .form-contents {
-  padding: 5px 20px 5px 20px;
+  padding: 10px 0;
 }
 </style>
 

@@ -1,6 +1,8 @@
 <template>
   <div class="container footer">
-    <hr />
+    <div class="section">
+      <div class="divider"></div>
+    </div>
     <p class="center">Quik Data (c) 2019</p>
   </div>
 </template>
@@ -15,8 +17,8 @@ export default {
 </script>
 
 <style>
-.footer {
-  margin-top: 60px;
+.footer.container {
+  margin-top: 30px;
   margin-bottom: 60px;
 }
 </style>
