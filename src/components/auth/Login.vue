@@ -36,6 +36,9 @@ export default {
       if (!this.email || !this.password) return;
       firebase.auth
         .signInWithEmailAndPassword(this.email, this.password)
+        .then(() => {
+          this.$router.push({ name: "Forms" });
+        })
         .catch(err => alert(err.message));
     }
   }

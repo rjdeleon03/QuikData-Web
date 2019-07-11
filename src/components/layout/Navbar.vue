@@ -17,7 +17,7 @@
             <router-link :to="{ name: 'Login'}">Login</router-link>
           </li>
           <li>
-            <router-link :to="{ name: 'Logout'}">Logout</router-link>
+            <a @click="logout">Logout</a>
           </li>
         </ul>
       </div>
@@ -26,10 +26,19 @@
 </template>
 
 <script>
+import firebase from "@/firebase/init";
 export default {
   name: "Navbar",
   data() {
     return {};
+  },
+  methods: {
+    logout() {
+      firebase.auth.signOut().then(() => {
+        this.$router.push({ name: "Login" });
+        console.log("Logged Out!");
+      });
+    }
   }
 };
 </script>
