@@ -11,16 +11,20 @@
         <input type="password" name="password" />
       </div>
       <div class="field">
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" name="confirmPassword" />
+      </div>
+      <!-- <div class="field">
         <label for="firstName">First Name:</label>
         <input type="text" name="firstName" />
       </div>
       <div class="field">
         <label for="lastName">Last Name:</label>
         <input type="text" name="lastName" />
-      </div>
+      </div>-->
       <p class="center">
         Already have an account?
-        <a href>Login</a> instead.
+        <router-link :to="{ name: 'Login'}">Login</router-link>&nbsp;instead.
       </p>
       <div class="field center submit">
         <button class="btn amber darken-2">Sign Up</button>

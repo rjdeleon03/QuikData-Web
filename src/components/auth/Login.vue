@@ -12,7 +12,7 @@
       </div>
       <p class="center">
         Don't have an account yet?
-        <a href>Sign up</a> instead.
+        <router-link :to="{ name: 'SignUp'}">Sign Up</router-link>&nbsp;instead.
       </p>
       <div class="field center submit">
         <button class="btn amber darken-2">Login</button>
