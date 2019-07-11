@@ -1,14 +1,14 @@
 <template>
   <div class="auth container">
-    <form @submit.prevent="auth" class="card-panel">
+    <form @submit.prevent="login" class="card-panel">
       <h2 class="center teal-text text-darken-1">Login</h2>
       <div class="field">
         <label for="email">Email:</label>
-        <input type="text" name="email" />
+        <input type="text" name="email" v-model="email" />
       </div>
       <div class="field">
         <label for="password">Password:</label>
-        <input type="password" name="password" />
+        <input type="password" name="password" v-model="password" />
       </div>
       <p class="center">
         Don't have an account yet?
@@ -22,13 +22,22 @@
 </template>
 
 <script>
+import firebase from "@/firebase/init";
 export default {
-  name: "SignUp",
+  name: "Login",
   data() {
-    return {};
+    return {
+      email: null,
+      password: null
+    };
   },
   methods: {
-    signup() {}
+    login() {
+      if (!this.email || !this.password) return;
+      firebase.auth
+        .signInWithEmailAndPassword(this.email, this.password)
+        .catch(err => alert(err.message));
+    }
   }
 };
 </script>
