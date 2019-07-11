@@ -4,15 +4,15 @@
       <h2 class="center teal-text text-darken-1">Sign Up</h2>
       <div class="field">
         <label for="email">Email:</label>
-        <input type="text" name="email" />
+        <input type="text" name="email" v-model="email" />
       </div>
       <div class="field">
         <label for="password">Password:</label>
-        <input type="password" name="password" />
+        <input type="password" name="password" v-model="password" />
       </div>
       <div class="field">
         <label for="confirmPassword">Confirm Password:</label>
-        <input type="password" name="confirmPassword" />
+        <input type="password" name="confirmPassword" v-model="confirmPassword" />
       </div>
       <!-- <div class="field">
         <label for="firstName">First Name:</label>
@@ -34,13 +34,33 @@
 </template>
 
 <script>
+import firebase from "@/firebase/init";
 export default {
   name: "SignUp",
   data() {
-    return {};
+    return {
+      email: null,
+      password: null,
+      confirmPassword: null
+    };
   },
   methods: {
-    signup() {}
+    signup() {
+      if (
+        !this.email ||
+        !this.password ||
+        !this.confirmPassword ||
+        this.password != this.confirmPassword
+      ) {
+        console.log(this.email);
+        console.log(this.password);
+        console.log(this.confirmPassword);
+        return;
+      }
+      firebase.auth
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .catch(err => alert(err.message));
+    }
   }
 };
 </script>
