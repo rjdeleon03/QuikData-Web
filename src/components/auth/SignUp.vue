@@ -59,6 +59,9 @@ export default {
       }
       firebase.auth
         .createUserWithEmailAndPassword(this.email, this.password)
+        .then(() => {
+          this.$router.push({ name: "Forms" });
+        })
         .catch(err => alert(err.message));
     }
   }

@@ -148,6 +148,10 @@ export default {
     $route: "updateId"
   },
   created() {
+    if (!firebase.auth.currentUser) {
+      this.$router.push("/");
+      return;
+    }
     firebase.db
       .collection("form")
       .doc(this.formId)

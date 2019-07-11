@@ -73,6 +73,10 @@ export default {
     };
   },
   created() {
+    if (!firebase.auth.currentUser) {
+      this.$router.push("/");
+      return;
+    }
     firebase.db.collection("form").onSnapshot(doc => {
       this.forms = [];
       doc.forEach(form => {
