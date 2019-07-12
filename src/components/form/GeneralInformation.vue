@@ -218,7 +218,7 @@
                     <th>Others</th>
                   </tr>
                   <template v-for="row in causeOfDeath">
-                    <tr v-bind:key="row.type">
+                    <tr v-bind:key="`${row.type}-001`">
                       <td class="exception" rowspan="2">{{ constants.ageGroup[row.type] }}</td>
                       <td>Male</td>
                       <td>{{ row.measlesMale }}</td>
@@ -231,7 +231,7 @@
                       <td>{{ row.collapsedBldgMale }}</td>
                       <td>{{ row.othersMale }}</td>
                     </tr>
-                    <tr v-bind:key="row.type">
+                    <tr v-bind:key="`${row.type}-002`">
                       <td>Female</td>
                       <td>{{ row.measlesFemale }}</td>
                       <td>{{ row.diarrheaFemale }}</td>

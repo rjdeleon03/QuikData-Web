@@ -265,6 +265,7 @@ export default {
       incomeBefore: null,
       incomeAfter: null,
       estimatedDamage: null,
+      livelihoodsCoping: null,
       livelihoodsNeeds: null,
       livelihoodsAssistance: null,
       livelihoodsGaps: null

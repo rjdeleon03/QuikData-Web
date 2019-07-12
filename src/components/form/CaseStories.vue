@@ -78,15 +78,15 @@ export default {
     doc.addEventListener(
       "DOMNodeInserted",
       function() {
-        var carousel = doc
-          .querySelector(".form #case-stories .form-contents")
-          .querySelectorAll(".row")[1]
-          .querySelector(".col .carousel");
-        M.Carousel.init(carousel, {
-          indicators: true,
-          noWrap: true,
-          fullWidth: true
-        });
+        // var carousel = doc
+        //   .querySelector(".form #case-stories .form-contents")
+        //   .querySelectorAll(".row")[1]
+        //   .querySelector(".col .carousel");
+        // M.Carousel.init(carousel, {
+        //   indicators: true,
+        //   noWrap: true,
+        //   fullWidth: true
+        // });
       },
       false
     );

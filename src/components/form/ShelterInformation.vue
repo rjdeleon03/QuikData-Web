@@ -81,7 +81,7 @@
           </div>
 
           <!-- Needs -->
-          <div v-if="shelterNeeds != null">
+          <div v-if="shelterNeeds != null && shelterNeeds.length > 0">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Needs</p>
             </div>
@@ -104,7 +104,7 @@
           </div>
 
           <!-- Assistance -->
-          <div v-if="shelterAssistance != null & shelterAssistance.length > 0">
+          <div v-if="shelterAssistance != null && shelterAssistance.length > 0">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Assistance</p>
             </div>
