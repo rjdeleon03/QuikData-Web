@@ -32,7 +32,7 @@
                     <th>Others</th>
                   </tr>
                   <template v-for="row in diseases">
-                    <tr>
+                    <tr v-bind:key="row.type">
                       <td rowspan="2">{{ constants.ageGroup[row.type] }}</td>
                       <td>Male</td>
                       <td>{{row.diarrheaMale}}</td>
@@ -45,7 +45,7 @@
                       <td>{{row.medicinesMale}}</td>
                       <td>{{row.medicalOthersMale}}</td>
                     </tr>
-                    <tr>
+                    <tr v-bind:key="row.type">
                       <td>Female</td>
                       <td>{{row.diarrheaFemale}}</td>
                       <td>{{row.pneumoniaFemale}}</td>

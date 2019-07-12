@@ -52,9 +52,6 @@ export default {
         !this.confirmPassword ||
         this.password != this.confirmPassword
       ) {
-        console.log(this.email);
-        console.log(this.password);
-        console.log(this.confirmPassword);
         return;
       }
       firebase.auth
