@@ -136,7 +136,8 @@ export default {
     return {
       constants: constants,
       formId: this.$route.params.form_id,
-      formDetailsSection: null
+      formDetailsSection: null,
+      isLoggedIn: false
     };
   },
   methods: {
@@ -148,10 +149,10 @@ export default {
     $route: "updateId"
   },
   created() {
-    if (!firebase.auth.currentUser) {
-      this.$router.push("/");
-      return;
-    }
+    firebase.auth.onAuthStateChanged(user => {
+      this.isLoggedIn = user;
+      if (!this.isLoggedIn) this.$router.push("/");
+    });
     firebase.db
       .collection("form")
       .doc(this.formId)
@@ -169,10 +170,6 @@ export default {
 </script>
 
 <style>
-.form {
-  /* min-width: 1150px; */
-  /* padding: 0 20px; */
-}
 .form .collapsible.card {
   border: none;
   border-radius: 8px;

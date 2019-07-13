@@ -7,7 +7,7 @@
         </div>
         <div class="collapsible-body shelter-information form-contents">
           <!-- House Damage -->
-          <div v-if="houseDamage != null">
+          <div v-if="houseDamage != null && houseDamage.length > 0">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Damage to Houses</p>
             </div>
