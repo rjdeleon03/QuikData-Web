@@ -220,6 +220,27 @@ export default {
             );
           item.ref.delete();
         });
+    },
+    getFormsAtPage(page) {
+      var collection = firebase.db
+        .collection("form")
+        .orderBy("form.dateCreated", "desc")
+        .limit(10);
+
+      if (page > 0) {
+        collection = collection.startAfter(page * 10);
+      }
+
+      collection.get().then(doc => {
+        this.forms = [];
+        doc.forEach(form => {
+          const data = form.data();
+          data.stringDate = utils.convertDate(
+            data.formDetails[0].assessmentDate
+          );
+          this.forms.push(data);
+        });
+      });
     }
   },
   created() {
@@ -227,21 +248,14 @@ export default {
       this.$router.push("/");
       return;
     }
-    firebase.db
-      .collection("form")
-      .orderBy("form.dateCreated", "desc")
-      .onSnapshot(doc => {
-        this.forms = [];
-        this.pageCount = Math.ceil(doc.size / 10);
-        doc.forEach(form => {
-          const data = form.data();
-          console.log(data);
-          data.stringDate = utils.convertDate(
-            data.formDetails[0].assessmentDate
-          );
-          this.forms.push(data);
-        });
-      });
+    this.getFormsAtPage(0);
+    // firebase.db
+    //   .collection("form")
+    //   .orderBy("form.dateCreated", "desc")
+    //   .onSnapshot(doc => {
+    //     this.forms = [];
+    //     this.pageCount = Math.ceil(doc.size / 10);
+    //   });
   },
   mounted() {
     var doc = document.querySelector(".forms .form-contents");
