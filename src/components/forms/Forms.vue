@@ -350,6 +350,13 @@ export default {
 .forms .form-contents {
   padding: 10px 0;
 }
+.forms .pages ul {
+  text-align: center;
+}
+.forms .pages ul li {
+  display: inline-block;
+  margin: 0 2px;
+}
 </style>
 
 
