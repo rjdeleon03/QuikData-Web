@@ -1,10 +1,16 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
+import Vue from "vue";
+import App from "./App.vue";
 
-Vue.config.productionTip = false
+import router from "./router";
+
+import Material from "materialize-css";
+import "materialize-css/dist/css/materialize.css";
+import "materialize-css/dist/js/materialize.min.js";
+Vue.use(Material);
+
+Vue.config.productionTip = false;
 
 new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
+  render: h => h(App),
+  router
+}).$mount("#app");

@@ -1,39 +1,36 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <Navbar />
+    <router-view />
+    <Footer />
   </div>
 </template>
 
+<script>
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+export default {
+  name: "app",
+  components: {
+    Navbar,
+    Footer
+  }
+};
+</script>
+
 <style>
 body {
-  background-image: linear-gradient(#0277bd, #4fc3f7);
-  background-attachment: fixed;
+  font-family: "Nunito Sans", sans-serif;
+  color: #424242;
 }
-
-#app {
-  font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body h2 {
+  font-size: 2.4em;
+  margin: 30px;
 }
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
+body .container {
+  width: 80%;
 }
-
-.mdl-button {
-  font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
-  font-weight: 600;
+body .row {
+  margin-bottom: 5px;
 }
 </style>
