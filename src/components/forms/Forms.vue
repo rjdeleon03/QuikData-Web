@@ -67,7 +67,8 @@ export default {
   data() {
     return {
       forms: [],
-      pageCount: null
+      pageCount: null,
+      formsSnapshot: null
     };
   },
   methods: {
@@ -222,25 +223,22 @@ export default {
         });
     },
     getFormsAtPage(page) {
-      var collection = firebase.db
+      firebase.db
         .collection("form")
         .orderBy("form.dateCreated", "desc")
-        .limit(10);
-
-      if (page > 0) {
-        collection = collection.startAfter(page * 10);
-      }
-
-      collection.get().then(doc => {
-        this.forms = [];
-        doc.forEach(form => {
-          const data = form.data();
-          data.stringDate = utils.convertDate(
-            data.formDetails[0].assessmentDate
-          );
-          this.forms.push(data);
+        .startAt(this.formsSnapshot.docs[page * 10])
+        .limit(10)
+        .get()
+        .then(doc => {
+          this.forms = [];
+          doc.forEach(form => {
+            const data = form.data();
+            data.stringDate = utils.convertDate(
+              data.formDetails[0].assessmentDate
+            );
+            this.forms.push(data);
+          });
         });
-      });
     }
   },
   created() {
@@ -248,14 +246,15 @@ export default {
       this.$router.push("/");
       return;
     }
-    this.getFormsAtPage(0);
-    // firebase.db
-    //   .collection("form")
-    //   .orderBy("form.dateCreated", "desc")
-    //   .onSnapshot(doc => {
-    //     this.forms = [];
-    //     this.pageCount = Math.ceil(doc.size / 10);
-    //   });
+
+    firebase.db
+      .collection("form")
+      .orderBy("form.dateCreated", "desc")
+      .get()
+      .then(snapshot => {
+        this.formsSnapshot = snapshot;
+        this.getFormsAtPage(0);
+      });
   },
   mounted() {
     var doc = document.querySelector(".forms .form-contents");
