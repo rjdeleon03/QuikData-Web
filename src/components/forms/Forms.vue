@@ -55,6 +55,16 @@
         </ul>
       </div>
     </div>
+    <div class="pages">
+      <ul>
+        <li v-for="page in pageCount" :key="page">
+          <router-link
+            :to="{name: 'Forms', params: { page_index: page }}"
+            class="waves-effect waves-light btn-flat teal"
+          >{{ page }}</router-link>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -75,6 +85,7 @@ export default {
   methods: {
     updatePage() {
       this.pageNumber = this.$route.params.page_index;
+      if (this.formsSnapshot) this.getFormsAtPage(this.pageNumber - 1);
     },
     deleteForm(id) {
       const db = firebase.db;
