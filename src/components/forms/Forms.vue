@@ -66,7 +66,8 @@ export default {
   name: "Forms",
   data() {
     return {
-      forms: []
+      forms: [],
+      pageCount: null
     };
   },
   methods: {
@@ -226,14 +227,21 @@ export default {
       this.$router.push("/");
       return;
     }
-    firebase.db.collection("form").onSnapshot(doc => {
-      this.forms = [];
-      doc.forEach(form => {
-        const data = form.data();
-        data.stringDate = utils.convertDate(data.formDetails[0].assessmentDate);
-        this.forms.push(data);
+    firebase.db
+      .collection("form")
+      .orderBy("form.dateCreated", "desc")
+      .onSnapshot(doc => {
+        this.forms = [];
+        this.pageCount = Math.ceil(doc.size / 10);
+        doc.forEach(form => {
+          const data = form.data();
+          console.log(data);
+          data.stringDate = utils.convertDate(
+            data.formDetails[0].assessmentDate
+          );
+          this.forms.push(data);
+        });
       });
-    });
   },
   mounted() {
     var doc = document.querySelector(".forms .form-contents");
