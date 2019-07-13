@@ -67,11 +67,15 @@ export default {
   data() {
     return {
       forms: [],
+      formsSnapshot: null,
       pageCount: null,
-      formsSnapshot: null
+      pageNumber: this.$route.params.page_index
     };
   },
   methods: {
+    updatePage() {
+      this.pageNumber = this.$route.params.page_index;
+    },
     deleteForm(id) {
       const db = firebase.db;
       db.collection("form")
@@ -241,19 +245,32 @@ export default {
         });
     }
   },
+  watch: {
+    $route: "updatePage"
+  },
   created() {
-    if (!firebase.auth.currentUser) {
-      this.$router.push("/");
-      return;
-    }
+    firebase.auth.onAuthStateChanged(user => {
+      if (!user) this.$router.push("/");
+    });
 
     firebase.db
       .collection("form")
       .orderBy("form.dateCreated", "desc")
-      .get()
-      .then(snapshot => {
-        this.formsSnapshot = snapshot;
-        this.getFormsAtPage(0);
+      .onSnapshot(snapshot => {
+        this.pageCount = Math.ceil(snapshot.size / 10);
+        if (
+          !this.pageNumber ||
+          this.pageNumber < 1 ||
+          this.pageNumber > this.pageCount
+        ) {
+          this.pageNumber = 1;
+        }
+        if (!this.formsSnapshot) {
+          this.formsSnapshot = snapshot;
+          this.getFormsAtPage(this.pageNumber - 1);
+        } else {
+          this.formsSnapshot = snapshot;
+        }
       });
   },
   mounted() {
