@@ -3,6 +3,19 @@
     <h2 class="center teal-text text-darken-1">DNCA Forms</h2>
     <div class="forms-list card-panel">
       <div class="form-contents">
+        <div class="modal">
+          <div class="modal-content">
+            <h4 class="teal-text text-darken-1">Delete DNCA Form</h4>
+            <p>Are you sure you want to delete the selected DNCA form?</p>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-teal btn-flat amber darken-2">Cancel</a>
+            <a
+              @click="deleteForm(deleteFormModal.selectedFormId)"
+              class="modal-close waves-effect waves-red btn-flat amber darken-2"
+            >OK</a>
+          </div>
+        </div>
         <ul class="collapsible card">
           <li v-for="form in forms" :key="form.id">
             <div class="collapsible-header grey lighten-3">
@@ -17,15 +30,11 @@
                         :to="{name: 'SingleForm', params : { form_id: form.form.id }}"
                         class="waves-effect waves-light btn-flat teal"
                       >View</router-link>
-                      <a @click="deleteForm(form.form.id)" class="btn-flat red">Delete</a>
+                      <a @click="confirmDelete(form.form.id)" class="btn-flat red">Delete</a>
                     </div>
                   </div>
                 </div>
               </div>
-              <!-- <router-link
-                :to="{name: 'SingleForm', params : { form_id: form.form.id }}"
-                class="waves-effect waves-light btn-flat teal"
-              >View</router-link>-->
             </div>
             <div class="collapsible-body">
               <div class="container">
@@ -66,10 +75,18 @@ export default {
   name: "Forms",
   data() {
     return {
-      forms: []
+      forms: [],
+      deleteFormModal: null
     };
   },
   methods: {
+    confirmDelete(id) {
+      if (this.deleteFormModal) {
+        const modal = M.Modal.getInstance(this.deleteFormModal);
+        modal.open();
+        this.deleteFormModal.selectedFormId = id;
+      }
+    },
     deleteForm(id) {
       const db = firebase.db;
       db.collection("form")
@@ -245,6 +262,9 @@ export default {
       },
       false
     );
+
+    this.deleteFormModal = doc.querySelector(".modal");
+    M.Modal.init(this.deleteFormModal, {});
   }
 };
 </script>
@@ -257,6 +277,16 @@ export default {
 }
 .forms .btn-flat {
   color: white;
+  height: 35px;
+  border-radius: 8px;
+  margin-left: 5px !important;
+}
+.forms .modal .modal-content {
+  padding: 24px 24px 12px 24px;
+}
+.forms .modal .modal-footer {
+  padding: 12px 24px 24px 24px;
+  height: auto;
 }
 .forms .collapsible {
   box-shadow: none;
@@ -277,11 +307,6 @@ export default {
 }
 .forms .collapsible .collapsible-header p {
   margin: 7px auto;
-}
-.forms .collapsible .collapsible-header .btn-flat {
-  height: 35px;
-  border-radius: 8px;
-  margin-left: 5px;
 }
 .forms .collapsible .collapsible-header .row {
   margin: 5px 0;
