@@ -8,7 +8,7 @@
             <router-link :to="{ name: 'About'}">About</router-link>
           </li>
           <li v-if="isLoggedIn">
-            <router-link :to="{ name: 'Forms'}">DNCA Forms</router-link>
+            <router-link :to="{ name: 'Forms', params : { page_index: 1 }}">DNCA Forms</router-link>
           </li>
           <li v-if="!isLoggedIn">
             <router-link :to="{ name: 'SignUp'}">Sign Up</router-link>

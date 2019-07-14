@@ -4,56 +4,140 @@
     <div class="forms-list card-panel">
       <div class="form-contents">
         <ul class="collapsible card">
-          <li v-for="form in forms" :key="form.id">
-            <div class="collapsible-header grey lighten-3">
-              <div class="container">
-                <div class="row">
-                  <div class="col s6 m6 l6 xl6">
-                    <p class="left">Assessed on {{form.stringDate}}</p>
-                  </div>
-                  <div class="col s6 m6 l6 xl6">
-                    <div class="right">
-                      <router-link
-                        :to="{name: 'SingleForm', params : { form_id: form.form.id }}"
-                        class="waves-effect waves-light btn-flat teal"
-                      >View</router-link>
-                      <a @click="deleteForm(form.form.id)" class="btn-flat red">Delete</a>
+          <template v-for="form in forms">
+            <li v-bind:key="form.id">
+              <div class="collapsible-header grey lighten-3">
+                <div class="container">
+                  <div class="row">
+                    <div class="col s6 m6 l6 xl6">
+                      <p class="left">Assessed on {{form.stringDate}}</p>
+                    </div>
+                    <div class="col s6 m6 l6 xl6">
+                      <div class="right">
+                        <router-link
+                          :to="{name: 'SingleForm', params : { form_id: form.form.id }}"
+                          class="waves-effect waves-light btn-flat teal"
+                        >View</router-link>
+                        <a @click="deleteForm(form.form.id)" class="btn-flat red">Delete</a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <!-- <router-link
-                :to="{name: 'SingleForm', params : { form_id: form.form.id }}"
-                class="waves-effect waves-light btn-flat teal"
-              >View</router-link>-->
-            </div>
-            <div class="collapsible-body">
-              <div class="container">
-                <div class="row">
-                  <div class="col s12 m3 label">Sitio:</div>
-                  <div class="col s12 m9">{{form.baselineData[0].sitio}}&nbsp;</div>
-                </div>
-                <div class="row">
-                  <div class="col s12 m3 label">Barangay:</div>
-                  <div class="col s12 m9">{{form.baselineData[0].barangay}}&nbsp;</div>
-                </div>
-                <div class="row">
-                  <div class="col s12 m3 label">City / Municipality:</div>
-                  <div class="col s12 m9">{{form.baselineData[0].city}}&nbsp;</div>
-                </div>
-                <div class="row">
-                  <div class="col s12 m3 label">Province:</div>
-                  <div class="col s12 m9">{{form.baselineData[0].province}}&nbsp;</div>
-                </div>
-                <div class="row">
-                  <div class="col s12 m3 label">Calamity:</div>
-                  <div class="col s12 m9">{{form.baselineData[0].calamityType}}&nbsp;</div>
+              <div class="collapsible-body">
+                <div class="container">
+                  <div class="row">
+                    <div class="col s12 m3 label">Sitio:</div>
+                    <div class="col s12 m9">{{form.baselineData[0].sitio}}&nbsp;</div>
+                  </div>
+                  <div class="row">
+                    <div class="col s12 m3 label">Barangay:</div>
+                    <div class="col s12 m9">{{form.baselineData[0].barangay}}&nbsp;</div>
+                  </div>
+                  <div class="row">
+                    <div class="col s12 m3 label">City / Municipality:</div>
+                    <div class="col s12 m9">{{form.baselineData[0].city}}&nbsp;</div>
+                  </div>
+                  <div class="row">
+                    <div class="col s12 m3 label">Province:</div>
+                    <div class="col s12 m9">{{form.baselineData[0].province}}&nbsp;</div>
+                  </div>
+                  <div class="row">
+                    <div class="col s12 m3 label">Calamity:</div>
+                    <div class="col s12 m9">{{form.baselineData[0].calamityType}}&nbsp;</div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </li>
+            </li>
+          </template>
         </ul>
       </div>
+    </div>
+    <div class="pages">
+      <ul>
+        <!-- <li v-for="page in pageCount" :key="page">
+          <router-link
+            :to="{name: 'Forms', params: { page_index: page }}"
+            v-if="page == pageNumber"
+            class="waves-effect waves-light btn-flat amber darken-2"
+          >{{ page }}</router-link>
+          <router-link
+            :to="{name: 'Forms', params: { page_index: page }}"
+            v-else
+            class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1"
+          >{{ page }}</router-link>
+        </li>-->
+        <li>
+          <router-link
+            :to="{name: 'Forms', params: { page_index: 1 }}"
+            v-if="pageNumber > 1"
+            class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1"
+          >
+            <i class="material-icons">first_page</i>
+          </router-link>
+          <router-link
+            :to="{name: 'Forms', params: { page_index: 1 }}"
+            v-else
+            class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1 disabled"
+          >
+            <i class="material-icons">first_page</i>
+          </router-link>
+        </li>
+        <li>
+          <router-link
+            :to="{name: 'Forms', params: { page_index: pageNumber - 1 }}"
+            v-if="pageNumber > 1"
+            class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1"
+          >
+            <i class="material-icons">navigate_before</i>
+          </router-link>
+          <router-link
+            :to="{name: 'Forms', params: { page_index: pageNumber - 1 }}"
+            v-else
+            class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1 disabled"
+          >
+            <i class="material-icons">navigate_before</i>
+          </router-link>
+        </li>
+        <li>
+          <router-link
+            :to="{name: 'Forms', params: { page_index: pageNumber }}"
+            class="waves-effect waves-light btn-flat amber darken-2"
+          >{{ pageNumber }}</router-link>
+        </li>
+        <li>
+          <router-link
+            :to="{name: 'Forms', params: { page_index: pageNumber + 1 }}"
+            v-if="pageNumber < pageCount"
+            class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1"
+          >
+            <i class="material-icons">navigate_next</i>
+          </router-link>
+          <router-link
+            :to="{name: 'Forms', params: { page_index: pageNumber + 1 }}"
+            v-else
+            class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1 disabled"
+          >
+            <i class="material-icons">navigate_next</i>
+          </router-link>
+        </li>
+        <li>
+          <router-link
+            :to="{name: 'Forms', params: { page_index: pageCount }}"
+            v-if="pageNumber < pageCount"
+            class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1"
+          >
+            <i class="material-icons">last_page</i>
+          </router-link>
+          <router-link
+            :to="{name: 'Forms', params: { page_index: pageCount }}"
+            v-else
+            class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1 disabled"
+          >
+            <i class="material-icons">last_page</i>
+          </router-link>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -66,10 +150,17 @@ export default {
   name: "Forms",
   data() {
     return {
-      forms: []
+      forms: [],
+      formsSnapshot: null,
+      pageCount: null,
+      pageNumber: this.$route.params.page_index
     };
   },
   methods: {
+    updatePage() {
+      this.pageNumber = this.$route.params.page_index;
+      if (this.formsSnapshot) this.getFormsAtPage(this.pageNumber - 1);
+    },
     deleteForm(id) {
       const db = firebase.db;
       db.collection("form")
@@ -219,21 +310,53 @@ export default {
             );
           item.ref.delete();
         });
+    },
+    getFormsAtPage(page) {
+      firebase.db
+        .collection("form")
+        .orderBy("form.dateCreated", "desc")
+        .startAt(this.formsSnapshot.docs[page * 10])
+        .limit(10)
+        .get()
+        .then(doc => {
+          this.forms = [];
+          doc.forEach(form => {
+            const data = form.data();
+            data.stringDate = utils.convertDate(
+              data.formDetails[0].assessmentDate
+            );
+            this.forms.push(data);
+          });
+        });
     }
   },
+  watch: {
+    $route: "updatePage"
+  },
   created() {
-    if (!firebase.auth.currentUser) {
-      this.$router.push("/");
-      return;
-    }
-    firebase.db.collection("form").onSnapshot(doc => {
-      this.forms = [];
-      doc.forEach(form => {
-        const data = form.data();
-        data.stringDate = utils.convertDate(data.formDetails[0].assessmentDate);
-        this.forms.push(data);
-      });
+    firebase.auth.onAuthStateChanged(user => {
+      if (!user) this.$router.push("/");
     });
+
+    firebase.db
+      .collection("form")
+      .orderBy("form.dateCreated", "desc")
+      .onSnapshot(snapshot => {
+        this.pageCount = Math.ceil(snapshot.size / 10);
+        if (
+          !this.pageNumber ||
+          this.pageNumber < 1 ||
+          this.pageNumber > this.pageCount
+        ) {
+          this.pageNumber = 1;
+        }
+        if (!this.formsSnapshot) {
+          this.formsSnapshot = snapshot;
+          this.getFormsAtPage(this.pageNumber - 1);
+        } else {
+          this.formsSnapshot = snapshot;
+        }
+      });
   },
   mounted() {
     var doc = document.querySelector(".forms .form-contents");
@@ -300,6 +423,13 @@ export default {
 }
 .forms .form-contents {
   padding: 10px 0;
+}
+.forms .pages ul {
+  text-align: center;
+}
+.forms .pages ul li {
+  display: inline-block;
+  margin: 0 2px;
 }
 </style>
 

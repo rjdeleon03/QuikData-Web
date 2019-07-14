@@ -39,7 +39,7 @@ const router = new Router({
       component: Logout
     },
     {
-      path: "/forms",
+      path: "/forms/:page_index",
       name: "Forms",
       component: Forms
     },

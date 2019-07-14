@@ -246,8 +246,6 @@ export default {
     return {
       constants: constants,
       washConditions: null,
-      specialNeeds: null,
-      psychosocial: null,
       washCoping: null,
       washAssistance: null,
       washGaps: null
@@ -260,18 +258,6 @@ export default {
       .get()
       .then(doc => {
         this.washConditions = doc.docs[0].data();
-      });
-    db.collection("specialNeeds")
-      .doc(this.formId)
-      .get()
-      .then(doc => {
-        this.specialNeeds = doc.data().list;
-      });
-    db.collection("psychosocial")
-      .doc(this.formId)
-      .get()
-      .then(doc => {
-        this.psychosocial = doc.data().list;
       });
     db.collection("washCoping")
       .where("formId", "==", this.formId)
