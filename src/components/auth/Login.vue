@@ -37,7 +37,7 @@ export default {
       firebase.auth
         .signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
-          this.$router.push({ name: "Forms" });
+          this.$router.push({ name: "Forms", params: { page_index: 1 } });
         })
         .catch(err => alert(err.message));
     }

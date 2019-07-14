@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "@/components/home/Home";
-import About from "@/components/about/About";
 import SignUp from "@/components/auth/SignUp";
 import Login from "@/components/auth/Login";
 import Logout from "@/components/auth/Logout";
@@ -19,11 +18,6 @@ const router = new Router({
       component: Home
     },
     {
-      path: "/about",
-      name: "About",
-      component: About
-    },
-    {
       path: "/signup",
       name: "SignUp",
       component: SignUp
@@ -39,7 +33,7 @@ const router = new Router({
       component: Logout
     },
     {
-      path: "/forms/:page_index",
+      path: "/forms/:page_index?",
       name: "Forms",
       component: Forms
     },

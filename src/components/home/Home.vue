@@ -1,12 +1,19 @@
 <template>
-  <div class="home">
-    <h2>Home</h2>
+  <div>
+    <div id="home" class="home">
+      <h2>Home</h2>
+    </div>
+    <About />
   </div>
 </template>
 
 <script>
+import About from "@/components/home/About";
 export default {
   name: "Home",
+  components: {
+    About
+  },
   data() {
     return {};
   }
@@ -21,7 +28,7 @@ export default {
   background-position: center center;
   background-size: cover;
   display: flex;
-  height: 800px;
+  height: 600px;
 }
 </style>
 

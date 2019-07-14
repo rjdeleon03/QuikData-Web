@@ -384,15 +384,6 @@ export default {
   },
   mounted() {
     var doc = document.querySelector(".forms .form-contents");
-    doc.addEventListener(
-      "DOMNodeInserted",
-      function() {
-        // var collapsible = doc.querySelector(".collapsible");
-        // M.Collapsible.init(collapsible, {});
-      },
-      false
-    );
-
     this.deleteFormModal = doc.querySelector(".modal");
     M.Modal.init(this.deleteFormModal, {});
   }

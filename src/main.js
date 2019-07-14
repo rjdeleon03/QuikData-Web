@@ -5,7 +5,9 @@ import router from "./router";
 
 import Material from "materialize-css";
 import "materialize-css/dist/css/materialize.css";
+import ScrollTo from "vue-scrollto";
 Vue.use(Material);
+Vue.use(ScrollTo);
 
 Vue.config.productionTip = false;
 
