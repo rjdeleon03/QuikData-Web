@@ -22,10 +22,6 @@
                   </div>
                 </div>
               </div>
-              <!-- <router-link
-                :to="{name: 'SingleForm', params : { form_id: form.form.id }}"
-                class="waves-effect waves-light btn-flat teal"
-              >View</router-link>-->
             </div>
             <div class="collapsible-body">
               <div class="container">
@@ -60,7 +56,13 @@
         <li v-for="page in pageCount" :key="page">
           <router-link
             :to="{name: 'Forms', params: { page_index: page }}"
-            class="waves-effect waves-light btn-flat teal"
+            v-if="page == pageNumber"
+            class="waves-effect waves-light btn-flat amber darken-2"
+          >{{ page }}</router-link>
+          <router-link
+            :to="{name: 'Forms', params: { page_index: page }}"
+            v-else
+            class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1"
           >{{ page }}</router-link>
         </li>
       </ul>
