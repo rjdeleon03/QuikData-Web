@@ -29,6 +29,7 @@ export default {
   background-size: cover;
   display: flex;
   height: 600px;
+  width: 100%;
 }
 </style>
 

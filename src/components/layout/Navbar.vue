@@ -8,7 +8,17 @@
             <a id="burger" class="sidenav-trigger material-icons" data-target="slide-out">menu</a>
           </li>
           <li v-if="user" class="expanded-item">
-            <router-link :to="{ name: 'Forms', params : { page_index: 1 }}">DNCA Forms</router-link>
+            <router-link :to="{ name: 'Forms', params : { page_index: 1 }}" v-if="needsRefresh">
+              <div class="text-with-icon">
+                <div>DNCA Forms</div>
+                <div class="material-icons">error</div>
+              </div>
+            </router-link>
+            <router-link :to="{ name: 'Forms', params : { page_index: 1 }}" v-else>
+              <div class="text-with-icon">
+                <div>DNCA Forms</div>
+              </div>
+            </router-link>
           </li>
           <li v-if="!user" class="expanded-item">
             <router-link :to="{ name: 'SignUp'}">Sign Up</router-link>
@@ -34,7 +44,7 @@
     </nav>
     <ul id="slide-out" class="sidenav">
       <li v-if="user">
-        <router-link :to="{ name: 'Forms', params : { page_index: 1 }}">DNCA Forms</router-link>
+        <router-link :to="{ name: 'Forms'}">DNCA Forms</router-link>
       </li>
       <li v-if="!user">
         <router-link :to="{ name: 'SignUp'}">Sign Up</router-link>
@@ -59,7 +69,9 @@ export default {
   name: "Navbar",
   data() {
     return {
-      user: false
+      user: false,
+      formsSnapshot: null,
+      needsRefresh: false
     };
   },
   created() {
@@ -71,6 +83,17 @@ export default {
         M.Sidenav.init(sidenav, {});
       }
     });
+    // firebase.db
+    //   .collection("form")
+    //   .orderBy("form.dateModified", "desc")
+    //   .onSnapshot(snapshot => {
+    //     if (this.formsSnapshot) {
+    //       try {
+    //         this.needsRefresh = true;
+    //       } catch (ex) {}
+    //     }
+    //     this.formsSnapshot = snapshot;
+    //   });
   },
   mounted() {
     var navbar = document.querySelector(".navbar");
@@ -123,6 +146,15 @@ export default {
   width: auto !important;
   border-radius: 0 0 8px 8px;
 }
+.navbar .text-with-icon div {
+  display: inline-block;
+}
+.navbar .text-with-icon .material-icons {
+  vertical-align: middle;
+  margin-top: -1px;
+  margin-left: 3px;
+  color: #ffa000;
+}
 @media only screen and (min-width: 601px) {
   .navbar .container ul li a.material-icons {
     height: 64px;
@@ -139,6 +171,9 @@ export default {
   .navbar .container ul li.expanded-item {
     visibility: visible;
     width: auto;
+  }
+  .navbar .text-with-icon .material-icons {
+    margin-top: -2px;
   }
 }
 </style>

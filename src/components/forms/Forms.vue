@@ -1,6 +1,19 @@
 <template>
   <div class="forms container">
     <h2 class="center teal-text text-darken-1">DNCA Forms</h2>
+    <div class="refresh-alert card-panel" v-if="needsRefresh">
+      <div class="left">
+        <p>The DNCA forms list has been updated. You may want to refresh the list.</p>
+      </div>
+      <div class="right">
+        <a @click="refreshAlertRefresh" class="btn-flat amber darken-2 waves-effect waves-light">
+          <p class="material-icons">refresh</p>
+        </a>
+        <a @click="refreshAlertClose" class="btn-flat red waves-effect waves-light end">
+          <p class="material-icons">close</p>
+        </a>
+      </div>
+    </div>
     <div class="forms-list card-panel">
       <div class="form-contents">
         <div class="modal">
@@ -31,7 +44,10 @@
                           :to="{name: 'SingleForm', params : { form_id: form.form.id }}"
                           class="waves-effect waves-light btn-flat teal"
                         >View</router-link>
-                        <a @click="confirmDelete(form.form.id)" class="btn-flat red">Delete</a>
+                        <a
+                          @click="confirmDelete(form.form.id)"
+                          class="btn-flat red waves-effect waves-light"
+                        >Delete</a>
                       </div>
                     </div>
                   </div>
@@ -172,13 +188,21 @@ export default {
       formsSnapshot: null,
       pageCount: null,
       pageNumber: this.$route.params.page_index,
-      deleteFormModal: null
+      deleteFormModal: null,
+      needsRefresh: false
     };
   },
   methods: {
     updatePage() {
       this.pageNumber = this.$route.params.page_index;
       if (this.formsSnapshot) this.getFormsAtPage(this.pageNumber - 1);
+    },
+    refreshAlertRefresh() {
+      this.getFormsAtPage(this.pageNumber - 1);
+      this.needsRefresh = false;
+    },
+    refreshAlertClose() {
+      this.needsRefresh = false;
     },
     confirmDelete(id) {
       if (this.deleteFormModal) {
@@ -385,7 +409,6 @@ export default {
             data.stringDate = utils.convertDate(
               data.formDetails[0].assessmentDate
             );
-            console.log(data.form.dateModified);
             data.stringDateModified = utils.convertDateTime(
               data.form.dateModified
             );
@@ -407,12 +430,19 @@ export default {
       .collection("form")
       .orderBy("form.dateModified", "desc")
       .onSnapshot(snapshot => {
+        /* Notify the user that they need to refresh to load new items in the page */
+        if (this.formsSnapshot) {
+          this.needsRefresh = true;
+        }
+
+        /* Update pagination information */
         this.pageCount = Math.ceil(snapshot.size / FORMS_PER_PAGE);
         if (!this.pageNumber || this.pageNumber < 1) {
           this.pageNumber = 1;
         } else if (this.pageNumber > this.pageCount) {
           this.pageNumber = this.pageCount;
         }
+
         if (!this.formsSnapshot || this.formsSnapshot.size > snapshot.size) {
           /* Refresh page when forms snapshot is null or a form item has been deleted */
           this.formsSnapshot = snapshot;
@@ -436,11 +466,33 @@ export default {
   text-transform: uppercase;
   font-weight: 700;
 }
-.forms .btn-flat {
+.forms .forms-list .btn-flat {
   color: white;
   height: 35px;
   border-radius: 8px;
   margin-left: 5px !important;
+}
+.refresh-alert {
+  margin-bottom: 20px !important;
+  height: 50px;
+}
+.refresh-alert p {
+  margin: 15px;
+}
+.refresh-alert a p {
+  margin: 12.5px 0;
+}
+.refresh-alert .btn-flat {
+  box-shadow: none;
+  height: 50px;
+  color: white;
+  border-radius: 0;
+  font-weight: 700;
+}
+.refresh-alert .btn-flat.end {
+  height: 50px;
+  color: white;
+  border-radius: 0 8px 8px 0;
 }
 .forms .modal .modal-content {
   padding: 24px 24px 12px 24px;
