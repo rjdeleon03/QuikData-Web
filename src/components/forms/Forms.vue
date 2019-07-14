@@ -4,56 +4,58 @@
     <div class="forms-list card-panel">
       <div class="form-contents">
         <ul class="collapsible card">
-          <li v-for="form in forms" :key="form.id">
-            <div class="collapsible-header grey lighten-3">
-              <div class="container">
-                <div class="row">
-                  <div class="col s6 m6 l6 xl6">
-                    <p class="left">Assessed on {{form.stringDate}}</p>
-                  </div>
-                  <div class="col s6 m6 l6 xl6">
-                    <div class="right">
-                      <router-link
-                        :to="{name: 'SingleForm', params : { form_id: form.form.id }}"
-                        class="waves-effect waves-light btn-flat teal"
-                      >View</router-link>
-                      <a @click="deleteForm(form.form.id)" class="btn-flat red">Delete</a>
+          <template v-for="form in forms">
+            <li v-bind:key="form.id">
+              <div class="collapsible-header grey lighten-3">
+                <div class="container">
+                  <div class="row">
+                    <div class="col s6 m6 l6 xl6">
+                      <p class="left">Assessed on {{form.stringDate}}</p>
+                    </div>
+                    <div class="col s6 m6 l6 xl6">
+                      <div class="right">
+                        <router-link
+                          :to="{name: 'SingleForm', params : { form_id: form.form.id }}"
+                          class="waves-effect waves-light btn-flat teal"
+                        >View</router-link>
+                        <a @click="deleteForm(form.form.id)" class="btn-flat red">Delete</a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="collapsible-body">
-              <div class="container">
-                <div class="row">
-                  <div class="col s12 m3 label">Sitio:</div>
-                  <div class="col s12 m9">{{form.baselineData[0].sitio}}&nbsp;</div>
-                </div>
-                <div class="row">
-                  <div class="col s12 m3 label">Barangay:</div>
-                  <div class="col s12 m9">{{form.baselineData[0].barangay}}&nbsp;</div>
-                </div>
-                <div class="row">
-                  <div class="col s12 m3 label">City / Municipality:</div>
-                  <div class="col s12 m9">{{form.baselineData[0].city}}&nbsp;</div>
-                </div>
-                <div class="row">
-                  <div class="col s12 m3 label">Province:</div>
-                  <div class="col s12 m9">{{form.baselineData[0].province}}&nbsp;</div>
-                </div>
-                <div class="row">
-                  <div class="col s12 m3 label">Calamity:</div>
-                  <div class="col s12 m9">{{form.baselineData[0].calamityType}}&nbsp;</div>
+              <div class="collapsible-body">
+                <div class="container">
+                  <div class="row">
+                    <div class="col s12 m3 label">Sitio:</div>
+                    <div class="col s12 m9">{{form.baselineData[0].sitio}}&nbsp;</div>
+                  </div>
+                  <div class="row">
+                    <div class="col s12 m3 label">Barangay:</div>
+                    <div class="col s12 m9">{{form.baselineData[0].barangay}}&nbsp;</div>
+                  </div>
+                  <div class="row">
+                    <div class="col s12 m3 label">City / Municipality:</div>
+                    <div class="col s12 m9">{{form.baselineData[0].city}}&nbsp;</div>
+                  </div>
+                  <div class="row">
+                    <div class="col s12 m3 label">Province:</div>
+                    <div class="col s12 m9">{{form.baselineData[0].province}}&nbsp;</div>
+                  </div>
+                  <div class="row">
+                    <div class="col s12 m3 label">Calamity:</div>
+                    <div class="col s12 m9">{{form.baselineData[0].calamityType}}&nbsp;</div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </li>
+            </li>
+          </template>
         </ul>
       </div>
     </div>
     <div class="pages">
       <ul>
-        <li v-for="page in pageCount" :key="page">
+        <!-- <li v-for="page in pageCount" :key="page">
           <router-link
             :to="{name: 'Forms', params: { page_index: page }}"
             v-if="page == pageNumber"
@@ -64,6 +66,76 @@
             v-else
             class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1"
           >{{ page }}</router-link>
+        </li>-->
+        <li>
+          <router-link
+            :to="{name: 'Forms', params: { page_index: 1 }}"
+            v-if="pageNumber > 1"
+            class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1"
+          >
+            <i class="material-icons">first_page</i>
+          </router-link>
+          <router-link
+            :to="{name: 'Forms', params: { page_index: 1 }}"
+            v-else
+            class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1 disabled"
+          >
+            <i class="material-icons">first_page</i>
+          </router-link>
+        </li>
+        <li>
+          <router-link
+            :to="{name: 'Forms', params: { page_index: pageNumber - 1 }}"
+            v-if="pageNumber > 1"
+            class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1"
+          >
+            <i class="material-icons">navigate_before</i>
+          </router-link>
+          <router-link
+            :to="{name: 'Forms', params: { page_index: pageNumber - 1 }}"
+            v-else
+            class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1 disabled"
+          >
+            <i class="material-icons">navigate_before</i>
+          </router-link>
+        </li>
+        <li>
+          <router-link
+            :to="{name: 'Forms', params: { page_index: pageNumber }}"
+            class="waves-effect waves-light btn-flat amber darken-2"
+          >{{ pageNumber }}</router-link>
+        </li>
+        <li>
+          <router-link
+            :to="{name: 'Forms', params: { page_index: pageNumber + 1 }}"
+            v-if="pageNumber < pageCount"
+            class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1"
+          >
+            <i class="material-icons">navigate_next</i>
+          </router-link>
+          <router-link
+            :to="{name: 'Forms', params: { page_index: pageNumber + 1 }}"
+            v-else
+            class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1 disabled"
+          >
+            <i class="material-icons">navigate_next</i>
+          </router-link>
+        </li>
+        <li>
+          <router-link
+            :to="{name: 'Forms', params: { page_index: pageCount }}"
+            v-if="pageNumber < pageCount"
+            class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1"
+          >
+            <i class="material-icons">last_page</i>
+          </router-link>
+          <router-link
+            :to="{name: 'Forms', params: { page_index: pageCount }}"
+            v-else
+            class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1 disabled"
+          >
+            <i class="material-icons">last_page</i>
+          </router-link>
         </li>
       </ul>
     </div>
