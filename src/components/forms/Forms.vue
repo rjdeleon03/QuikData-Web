@@ -3,10 +3,23 @@
     <h2 class="center teal-text text-darken-1">DNCA Forms</h2>
     <div class="forms-list card-panel">
       <div class="form-contents">
+        <div class="modal">
+          <div class="modal-content">
+            <h4 class="teal-text text-darken-1">Delete DNCA Form</h4>
+            <p>Are you sure you want to delete the selected DNCA form?</p>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-teal btn-flat amber darken-2">Cancel</a>
+            <a
+              @click="deleteForm(deleteFormModal.selectedFormId)"
+              class="modal-close waves-effect waves-red btn-flat amber darken-2"
+            >OK</a>
+          </div>
+        </div>
         <ul class="collapsible card">
           <template v-for="form in forms">
             <li v-bind:key="form.id">
-              <div class="collapsible-header grey lighten-3">
+              <div class="form-header grey lighten-3">
                 <div class="container">
                   <div class="row">
                     <div class="col s6 m6 l6 xl6">
@@ -18,13 +31,13 @@
                           :to="{name: 'SingleForm', params : { form_id: form.form.id }}"
                           class="waves-effect waves-light btn-flat teal"
                         >View</router-link>
-                        <a @click="deleteForm(form.form.id)" class="btn-flat red">Delete</a>
+                        <a @click="confirmDelete(form.form.id)" class="btn-flat red">Delete</a>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="collapsible-body">
+              <div class="form-body">
                 <div class="container">
                   <div class="row">
                     <div class="col s12 m3 label">Sitio:</div>
@@ -153,13 +166,21 @@ export default {
       forms: [],
       formsSnapshot: null,
       pageCount: null,
-      pageNumber: this.$route.params.page_index
+      pageNumber: this.$route.params.page_index,
+      deleteFormModal: null
     };
   },
   methods: {
     updatePage() {
       this.pageNumber = this.$route.params.page_index;
       if (this.formsSnapshot) this.getFormsAtPage(this.pageNumber - 1);
+    },
+    confirmDelete(id) {
+      if (this.deleteFormModal) {
+        const modal = M.Modal.getInstance(this.deleteFormModal);
+        modal.open();
+        this.deleteFormModal.selectedFormId = id;
+      }
     },
     deleteForm(id) {
       const db = firebase.db;
@@ -312,11 +333,12 @@ export default {
         });
     },
     getFormsAtPage(page) {
+      const FORMS_PER_PAGE = 5;
       firebase.db
         .collection("form")
         .orderBy("form.dateCreated", "desc")
-        .startAt(this.formsSnapshot.docs[page * 10])
-        .limit(10)
+        .startAt(this.formsSnapshot.docs[page * FORMS_PER_PAGE])
+        .limit(FORMS_PER_PAGE)
         .get()
         .then(doc => {
           this.forms = [];
@@ -334,6 +356,7 @@ export default {
     $route: "updatePage"
   },
   created() {
+    const FORMS_PER_PAGE = 5;
     firebase.auth.onAuthStateChanged(user => {
       if (!user) this.$router.push("/");
     });
@@ -342,7 +365,7 @@ export default {
       .collection("form")
       .orderBy("form.dateCreated", "desc")
       .onSnapshot(snapshot => {
-        this.pageCount = Math.ceil(snapshot.size / 10);
+        this.pageCount = Math.ceil(snapshot.size / FORMS_PER_PAGE);
         if (
           !this.pageNumber ||
           this.pageNumber < 1 ||
@@ -350,7 +373,8 @@ export default {
         ) {
           this.pageNumber = 1;
         }
-        if (!this.formsSnapshot) {
+        if (!this.formsSnapshot || this.formsSnapshot.size > snapshot.size) {
+          /* Refresh page when forms snapshot is null or a form item has been deleted */
           this.formsSnapshot = snapshot;
           this.getFormsAtPage(this.pageNumber - 1);
         } else {
@@ -363,11 +387,14 @@ export default {
     doc.addEventListener(
       "DOMNodeInserted",
       function() {
-        var collapsible = doc.querySelector(".collapsible");
-        M.Collapsible.init(collapsible, {});
+        // var collapsible = doc.querySelector(".collapsible");
+        // M.Collapsible.init(collapsible, {});
       },
       false
     );
+
+    this.deleteFormModal = doc.querySelector(".modal");
+    M.Modal.init(this.deleteFormModal, {});
   }
 };
 </script>
@@ -380,6 +407,16 @@ export default {
 }
 .forms .btn-flat {
   color: white;
+  height: 35px;
+  border-radius: 8px;
+  margin-left: 5px !important;
+}
+.forms .modal .modal-content {
+  padding: 24px 24px 12px 24px;
+}
+.forms .modal .modal-footer {
+  padding: 12px 24px 24px 24px;
+  height: auto;
 }
 .forms .collapsible {
   box-shadow: none;
@@ -387,30 +424,34 @@ export default {
   border-left: none;
   border-right: none;
 }
-.forms .collapsible .collapsible-header {
+.forms .collapsible .form-header {
   font-weight: 700;
   padding-top: 1px;
   padding-bottom: 1px;
   text-transform: uppercase;
 }
-.forms .collapsible .collapsible-header .container,
-.forms .collapsible .collapsible-body .container {
+.forms .collapsible .form-header .container,
+.forms .collapsible .form-body .container {
   margin: 0;
   width: 100%;
 }
-.forms .collapsible .collapsible-header p {
+.forms .collapsible li {
+  border-bottom: 1px solid #ddd;
+}
+.forms .collapsible .form-header p {
   margin: 7px auto;
 }
-.forms .collapsible .collapsible-header .btn-flat {
-  height: 35px;
-  border-radius: 8px;
-  margin-left: 5px;
-}
-.forms .collapsible .collapsible-header .row {
+.forms .collapsible .form-header .row {
   margin: 5px 0;
   width: 100%;
 }
-.forms .collapsible .collapsible-body {
+.forms .collapsible .form-header .row .left {
+  margin-left: 15px;
+}
+.forms .collapsible .form-header .row .right {
+  margin-right: 15px;
+}
+.forms .collapsible .form-body {
   margin: 0;
   padding: 10px 15px;
 }
