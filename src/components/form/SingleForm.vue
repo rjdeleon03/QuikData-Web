@@ -2,6 +2,11 @@
   <div class="container">
     <div class="form" v-if="formDetailsSection != null">
       <h2 class="center teal-text text-darken-1">Damage, Needs, and Capacities Assessment Form</h2>
+      <div id="options" class="center">
+        <a href>Print</a>
+        &nbsp;|&nbsp;
+        <a href>Delete</a>
+      </div>
       <p
         class="center subtitle"
       >Assessed on {{ constants.convertDate(formDetailsSection.formDetails.assessmentDate) }} by {{ formDetailsSection.baselineData.organization }}</p>
@@ -170,6 +175,11 @@ export default {
 </script>
 
 <style>
+.form h2 {
+  margin: 30px 30px 5px 30px;
+}
+.form #options {
+}
 .form .collapsible.card {
   border: none;
   border-radius: 8px;
@@ -198,8 +208,7 @@ export default {
 }
 
 .form p.subtitle {
-  margin-top: -20px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   font-weight: 600;
 }
 
