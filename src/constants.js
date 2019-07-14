@@ -80,5 +80,24 @@ export default {
   ],
   convertDate: dateLong => {
     return new Date(dateLong).toLocaleDateString("en-US");
+  },
+  convertDateTime: dateTimeLong => {
+    const date = new Date(dateTimeLong);
+    return (
+      date.toLocaleDateString("en-US") +
+      " " +
+      appendLeadingZeroes(date.getHours()) +
+      ":" +
+      appendLeadingZeroes(date.getMinutes()) +
+      ":" +
+      appendLeadingZeroes(date.getSeconds())
+    );
   }
 };
+
+function appendLeadingZeroes(n) {
+  if (n <= 9) {
+    return "0" + n;
+  }
+  return n;
+}

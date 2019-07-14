@@ -59,6 +59,10 @@
                     <div class="col s12 m3 label">Calamity:</div>
                     <div class="col s12 m9">{{form.baselineData[0].calamityType}}&nbsp;</div>
                   </div>
+                  <div class="row">
+                    <div class="col s12 m3 label">Last Modified:</div>
+                    <div class="col s12 m9">{{form.stringDateModified}}&nbsp;</div>
+                  </div>
                 </div>
               </div>
             </li>
@@ -370,7 +374,7 @@ export default {
       const FORMS_PER_PAGE = 5;
       firebase.db
         .collection("form")
-        .orderBy("form.dateCreated", "desc")
+        .orderBy("form.dateModified", "desc")
         .startAt(this.formsSnapshot.docs[page * FORMS_PER_PAGE])
         .limit(FORMS_PER_PAGE)
         .get()
@@ -380,6 +384,10 @@ export default {
             const data = form.data();
             data.stringDate = utils.convertDate(
               data.formDetails[0].assessmentDate
+            );
+            console.log(data.form.dateModified);
+            data.stringDateModified = utils.convertDateTime(
+              data.form.dateModified
             );
             this.forms.push(data);
           });
@@ -397,7 +405,7 @@ export default {
 
     firebase.db
       .collection("form")
-      .orderBy("form.dateCreated", "desc")
+      .orderBy("form.dateModified", "desc")
       .onSnapshot(snapshot => {
         this.pageCount = Math.ceil(snapshot.size / FORMS_PER_PAGE);
         if (!this.pageNumber || this.pageNumber < 1) {
