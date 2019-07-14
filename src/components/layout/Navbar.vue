@@ -4,16 +4,19 @@
       <div class="container">
         <router-link :to="{ name: 'Home'}" class="brand-logo left">Quik Data</router-link>
         <ul class="right" id="menu">
-          <li v-if="user">
+          <li>
+            <a id="burger" class="sidenav-trigger material-icons" data-target="slide-out">menu</a>
+          </li>
+          <li v-if="user" class="expanded-item">
             <router-link :to="{ name: 'Forms', params : { page_index: 1 }}">DNCA Forms</router-link>
           </li>
-          <li v-if="!user">
+          <li v-if="!user" class="expanded-item">
             <router-link :to="{ name: 'SignUp'}">Sign Up</router-link>
           </li>
-          <li v-if="!user">
+          <li v-if="!user" class="expanded-item">
             <router-link :to="{ name: 'Login'}">Login</router-link>
           </li>
-          <li v-if="user">
+          <li v-if="user" class="expanded-item">
             <a class="dropdown-trigger material-icons" data-target="user-dropdown">account_circle</a>
           </li>
         </ul>
@@ -29,6 +32,23 @@
         </ul>
       </div>
     </nav>
+    <ul id="slide-out" class="sidenav">
+      <li v-if="user">
+        <router-link :to="{ name: 'Forms', params : { page_index: 1 }}">DNCA Forms</router-link>
+      </li>
+      <li v-if="!user">
+        <router-link :to="{ name: 'SignUp'}">Sign Up</router-link>
+      </li>
+      <li v-if="!user">
+        <router-link :to="{ name: 'Login'}">Login</router-link>
+      </li>
+      <li v-if="user">
+        <a>{{ user.email }}</a>
+      </li>
+      <li v-if="user">
+        <a @click="logout">Logout</a>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -45,10 +65,16 @@ export default {
   created() {
     firebase.auth.onAuthStateChanged(user => {
       this.user = user;
+      var navbar = document.querySelector(".navbar");
+      var sidenav = navbar.querySelector(".sidenav");
+      if (sidenav && !M.Sidenav.getInstance(sidenav)) {
+        M.Sidenav.init(sidenav, {});
+      }
     });
   },
   mounted() {
-    var doc = document.querySelector(".navbar nav .container ul");
+    var navbar = document.querySelector(".navbar");
+    var doc = navbar.querySelector("nav .container ul");
     doc.addEventListener(
       "DOMNodeInserted",
       function() {
@@ -59,6 +85,7 @@ export default {
       },
       false
     );
+    // if (!navbar) return;
   },
   methods: {
     logout() {
@@ -73,6 +100,16 @@ export default {
 <style>
 .navbar .container ul#menu {
   display: flex;
+}
+.navbar .container ul li.expanded-item {
+  visibility: hidden;
+  width: 0;
+}
+.navbar .container ul li a.material-icons#burger {
+  margin-left: 0;
+  margin-right: 0;
+  visibility: visible;
+  width: auto;
 }
 .navbar .container ul li a.material-icons {
   display: inline-block;
@@ -94,6 +131,14 @@ export default {
   }
   .navbar .container .dropdown-content {
     top: 64px !important;
+  }
+  .navbar .container ul li a.material-icons#burger {
+    visibility: hidden;
+    width: 0;
+  }
+  .navbar .container ul li.expanded-item {
+    visibility: visible;
+    width: auto;
   }
 }
 </style>
