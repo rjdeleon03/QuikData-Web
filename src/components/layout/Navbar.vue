@@ -44,6 +44,12 @@
     </nav>
     <ul id="slide-out" class="sidenav">
       <li v-if="user">
+        <a>{{ user.email }}</a>
+      </li>
+      <li>
+        <hr />
+      </li>
+      <li v-if="user">
         <router-link :to="{ name: 'Forms'}">DNCA Forms</router-link>
       </li>
       <li v-if="!user">
@@ -51,9 +57,6 @@
       </li>
       <li v-if="!user">
         <router-link :to="{ name: 'Login'}">Login</router-link>
-      </li>
-      <li v-if="user">
-        <a>{{ user.email }}</a>
       </li>
       <li v-if="user">
         <a @click="logout">Logout</a>
@@ -121,6 +124,9 @@ export default {
 </script>
 
 <style>
+.navbar#slide-out {
+  margin: 0 30px;
+}
 .navbar .container ul#menu {
   display: flex;
 }

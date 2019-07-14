@@ -559,19 +559,19 @@ export default {
 
 @media only screen and (min-width: 484px) {
   .refresh-alert.card-panel {
-    height: 70px;
+    height: 90px;
   }
   .refresh-alert.card-panel .left {
     width: 70%;
   }
   .refresh-alert .btn-flat {
-    height: 70px;
+    height: 90px;
   }
   .refresh-alert p {
     margin: 15px;
   }
   .refresh-alert a p {
-    margin: 23px 0;
+    margin: 35px 0;
   }
 }
 @media only screen and (min-width: 761px) {
