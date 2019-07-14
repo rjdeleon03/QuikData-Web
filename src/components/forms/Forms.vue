@@ -364,6 +364,7 @@ export default {
             );
           item.ref.delete();
         });
+      M.toast({ html: "Selected DNCA form has been deleted successfully." });
     },
     getFormsAtPage(page) {
       const FORMS_PER_PAGE = 5;
