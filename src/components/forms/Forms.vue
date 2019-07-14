@@ -151,6 +151,7 @@
           </router-link>
         </li>
       </ul>
+      <p class="center">Page {{ pageNumber }} of {{ pageCount }}</p>
     </div>
   </div>
 </template>
@@ -192,14 +193,18 @@ export default {
       db.collection("calamityInfo")
         .where("formId", "==", id)
         .get()
-        .then(doc => doc.docs[0].ref.delete());
+        .then(doc => {
+          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
+        });
       db.collection("population")
         .doc(id)
         .delete();
       db.collection("families")
         .where("formId", "==", id)
         .get()
-        .then(doc => doc.docs[0].ref.delete());
+        .then(doc => {
+          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
+        });
       db.collection("vulnerable")
         .doc(id)
         .delete();
@@ -219,7 +224,9 @@ export default {
       db.collection("shelterCoping")
         .where("formId", "==", id)
         .get()
-        .then(doc => doc.docs[0].ref.delete());
+        .then(doc => {
+          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
+        });
       db.collection("shelterNeeds")
         .doc(id)
         .delete();
@@ -229,28 +236,38 @@ export default {
       db.collection("shelterGaps")
         .where("formId", "==", id)
         .get()
-        .then(doc => doc.docs[0].ref.delete());
+        .then(doc => {
+          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
+        });
 
       /* Food Security */
       db.collection("foodImpact")
         .where("formId", "==", id)
         .get()
-        .then(doc => doc.docs[0].ref.delete());
+        .then(doc => {
+          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
+        });
       db.collection("foodCoping")
         .where("formId", "==", id)
         .get()
-        .then(doc => doc.docs[0].ref.delete());
+        .then(doc => {
+          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
+        });
       db.collection("foodNeeds")
         .where("formId", "==", id)
         .get()
-        .then(doc => doc.docs[0].ref.delete());
+        .then(doc => {
+          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
+        });
       db.collection("foodAssistance")
         .doc(id)
         .delete();
       db.collection("foodGaps")
         .where("formId", "==", id)
         .get()
-        .then(doc => doc.docs[0].ref.delete());
+        .then(doc => {
+          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
+        });
 
       /* Livelihoods */
       db.collection("incomeBefore")
@@ -265,18 +282,24 @@ export default {
       db.collection("livelihoodsCoping")
         .where("formId", "==", id)
         .get()
-        .then(doc => doc.docs[0].ref.delete());
+        .then(doc => {
+          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
+        });
       db.collection("livelihoodsNeeds")
         .where("formId", "==", id)
         .get()
-        .then(doc => doc.docs[0].ref.delete());
+        .then(doc => {
+          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
+        });
       db.collection("livelihoodsAssistance")
         .doc(id)
         .delete();
       db.collection("livelihoodsGaps")
         .where("formId", "==", id)
         .get()
-        .then(doc => doc.docs[0].ref.delete());
+        .then(doc => {
+          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
+        });
       /* Health */
       db.collection("diseases")
         .doc(id)
@@ -290,30 +313,40 @@ export default {
       db.collection("healthCoping")
         .where("formId", "==", id)
         .get()
-        .then(doc => doc.docs[0].ref.delete());
+        .then(doc => {
+          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
+        });
       db.collection("healthAssistance")
         .doc(id)
         .delete();
       db.collection("healthGaps")
         .where("formId", "==", id)
         .get()
-        .then(doc => doc.docs[0].ref.delete());
+        .then(doc => {
+          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
+        });
       /* Wash */
       db.collection("washConditions")
         .where("formId", "==", id)
         .get()
-        .then(doc => doc.docs[0].ref.delete());
+        .then(doc => {
+          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
+        });
       db.collection("washCoping")
         .where("formId", "==", id)
         .get()
-        .then(doc => doc.docs[0].ref.delete());
+        .then(doc => {
+          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
+        });
       db.collection("washAssistance")
         .doc(id)
         .delete();
       db.collection("washGaps")
         .where("formId", "==", id)
         .get()
-        .then(doc => doc.docs[0].ref.delete());
+        .then(doc => {
+          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
+        });
       /* Evacuation */
       db.collection("evacuationSites")
         .doc(id)
@@ -366,12 +399,10 @@ export default {
       .orderBy("form.dateCreated", "desc")
       .onSnapshot(snapshot => {
         this.pageCount = Math.ceil(snapshot.size / FORMS_PER_PAGE);
-        if (
-          !this.pageNumber ||
-          this.pageNumber < 1 ||
-          this.pageNumber > this.pageCount
-        ) {
+        if (!this.pageNumber || this.pageNumber < 1) {
           this.pageNumber = 1;
+        } else if (this.pageNumber > this.pageCount) {
+          this.pageNumber = this.pageCount;
         }
         if (!this.formsSnapshot || this.formsSnapshot.size > snapshot.size) {
           /* Refresh page when forms snapshot is null or a form item has been deleted */
