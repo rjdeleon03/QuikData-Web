@@ -189,7 +189,7 @@ export default {
       pageCount: null,
       pageNumber: this.$route.params.page_index,
       deleteFormModal: null,
-      needsRefresh: false
+      needsRefresh: true
     };
   },
   methods: {
@@ -472,26 +472,27 @@ export default {
   border-radius: 8px;
   margin-left: 5px !important;
 }
-.refresh-alert {
+.refresh-alert.card-panel {
   margin-bottom: 20px !important;
-  height: 50px;
+  height: 150px;
+}
+.refresh-alert.card-panel .left {
+  width: 50%;
 }
 .refresh-alert p {
   margin: 15px;
 }
 .refresh-alert a p {
-  margin: 12.5px 0;
+  margin: 63px 0;
 }
 .refresh-alert .btn-flat {
   box-shadow: none;
-  height: 50px;
+  height: 150px;
   color: white;
   border-radius: 0;
   font-weight: 700;
 }
 .refresh-alert .btn-flat.end {
-  height: 50px;
-  color: white;
   border-radius: 0 8px 8px 0;
 }
 .forms .modal .modal-content {
@@ -554,6 +555,41 @@ export default {
 .forms .pages ul li {
   display: inline-block;
   margin: 0 2px;
+}
+
+@media only screen and (min-width: 484px) {
+  .refresh-alert.card-panel {
+    height: 70px;
+  }
+  .refresh-alert.card-panel .left {
+    width: 70%;
+  }
+  .refresh-alert .btn-flat {
+    height: 70px;
+  }
+  .refresh-alert p {
+    margin: 15px;
+  }
+  .refresh-alert a p {
+    margin: 23px 0;
+  }
+}
+@media only screen and (min-width: 761px) {
+  .refresh-alert.card-panel {
+    height: 50px;
+  }
+  .refresh-alert.card-panel .left {
+    width: auto;
+  }
+  .refresh-alert .btn-flat {
+    height: 50px;
+  }
+  .refresh-alert p {
+    margin: 15px;
+  }
+  .refresh-alert a p {
+    margin: 12.5px 0;
+  }
 }
 </style>
 
