@@ -56,60 +56,37 @@
       </div>
 
       <GeneralInformation :formId="formId" :form="formDetailsSection" />
-      <ShelterInformation :formId="formId" :form="formDetailsSection" />
-      <FoodSecurity :formId="formId" :form="formDetailsSection" />
-      <Livelihoods :formId="formId" :form="formDetailsSection" />
-      <Health :formId="formId" :form="formDetailsSection" />
-      <Wash :formId="formId" :form="formDetailsSection" />
-      <Evacuation :formId="formId" :form="formDetailsSection" />
+      <ShelterInformation
+        :formId="formId"
+        :form="formDetailsSection"
+        v-if="formMetadata != null && formMetadata.includeShelter"
+      />
+      <FoodSecurity
+        :formId="formId"
+        :form="formDetailsSection"
+        v-if="formMetadata != null && formMetadata.includeFood"
+      />
+      <Livelihoods
+        :formId="formId"
+        :form="formDetailsSection"
+        v-if="formMetadata != null && formMetadata.includeLivelihoods"
+      />
+      <Health
+        :formId="formId"
+        :form="formDetailsSection"
+        v-if="formMetadata != null && formMetadata.includeHealth"
+      />
+      <Wash
+        :formId="formId"
+        :form="formDetailsSection"
+        v-if="formMetadata != null && formMetadata.includeWater"
+      />
+      <Evacuation
+        :formId="formId"
+        :form="formDetailsSection"
+        v-if="formMetadata != null && formMetadata.includeEvacuation"
+      />
       <CaseStories :formId="formId" :form="formDetailsSection" />
-      <!--
-      <div class="form-details card-panel">
-        <div class="row form-header">
-          <div class="col s2 col-no-padding">
-            <p>Sections</p>
-          </div>
-          <div class="col s10 col-no-padding">
-            <ul class="tabs">
-              <li class="tab col s1 offset-s4">
-                <a href="#test1" class="#active">1</a>
-              </li>
-              <li class="tab col s1">
-                <a href="#test2">2</a>
-              </li>
-              <li class="tab col s1">
-                <a href="#test3">3</a>
-              </li>
-              <li class="tab col s1">
-                <a href="#test4">4</a>
-              </li>
-              <li class="tab col s1">
-                <a href="#test5">5</a>
-              </li>
-              <li class="tab col s1">
-                <a href="#test6">6</a>
-              </li>
-              <li class="tab col s1">
-                <a href="#test7">7</a>
-              </li>
-              <li class="tab col s1">
-                <a href="#test8">8</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div>
-          <div id="test1" class="form-contents"></div>
-          <div id="test2" class="form-contents"></div>
-          <div id="test3" class="form-contents">Test 3</div>
-          <div id="test4" class="form-contents">Test 4</div>
-          <div id="test5" class="form-contents">Test 5</div>
-          <div id="test6" class="form-contents">Test 6</div>
-          <div id="test7" class="form-contents">Test 7</div>
-          <div id="test8" class="form-contents">Test 8</div>
-        </div>
-      </div>
-      -->
     </div>
   </div>
 </template>
@@ -142,6 +119,7 @@ export default {
       constants: constants,
       formId: this.$route.params.form_id,
       formDetailsSection: null,
+      formMetadata: null,
       isLoggedIn: false
     };
   },
@@ -164,6 +142,7 @@ export default {
       .get()
       .then(doc => {
         const data = doc.data();
+        this.formMetadata = data.form;
         this.formDetailsSection = {
           formDetails: data.formDetails[0],
           baselineData: data.baselineData[0],

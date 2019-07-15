@@ -189,7 +189,7 @@ export default {
       pageCount: null,
       pageNumber: this.$route.params.page_index,
       deleteFormModal: null,
-      needsRefresh: true
+      needsRefresh: false
     };
   },
   methods: {

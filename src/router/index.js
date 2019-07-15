@@ -33,14 +33,14 @@ const router = new Router({
       component: Logout
     },
     {
+      path: "/form/:form_id",
+      name: "SingleForm",
+      component: SingleForm
+    },
+    {
       path: "/forms/:page_index?",
       name: "Forms",
       component: Forms
-    },
-    {
-      path: "/forms/:form_id",
-      name: "SingleForm",
-      component: SingleForm
     }
   ]
 });
