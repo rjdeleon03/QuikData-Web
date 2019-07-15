@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar">
+  <div class="navbar" v-if="!mustHide">
     <nav class="teal darken-1">
       <div class="container">
         <router-link :to="{ name: 'Home'}" class="brand-logo left">Quik Data</router-link>
@@ -74,13 +74,15 @@ export default {
     return {
       user: false,
       formsSnapshot: null,
-      needsRefresh: false
+      needsRefresh: false,
+      mustHide: false
     };
   },
   created() {
     firebase.auth.onAuthStateChanged(user => {
       this.user = user;
       var navbar = document.querySelector(".navbar");
+      if (!navbar) return;
       var sidenav = navbar.querySelector(".sidenav");
       if (sidenav && !M.Sidenav.getInstance(sidenav)) {
         M.Sidenav.init(sidenav, {});
@@ -99,6 +101,9 @@ export default {
     //   });
   },
   mounted() {
+    if (this.$router.currentRoute.name == "Print") {
+      this.mustHide = true;
+    }
     var navbar = document.querySelector(".navbar");
     var doc = navbar.querySelector("nav .container ul");
     doc.addEventListener(
@@ -118,6 +123,16 @@ export default {
       firebase.auth.signOut().then(() => {
         this.$router.push({ name: "Login" });
       });
+    }
+  },
+  watch: {
+    $route(to, from) {
+      if (to.name === "Print") {
+        this.mustHide = true;
+        console.log("Hello");
+        return;
+      }
+      this.mustHide = false;
     }
   }
 };

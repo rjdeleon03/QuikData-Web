@@ -1,5 +1,5 @@
 <template>
-  <div class="container footer">
+  <div class="container footer" v-if="!mustHide">
     <div class="section">
       <div class="divider"></div>
     </div>
@@ -11,7 +11,24 @@
 export default {
   name: "Footer",
   data() {
-    return {};
+    return {
+      mustHide: false
+    };
+  },
+  mounted() {
+    if (this.$router.currentRoute.name == "Print") {
+      this.mustHide = true;
+    }
+  },
+  watch: {
+    $route(to, from) {
+      if (to.name === "Print") {
+        this.mustHide = true;
+        console.log("Hello");
+        return;
+      }
+      this.mustHide = false;
+    }
   }
 };
 </script>
