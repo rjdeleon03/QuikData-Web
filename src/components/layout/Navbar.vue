@@ -129,7 +129,6 @@ export default {
     $route(to, from) {
       if (to.name === "Print") {
         this.mustHide = true;
-        console.log("Hello");
         return;
       }
       this.mustHide = false;

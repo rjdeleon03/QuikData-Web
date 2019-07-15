@@ -56,26 +56,10 @@
 <script>
 import firebase from "@/firebase/init";
 import constants from "@/constants";
-import GeneralInformation from "@/components/form/GeneralInformation";
-import ShelterInformation from "@/components/form/ShelterInformation";
-import FoodSecurity from "@/components/form/FoodSecurity";
-import Livelihoods from "@/components/form/Livelihoods";
-import Health from "@/components/form/Health";
-import Wash from "@/components/form/Wash";
-import Evacuation from "@/components/form/Evacuation";
-import CaseStories from "@/components/form/CaseStories";
+import jsPDF from "jspdf";
 export default {
   name: "Print",
-  components: {
-    GeneralInformation,
-    ShelterInformation,
-    FoodSecurity,
-    Livelihoods,
-    Health,
-    Wash,
-    Evacuation,
-    CaseStories
-  },
+  components: {},
   data() {
     return {
       constants: constants,
@@ -111,6 +95,12 @@ export default {
           calamityInfo: data.calamityInfo[0]
         };
       });
+  },
+  mounted() {
+    let pdfName = "test";
+    var doc = new jsPDF();
+    doc.text("Hello World", 10, 10);
+    doc.save(pdfName + ".pdf");
   }
 };
 </script>
