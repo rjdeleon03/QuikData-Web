@@ -147,8 +147,7 @@ export default {
   display: flex;
 }
 .navbar .container ul li.expanded-item {
-  visibility: hidden;
-  width: 0;
+  display: none;
 }
 .navbar .container ul li a.material-icons#burger {
   margin-left: 0;
@@ -187,12 +186,12 @@ export default {
     top: 64px !important;
   }
   .navbar .container ul li a.material-icons#burger {
-    visibility: hidden;
-    width: 0;
+    display: none;
   }
   .navbar .container ul li.expanded-item {
     visibility: visible;
     width: auto;
+    display: block;
   }
   .navbar .text-with-icon .material-icons {
     margin-top: -2px;

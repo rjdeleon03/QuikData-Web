@@ -466,10 +466,13 @@ export default {
   font-weight: 700;
 }
 .forms .forms-list .btn-flat {
+  width: 100% !important;
+  text-align: center;
   color: white;
-  height: 35px;
   border-radius: 8px;
-  margin-left: 5px !important;
+}
+.forms .forms-list .btn-flat:first-child {
+  margin-bottom: 5px !important;
 }
 .refresh-alert.card-panel {
   margin-bottom: 20px !important;
@@ -557,6 +560,15 @@ export default {
 }
 
 @media only screen and (min-width: 484px) {
+  .forms .forms-list .btn-flat {
+    width: inherit !important;
+    text-align: center;
+    height: 35px;
+    margin-left: 5px !important;
+  }
+  .forms .forms-list .btn-flat:first-child {
+    margin-bottom: 0 !important;
+  }
   .refresh-alert.card-panel {
     height: 90px;
   }

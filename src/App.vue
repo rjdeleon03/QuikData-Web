@@ -30,9 +30,6 @@ body h2 {
 body h4 {
   font-size: 1.8em;
 }
-body .container {
-  width: 80%;
-}
 body .row {
   margin-bottom: 5px;
 }
