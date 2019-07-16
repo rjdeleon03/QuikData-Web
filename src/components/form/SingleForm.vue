@@ -5,7 +5,7 @@
       <div id="options" class="center">
         <a @click="print">Print</a>
         &nbsp;|&nbsp;
-        <a href>Delete</a>
+        <a @click="deleteForm(formId)">Delete</a>
       </div>
       <p
         class="center subtitle"
@@ -93,6 +93,7 @@
 
 <script>
 import firebase from "@/firebase/init";
+import utils from "@/constants";
 import constants from "@/constants";
 import GeneralInformation from "@/components/form/GeneralInformation";
 import ShelterInformation from "@/components/form/ShelterInformation";
@@ -129,6 +130,10 @@ export default {
     },
     print() {
       window.print();
+    },
+    deleteForm(id) {
+      utils.deleteForm(id);
+      this.$router.push({ name: "Forms", params: { page_index: 1 } });
     }
   },
   watch: {
