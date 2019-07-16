@@ -319,6 +319,7 @@ export default {
 @media print {
   body {
     margin: 0 !important;
+    font-size: 0.9em;
   }
   .container#form-container {
     margin: 0 !important;
@@ -328,10 +329,11 @@ export default {
   .form #options {
     display: none;
   }
-  .form h2 {
+  .form h2.teal-text.text-darken-1 {
     font-size: 1.15em;
     text-transform: uppercase;
     font-weight: 700;
+    color: inherit !important;
   }
   .form .form-details#details {
     page-break-after: avoid;
@@ -345,7 +347,14 @@ export default {
   .form .form-details.card-panel .form-contents {
     border-radius: 0;
   }
-  .form .collapsible .collapsible-header,
+  .form .collapsible .collapsible-header {
+    margin: 0 22px;
+    border-bottom: 1px solid gray !important;
+    height: 30px;
+  }
+  .form .collapsible .collapsible-header p {
+    margin: 0 !important;
+  }
   .form .collapsible .collapsible-body {
     border: 0 !important;
   }
@@ -355,6 +364,9 @@ export default {
   }
   .form .collapsible-body {
     display: block !important;
+  }
+  .form .form-header p {
+    color: inherit;
   }
 }
 </style>
