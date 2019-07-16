@@ -1,11 +1,24 @@
 <template>
   <div class="container" id="form-container">
+    <div class="modal">
+      <div class="modal-content">
+        <h4 class="teal-text text-darken-1">Delete DNCA Form</h4>
+        <p>Are you sure you want to delete this DNCA form?</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-teal btn-flat amber darken-2">Cancel</a>
+        <a
+          @click="deleteForm(formId)"
+          class="modal-close waves-effect waves-red btn-flat amber darken-2"
+        >OK</a>
+      </div>
+    </div>
     <div class="form" v-if="formDetailsSection != null">
       <h2 class="center teal-text text-darken-1">Damage, Needs, and Capacities Assessment Form</h2>
       <div id="options" class="center">
         <a @click="print">Print</a>
         &nbsp;|&nbsp;
-        <a @click="deleteForm(formId)">Delete</a>
+        <a @click="confirmDelete(formId)">Delete</a>
       </div>
       <p
         class="center subtitle"
@@ -121,6 +134,7 @@ export default {
       formId: this.$route.params.form_id,
       formDetailsSection: null,
       formMetadata: null,
+      deleteFormModal: null,
       isLoggedIn: false
     };
   },
@@ -131,7 +145,15 @@ export default {
     print() {
       window.print();
     },
+    confirmDelete(id) {
+      console.log(this.deleteFormModal);
+      if (this.deleteFormModal) {
+        const modal = M.Modal.getInstance(this.deleteFormModal);
+        modal.open();
+      }
+    },
     deleteForm(id) {
+      console.log(id);
       utils.deleteForm(id);
       this.$router.push({ name: "Forms", params: { page_index: 1 } });
     }
@@ -157,6 +179,10 @@ export default {
           calamityInfo: data.calamityInfo[0]
         };
       });
+  },
+  mounted() {
+    this.deleteFormModal = document.querySelector("#form-container .modal");
+    M.Modal.init(this.deleteFormModal, {});
   }
 };
 </script>
