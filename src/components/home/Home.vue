@@ -9,6 +9,7 @@
 
 <script>
 import About from "@/components/home/About";
+import jsPDF from "jspdf";
 export default {
   name: "Home",
   components: {
@@ -16,6 +17,14 @@ export default {
   },
   data() {
     return {};
+  },
+  mounted() {
+    var source = window.document.getElementsByTagName("body")[0];
+    let pdfName = "test";
+    var doc = new jsPDF();
+    doc.fromHTML(source, 15, 15);
+    doc.save(pdfName + ".pdf");
+    console.log(doc);
   }
 };
 </script>
