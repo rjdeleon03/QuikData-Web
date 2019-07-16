@@ -42,26 +42,34 @@
         </ul>
       </div>
     </nav>
-    <ul id="slide-out" class="sidenav">
-      <li v-if="user">
-        <a>{{ user.email }}</a>
-      </li>
-      <li>
-        <hr />
-      </li>
-      <li v-if="user">
-        <a @click="goToDncaForms">DNCA Forms</a>
-      </li>
-      <li v-if="!user">
-        <a @click="signup">Sign Up</a>
-      </li>
-      <li v-if="!user">
-        <a @click="login">Login</a>
-      </li>
-      <li v-if="user">
-        <a @click="logout">Logout</a>
-      </li>
-    </ul>
+    <div id="slide-out" class="sidenav">
+      <img src="@/assets/temp_bg_side.jpg" alt />
+      <div id="email-wrapper" v-if="user">
+        <p class="center" id="email-label">You are logged in as</p>
+        <p class="center" id="email">{{ user.email }}</p>
+      </div>
+      <div id="email-wrapper" v-else>
+        <p class="center" id="email-label">You are not logged in.</p>
+      </div>
+      <hr />
+      <ul>
+        <li>
+          <a @click="goToHome">Home</a>
+        </li>
+        <li v-if="user">
+          <a @click="goToDncaForms">DNCA Forms</a>
+        </li>
+        <li v-if="!user">
+          <a @click="login">Login</a>
+        </li>
+        <li v-if="!user">
+          <a @click="signup">Sign Up</a>
+        </li>
+        <li v-if="user">
+          <a @click="logout">Logout</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -134,6 +142,10 @@ export default {
     goToDncaForms() {
       if (this.sideNav) this.sideNav.close();
       this.$router.push({ name: "Forms" });
+    },
+    goToHome() {
+      if (this.sideNav) this.sideNav.close();
+      this.$router.push({ name: "Home" });
     }
   }
 };
@@ -175,6 +187,23 @@ export default {
   margin-top: -1px;
   margin-left: 3px;
   color: #ffa000;
+}
+.navbar #slide-out #email-wrapper {
+  background: #009688;
+  margin-top: -6px;
+  margin-bottom: -7px;
+  padding-bottom: 10px;
+  color: white;
+}
+.navbar #slide-out p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.navbar #slide-out p#email {
+  font-weight: 600;
+}
+.navbar #slide-out img {
+  width: 100%;
 }
 @media only screen and (min-width: 601px) {
   .navbar .container ul li a.material-icons {
