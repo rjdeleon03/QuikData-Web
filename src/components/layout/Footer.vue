@@ -37,6 +37,12 @@ export default {
   margin-top: 30px;
   margin-bottom: 60px;
 }
+@media print {
+  .footer.container {
+    visibility: collapse;
+    height: 0;
+  }
+}
 </style>
 
 

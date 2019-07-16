@@ -97,10 +97,12 @@ export default {
       });
   },
   mounted() {
+    var source = window.document.getElementsByTagName("body")[0];
     let pdfName = "test";
     var doc = new jsPDF();
-    doc.text("Hello World", 10, 10);
+    doc.fromHTML(source, 15, 15);
     doc.save(pdfName + ".pdf");
+    console.log(doc);
   }
 };
 </script>

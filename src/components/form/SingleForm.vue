@@ -3,7 +3,7 @@
     <div class="form" v-if="formDetailsSection != null">
       <h2 class="center teal-text text-darken-1">Damage, Needs, and Capacities Assessment Form</h2>
       <div id="options" class="center">
-        <a href>Print</a>
+        <a @click="print">Print</a>
         &nbsp;|&nbsp;
         <a href>Delete</a>
       </div>
@@ -126,6 +126,9 @@ export default {
   methods: {
     updateId() {
       this.formId = this.$route.params.form_id;
+    },
+    print() {
+      window.print();
     }
   },
   watch: {
@@ -312,6 +315,12 @@ export default {
 
 .form table tr .center {
   text-align: center;
+}
+@media print {
+  .collapsible-body {
+    visibility: visible;
+    height: auto;
+  }
 }
 </style>
 

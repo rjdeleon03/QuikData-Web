@@ -196,6 +196,12 @@ export default {
     margin-top: -2px;
   }
 }
+@media print {
+  .navbar {
+    visibility: collapse;
+    height: 0;
+  }
+}
 </style>
 
 

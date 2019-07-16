@@ -10,8 +10,8 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "firebase": "^6.2.4",
+    "jspdf": "^1.5.3",
     "materialize-css": "^1.0.0-rc.2",
-    "jspdf": "1.5.2",
     "vue": "^2.6.10",
     "vue-router": "^3.0.6",
     "vue-scrollto": "^2.15.0"
