@@ -14,20 +14,6 @@ export default {
     return {
       mustHide: false
     };
-  },
-  mounted() {
-    if (this.$router.currentRoute.name == "Print") {
-      this.mustHide = true;
-    }
-  },
-  watch: {
-    $route(to, from) {
-      if (to.name === "Print") {
-        this.mustHide = true;
-        return;
-      }
-      this.mustHide = false;
-    }
   }
 };
 </script>

@@ -50,13 +50,13 @@
         <hr />
       </li>
       <li v-if="user">
-        <router-link :to="{ name: 'Forms'}">DNCA Forms</router-link>
+        <a @click="goToDncaForms">DNCA Forms</a>
       </li>
       <li v-if="!user">
-        <router-link :to="{ name: 'SignUp'}">Sign Up</router-link>
+        <a @click="signup">Sign Up</a>
       </li>
       <li v-if="!user">
-        <router-link :to="{ name: 'Login'}">Login</router-link>
+        <a @click="login">Login</a>
       </li>
       <li v-if="user">
         <a @click="logout">Logout</a>
@@ -75,7 +75,8 @@ export default {
       user: false,
       formsSnapshot: null,
       needsRefresh: false,
-      mustHide: false
+      mustHide: false,
+      sideNav: null
     };
   },
   created() {
@@ -85,7 +86,7 @@ export default {
       if (!navbar) return;
       var sidenav = navbar.querySelector(".sidenav");
       if (sidenav && !M.Sidenav.getInstance(sidenav)) {
-        M.Sidenav.init(sidenav, {});
+        this.sideNav = M.Sidenav.init(sidenav, {});
       }
     });
     // firebase.db
@@ -101,9 +102,6 @@ export default {
     //   });
   },
   mounted() {
-    if (this.$router.currentRoute.name == "Print") {
-      this.mustHide = true;
-    }
     var navbar = document.querySelector(".navbar");
     var doc = navbar.querySelector("nav .container ul");
     doc.addEventListener(
@@ -119,19 +117,23 @@ export default {
     // if (!navbar) return;
   },
   methods: {
+    signup() {
+      if (this.sideNav) this.sideNav.close();
+      this.$router.push({ name: "SignUp" });
+    },
+    login() {
+      if (this.sideNav) this.sideNav.close();
+      this.$router.push({ name: "Login" });
+    },
     logout() {
+      if (this.sideNav) this.sideNav.close();
       firebase.auth.signOut().then(() => {
         this.$router.push({ name: "Login" });
       });
-    }
-  },
-  watch: {
-    $route(to, from) {
-      if (to.name === "Print") {
-        this.mustHide = true;
-        return;
-      }
-      this.mustHide = false;
+    },
+    goToDncaForms() {
+      if (this.sideNav) this.sideNav.close();
+      this.$router.push({ name: "Forms" });
     }
   }
 };
