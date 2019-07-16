@@ -2,6 +2,15 @@
   <div id="app">
     <Navbar />
     <router-view />
+    <div class="modal alert">
+      <div class="modal-content">
+        <h4 class="teal-text text-darken-1">Delete DNCA Form</h4>
+        <p>Are you sure you want to delete the selected DNCA form?</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-teal btn-flat amber darken-2">OK</a>
+      </div>
+    </div>
     <Footer />
   </div>
 </template>

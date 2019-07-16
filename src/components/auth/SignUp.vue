@@ -41,7 +41,9 @@ export default {
     return {
       email: null,
       password: null,
-      confirmPassword: null
+      confirmPassword: null,
+      alertModal: null,
+      alertParagraph: null
     };
   },
   methods: {
@@ -59,8 +61,18 @@ export default {
         .then(() => {
           this.$router.push({ name: "Forms", params: { page_index: 1 } });
         })
-        .catch(err => alert(err.message));
+        .catch(err => {
+          console.log(this.alertModal);
+          if (this.alertModal) this.alertModal.open();
+          return;
+        });
     }
+  },
+  mounted() {
+    var doc = document.querySelector(".modal");
+    this.alertParagraph = doc.querySelector("p");
+    console.log(this.alertParagraph);
+    this.alertModal = M.Modal.init(doc, {});
   }
 };
 </script>
