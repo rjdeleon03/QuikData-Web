@@ -1,11 +1,15 @@
 <template>
-  <div class="form-details card-panel" id="evacuation">
+  <div
+    class="form-details card-panel"
+    id="evacuation"
+    v-if="evacuationSites != null && evacuationSites.length > 0"
+  >
     <div class="form-header">
       <p class="center">Evacuation Sites</p>
     </div>
     <div class="evacuation form-contents">
       <!-- Evacuation Sites -->
-      <div v-if="evacuationSites != null && evacuationSites.length > 0">
+      <div>
         <ul class="collapsible">
           <template v-for="(row, index) in evacuationSites">
             <li :key="index" v-bind:id="'evacuation' + (index + 1)">
