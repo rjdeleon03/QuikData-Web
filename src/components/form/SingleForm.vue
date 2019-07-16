@@ -10,7 +10,7 @@
       <p
         class="center subtitle"
       >Assessed on {{ constants.convertDate(formDetailsSection.formDetails.assessmentDate) }} by {{ formDetailsSection.baselineData.organization }}</p>
-      <div class="form-details card-panel">
+      <div class="form-details card-panel" id="details">
         <div class="form-header">
           <p class="center">Form Details</p>
         </div>
@@ -325,6 +325,17 @@ export default {
     padding: 0 !important;
     width: 100% !important;
   }
+  .form #options {
+    display: none;
+  }
+  .form h2 {
+    font-size: 1.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .form .form-details#details {
+    page-break-after: avoid;
+  }
   .form .form-details.card-panel {
     box-shadow: none;
     border-radius: 0;
@@ -333,6 +344,10 @@ export default {
   .form .form-details.card-panel .form-header,
   .form .form-details.card-panel .form-contents {
     border-radius: 0;
+  }
+  .form .collapsible .collapsible-header,
+  .form .collapsible .collapsible-body {
+    border: 0 !important;
   }
   .form .row {
     width: 100% !important;
