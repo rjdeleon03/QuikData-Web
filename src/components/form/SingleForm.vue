@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" id="form-container">
     <div class="form" v-if="formDetailsSection != null">
       <h2 class="center teal-text text-darken-1">Damage, Needs, and Capacities Assessment Form</h2>
       <div id="options" class="center">
@@ -284,7 +284,7 @@ export default {
 .form table {
   border-collapse: collapse;
   table-layout: fixed;
-  width: 100%;
+  width: inherit;
 }
 
 .form th,
@@ -317,9 +317,16 @@ export default {
   text-align: center;
 }
 @media print {
-  .collapsible-body {
-    visibility: visible;
-    height: auto;
+  .container#form-container {
+    margin: 0 10px;
+    width: 100% !important;
+  }
+  .form .row {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  .form .collapsible-body {
+    display: block !important;
   }
 }
 </style>
