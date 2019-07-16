@@ -42,4 +42,11 @@ body h4 {
 body .row {
   margin-bottom: 5px;
 }
+.modal .modal-content {
+  padding: 24px 24px 12px 24px !important;
+}
+.modal .modal-footer {
+  padding: 12px 24px 24px 24px !important;
+  height: auto !important;
+}
 </style>

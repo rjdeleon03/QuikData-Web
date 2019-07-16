@@ -43,7 +43,8 @@ export default {
       password: null,
       confirmPassword: null,
       alertModal: null,
-      alertParagraph: null
+      alertParagraph: null,
+      alertTitle: null
     };
   },
   methods: {
@@ -62,7 +63,9 @@ export default {
           this.$router.push({ name: "Forms", params: { page_index: 1 } });
         })
         .catch(err => {
-          console.log(this.alertModal);
+          this.alertTitle.innerHTML = "Signup Error";
+          this.alertParagraph.innerHTML = err.message;
+          console.log(this.alertParagraph);
           if (this.alertModal) this.alertModal.open();
           return;
         });
@@ -71,7 +74,7 @@ export default {
   mounted() {
     var doc = document.querySelector(".modal");
     this.alertParagraph = doc.querySelector("p");
-    console.log(this.alertParagraph);
+    this.alertTitle = doc.querySelector("h4");
     this.alertModal = M.Modal.init(doc, {});
   }
 };

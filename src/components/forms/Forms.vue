@@ -497,13 +497,6 @@ export default {
 .refresh-alert .btn-flat.end {
   border-radius: 0 8px 8px 0;
 }
-.forms .modal .modal-content {
-  padding: 24px 24px 12px 24px;
-}
-.forms .modal .modal-footer {
-  padding: 12px 24px 24px 24px;
-  height: auto;
-}
 .forms .collapsible {
   box-shadow: none;
   margin: 10px 0;
