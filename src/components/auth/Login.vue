@@ -28,7 +28,10 @@ export default {
   data() {
     return {
       email: null,
-      password: null
+      password: null,
+      alertModal: null,
+      alertParagraph: null,
+      alertTitle: null
     };
   },
   methods: {
@@ -39,8 +42,21 @@ export default {
         .then(() => {
           this.$router.push({ name: "Forms", params: { page_index: 1 } });
         })
-        .catch(err => alert(err.message));
+        .catch(err => {
+          this.alertTitle.innerHTML = "Login Error";
+          this.alertParagraph.innerHTML = err.message;
+          console.log(this.alertModal);
+          if (this.alertModal) this.alertModal.open();
+          return;
+        });
     }
+  },
+  mounted() {
+    var doc = document.querySelector(".modal");
+    this.alertParagraph = doc.querySelector("p");
+    this.alertTitle = doc.querySelector("h4");
+    if (!M.Modal.getInstance(this.alertModal))
+      this.alertModal = M.Modal.init(doc, {});
   }
 };
 </script>

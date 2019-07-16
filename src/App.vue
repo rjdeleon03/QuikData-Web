@@ -49,4 +49,8 @@ body .row {
   padding: 12px 24px 24px 24px !important;
   height: auto !important;
 }
+.modal .btn-flat {
+  text-align: center;
+  color: white;
+}
 </style>

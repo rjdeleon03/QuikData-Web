@@ -467,9 +467,9 @@ export default {
 }
 .forms .forms-list .btn-flat {
   width: 100% !important;
+  border-radius: 8px;
   text-align: center;
   color: white;
-  border-radius: 8px;
 }
 .forms .forms-list .btn-flat:first-child {
   margin-bottom: 5px !important;

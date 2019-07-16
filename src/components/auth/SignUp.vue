@@ -65,7 +65,6 @@ export default {
         .catch(err => {
           this.alertTitle.innerHTML = "Signup Error";
           this.alertParagraph.innerHTML = err.message;
-          console.log(this.alertParagraph);
           if (this.alertModal) this.alertModal.open();
           return;
         });
@@ -75,7 +74,8 @@ export default {
     var doc = document.querySelector(".modal");
     this.alertParagraph = doc.querySelector("p");
     this.alertTitle = doc.querySelector("h4");
-    this.alertModal = M.Modal.init(doc, {});
+    if (!M.Modal.getInstance(this.alertModal))
+      this.alertModal = M.Modal.init(doc, {});
   }
 };
 </script>
