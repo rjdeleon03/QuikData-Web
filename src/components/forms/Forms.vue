@@ -44,10 +44,6 @@
                           :to="{name: 'SingleForm', params : { form_id: form.form.id }}"
                           class="waves-effect waves-light btn-flat teal"
                         >View</router-link>
-                        <router-link
-                          :to="{name: 'Print', params : { form_id: form.form.id }}"
-                          class="waves-effect waves-light btn-flat blue darken-4"
-                        >PDF</router-link>
                         <a
                           @click="confirmDelete(form.form.id)"
                           class="btn-flat red waves-effect waves-light"
