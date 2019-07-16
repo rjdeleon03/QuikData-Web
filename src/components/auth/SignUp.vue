@@ -44,25 +44,31 @@ export default {
       confirmPassword: null,
       alertModal: null,
       alertParagraph: null,
-      alertTitle: null
+      alertTitle: null,
+      authButton: null
     };
   },
   methods: {
     signup() {
-      if (
-        !this.email ||
-        !this.password ||
-        !this.confirmPassword ||
-        this.password != this.confirmPassword
-      ) {
+      if (!this.email || !this.password || !this.confirmPassword) {
+        this.alertTitle.innerHTML = "Signup Error";
+        this.alertParagraph.innerHTML = "All fields must be filled out.";
+        if (this.alertModal) this.alertModal.open();
+        return;
+      } else if (this.password != this.confirmPassword) {
+        this.alertTitle.innerHTML = "Signup Error";
+        this.alertParagraph.innerHTML = "Passwords do not match.";
+        if (this.alertModal) this.alertModal.open();
         return;
       }
+      if (this.authButton) this.authButton.classList.add("disabled");
       firebase.auth
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(() => {
           this.$router.push({ name: "Forms", params: { page_index: 1 } });
         })
         .catch(err => {
+          if (this.authButton) this.authButton.classList.remove("disabled");
           this.alertTitle.innerHTML = "Signup Error";
           this.alertParagraph.innerHTML = err.message;
           if (this.alertModal) this.alertModal.open();
@@ -71,10 +77,13 @@ export default {
     }
   },
   mounted() {
+    this.authButton = document.querySelector(
+      ".auth .card-panel .submit button"
+    );
     var doc = document.querySelector(".modal");
     this.alertParagraph = doc.querySelector("p");
     this.alertTitle = doc.querySelector("h4");
-    if (!M.Modal.getInstance(this.alertModal))
+    if (!this.alertModal || !M.Modal.getInstance(this.alertModal))
       this.alertModal = M.Modal.init(doc, {});
   }
 };
