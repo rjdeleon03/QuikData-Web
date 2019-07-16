@@ -319,7 +319,7 @@ export default {
 @media print {
   body {
     margin: 0 !important;
-    font-size: 0.9em;
+    font-size: 0.8em;
   }
   .container#form-container {
     margin: 0 !important;
@@ -338,10 +338,16 @@ export default {
   .form .form-details#details {
     page-break-after: avoid;
   }
+  .form .form-details#case-stories {
+    page-break-after: avoid;
+  }
   .form .form-details.card-panel {
     box-shadow: none;
     border-radius: 0;
     page-break-after: always;
+  }
+  .form .subsection-wrapper {
+    page-break-inside: avoid;
   }
   .form .form-details.card-panel .form-header,
   .form .form-details.card-panel .form-contents {
@@ -367,6 +373,10 @@ export default {
   }
   .form .form-header p {
     color: inherit;
+  }
+  .form .case-stories img {
+    border-radius: 0;
+    box-shadow: none;
   }
 }
 </style>

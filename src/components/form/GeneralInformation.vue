@@ -7,7 +7,7 @@
         </div>
         <div class="collapsible-body general-information form-contents">
           <!-- Calamity Description  -->
-          <div v-if="calamityInfo != null">
+          <div class="subsection-wrapper" v-if="calamityInfo != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Description of the Calamity</p>
             </div>
@@ -32,7 +32,7 @@
           </div>
 
           <!-- Affected Area -->
-          <div v-if="calamityInfo != null">
+          <div class="subsection-wrapper" v-if="calamityInfo != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Brief Description of the Affected Area</p>
             </div>
@@ -48,7 +48,7 @@
           </div>
 
           <!-- Population -->
-          <div v-if="population != null">
+          <div class="subsection-wrapper" v-if="population != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Population</p>
             </div>
@@ -84,7 +84,7 @@
           </div>
 
           <!-- Families -->
-          <div v-if="families != null">
+          <div class="subsection-wrapper" v-if="families != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Family and Household Data</p>
             </div>
@@ -115,7 +115,7 @@
           </div>
 
           <!-- Vulnerable -->
-          <div v-if="vulnerable != null">
+          <div class="subsection-wrapper" v-if="vulnerable != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Vulnerable Population</p>
             </div>
@@ -161,7 +161,7 @@
           </div>
 
           <!-- Casualties -->
-          <div v-if="casualties != null">
+          <div class="subsection-wrapper" v-if="casualties != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Casualties</p>
             </div>
@@ -197,7 +197,7 @@
           </div>
 
           <!-- Cause of Death -->
-          <div v-if="causeOfDeath != null">
+          <div class="subsection-wrapper" v-if="causeOfDeath != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Cause of Death</p>
             </div>
@@ -250,7 +250,7 @@
           </div>
 
           <!-- Infrastructure -->
-          <div v-if="infrastructureDamage != null">
+          <div class="subsection-wrapper" v-if="infrastructureDamage != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Damage to Infrastructures</p>
             </div>

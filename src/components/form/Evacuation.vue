@@ -12,7 +12,7 @@
       <div>
         <ul class="collapsible">
           <template v-for="(row, index) in evacuationSites">
-            <li :key="index" v-bind:id="'evacuation' + (index + 1)">
+            <li :key="index" v-bind:id="'evacuation' + (index + 1)" class="subsection-wrapper">
               <div class="collapsible-header">
                 <p class="center">Site / Shelter {{ index + 1 }}</p>
               </div>

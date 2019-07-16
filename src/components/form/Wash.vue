@@ -7,7 +7,7 @@
         </div>
         <div class="collapsible-body wash form-contents">
           <!-- WASH Conditions -->
-          <div v-if="washConditions != null">
+          <div class="subsection-wrapper" v-if="washConditions != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">WASH Conditions</p>
             </div>
@@ -123,7 +123,7 @@
           </div>
 
           <!-- Coping  -->
-          <div v-if="washCoping != null">
+          <div class="subsection-wrapper" v-if="washCoping != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Coping</p>
             </div>
@@ -140,7 +140,10 @@
           </div>
 
           <!-- Assistance -->
-          <div v-if="washAssistance != null && washAssistance.length > 0">
+          <div
+            class="subsection-wrapper"
+            v-if="washAssistance != null && washAssistance.length > 0"
+          >
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Assistance</p>
             </div>
@@ -176,7 +179,7 @@
           </div>
 
           <!-- Gaps -->
-          <div v-if="washGaps != null">
+          <div class="subsection-wrapper" v-if="washGaps != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Gaps</p>
             </div>
