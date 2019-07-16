@@ -198,8 +198,7 @@ export default {
 }
 @media print {
   .navbar {
-    visibility: collapse;
-    height: 0;
+    display: none;
   }
 }
 </style>

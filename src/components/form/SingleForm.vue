@@ -317,9 +317,22 @@ export default {
   text-align: center;
 }
 @media print {
+  body {
+    margin: 0 !important;
+  }
   .container#form-container {
-    margin: 0 10px;
+    margin: 0 !important;
+    padding: 0 !important;
     width: 100% !important;
+  }
+  .form .form-details.card-panel {
+    box-shadow: none;
+    border-radius: 0;
+    page-break-after: always;
+  }
+  .form .form-details.card-panel .form-header,
+  .form .form-details.card-panel .form-contents {
+    border-radius: 0;
   }
   .form .row {
     width: 100% !important;
