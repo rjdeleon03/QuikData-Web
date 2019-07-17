@@ -4,6 +4,9 @@
       <li>
         <div class="form-header collapsible-header">
           <p class="center">Livelihoods</p>
+          <p class="right">
+            <i class="material-icons">expand_more</i>
+          </p>
         </div>
         <div class="collapsible-body livelihoods form-contents">
           <!-- Income Before -->

@@ -4,6 +4,9 @@
       <li>
         <div class="form-header collapsible-header">
           <p class="center">General Information</p>
+          <p class="right">
+            <i class="material-icons">expand_more</i>
+          </p>
         </div>
         <div class="collapsible-body general-information form-contents">
           <!-- Calamity Description  -->
@@ -306,7 +309,10 @@ export default {
       "DOMNodeInserted",
       function() {
         var cards = doc.querySelectorAll(".form .collapsible.card");
-        cards.forEach(card => M.Collapsible.init(card, {}));
+        cards.forEach(card => {
+          if (M.Collapsible.getInstance(card)) return;
+          M.Collapsible.init(card, {});
+        });
       },
       false
     );

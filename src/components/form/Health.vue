@@ -4,6 +4,9 @@
       <li>
         <div class="form-header collapsible-header">
           <p class="center">Health</p>
+          <p class="right">
+            <i class="material-icons">expand_more</i>
+          </p>
         </div>
         <div class="collapsible-body health form-contents">
           <!-- Diseases -->

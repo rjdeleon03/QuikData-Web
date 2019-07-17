@@ -6,6 +6,9 @@
   >
     <div class="form-header">
       <p class="center">Evacuation Sites</p>
+      <p class="right">
+        <i class="material-icons">expand_more</i>
+      </p>
     </div>
     <div class="evacuation form-contents">
       <!-- Evacuation Sites -->

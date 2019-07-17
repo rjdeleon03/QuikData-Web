@@ -4,6 +4,9 @@
       <li>
         <div class="form-header collapsible-header">
           <p class="center">Shelter and Non-Food Items</p>
+          <p class="right">
+            <i class="material-icons">expand_more</i>
+          </p>
         </div>
         <div class="collapsible-body shelter-information form-contents">
           <!-- House Damage -->

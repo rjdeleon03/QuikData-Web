@@ -214,6 +214,17 @@ export default {
   margin: auto;
   width: 100%;
 }
+.form .collapsible .collapsible-header p.center {
+  margin-left: 40px;
+}
+.form .collapsible .collapsible-header p.right {
+  width: 40px !important;
+}
+.form .collapsible li.active .collapsible-header p.right i {
+  -ms-transform: rotate(180deg); /* IE 9 */
+  -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+  transform: rotate(180deg);
+}
 .form .form-details {
   border-radius: 8px;
   padding: 0px;
@@ -390,6 +401,12 @@ export default {
   }
   .form .collapsible .collapsible-header p {
     margin: 0 !important;
+  }
+  .form .collapsible .collapsible-header p.center {
+    margin-left: 0px !important;
+  }
+  .form .collapsible .collapsible-header p.right {
+    display: none !important;
   }
   .form .collapsible .collapsible-body {
     border: 0 !important;
