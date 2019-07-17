@@ -243,6 +243,10 @@ export default {
   margin-bottom: 0;
 }
 
+.form .form-details:nth-child(odd) .form-header {
+  background-color: #00897b !important;
+}
+
 .form .form-header p {
   padding: 10px 0;
   text-transform: uppercase;
@@ -357,6 +361,9 @@ export default {
 .form table tr .center {
   text-align: center;
 }
+.form .print-include {
+  display: none !important;
+}
 @media print {
   body {
     margin: 0 !important;
@@ -366,6 +373,12 @@ export default {
     margin: 0 !important;
     padding: 0 !important;
     width: 100% !important;
+  }
+  .form .print-exclude {
+    display: none !important;
+  }
+  .form .print-include {
+    display: block !important;
   }
   .form #options {
     display: none;
@@ -420,6 +433,9 @@ export default {
   }
   .form .form-header p {
     color: inherit;
+  }
+  .form .evacuation .collapsible-header p {
+    text-transform: uppercase;
   }
   .form .case-stories img {
     border-radius: 0;
