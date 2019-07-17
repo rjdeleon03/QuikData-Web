@@ -258,23 +258,17 @@
               <div class="col s12">
                 <table>
                   <tr class="topmost">
-                    <th rowspan="2">Infrastructure</th>
-                    <th rowspan="2">Number of Infrastructure</th>
-                    <th class="center" colspan="2">Status</th>
-                    <th rowspan="2" colspan="2">Remarks</th>
-                  </tr>
-                  <tr>
-                    <th class="exception">Functional</th>
-                    <th>Not Functional</th>
+                    <th>Infrastructure</th>
+                    <th>Number of Infrastructure</th>
+                    <th>Status (Functional?)</th>
+                    <th>Remarks</th>
                   </tr>
                   <tr v-for="row in infrastructureDamage" :key="row.type">
                     <td class="exception">{{ constants.infraType[row.type] }}</td>
                     <td>{{ row.numberOfInfrastructure }}</td>
                     <td>
-                      <span v-if="row.functional">O</span>
-                    </td>
-                    <td>
-                      <span v-if="!row.functional">O</span>
+                      <span v-if="row.functional">Yes</span>
+                      <span v-else>No</span>
                     </td>
                     <td colspan="2">{{ row.remarks }}</td>
                   </tr>

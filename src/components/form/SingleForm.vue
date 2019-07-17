@@ -228,7 +228,7 @@ export default {
 .form .form-header {
   border-radius: 8px 8px 0 0;
   height: 40px;
-  background-color: #ffa000;
+  background-color: #ffa000 !important;
   margin-bottom: 0;
 }
 
@@ -314,7 +314,6 @@ export default {
 
 .form table {
   border-collapse: collapse;
-  table-layout: fixed;
   width: inherit;
 }
 

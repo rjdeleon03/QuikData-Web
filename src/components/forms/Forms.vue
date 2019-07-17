@@ -243,34 +243,37 @@ export default {
   created() {
     const FORMS_PER_PAGE = 5;
     firebase.auth.onAuthStateChanged(user => {
-      if (!user) this.$router.push("/");
+      if (!user) {
+        this.$router.push("/");
+        return;
+      }
+
+      firebase.db
+        .collection("form")
+        .orderBy("form.dateModified", "desc")
+        .onSnapshot(snapshot => {
+          /* Notify the user that they need to refresh to load new items in the page */
+          if (this.formsSnapshot && this.formsSnapshot.size < snapshot.size) {
+            this.needsRefresh = true;
+          }
+
+          /* Update pagination information */
+          this.pageCount = Math.ceil(snapshot.size / FORMS_PER_PAGE);
+          if (!this.pageNumber || this.pageNumber < 1) {
+            this.pageNumber = 1;
+          } else if (this.pageNumber > this.pageCount) {
+            this.pageNumber = this.pageCount;
+          }
+
+          if (!this.formsSnapshot || this.formsSnapshot.size > snapshot.size) {
+            /* Refresh page when forms snapshot is null or a form item has been deleted */
+            this.formsSnapshot = snapshot;
+            this.getFormsAtPage(this.pageNumber - 1);
+          } else {
+            this.formsSnapshot = snapshot;
+          }
+        });
     });
-
-    firebase.db
-      .collection("form")
-      .orderBy("form.dateModified", "desc")
-      .onSnapshot(snapshot => {
-        /* Notify the user that they need to refresh to load new items in the page */
-        if (this.formsSnapshot && this.formsSnapshot.size < snapshot.size) {
-          this.needsRefresh = true;
-        }
-
-        /* Update pagination information */
-        this.pageCount = Math.ceil(snapshot.size / FORMS_PER_PAGE);
-        if (!this.pageNumber || this.pageNumber < 1) {
-          this.pageNumber = 1;
-        } else if (this.pageNumber > this.pageCount) {
-          this.pageNumber = this.pageCount;
-        }
-
-        if (!this.formsSnapshot || this.formsSnapshot.size > snapshot.size) {
-          /* Refresh page when forms snapshot is null or a form item has been deleted */
-          this.formsSnapshot = snapshot;
-          this.getFormsAtPage(this.pageNumber - 1);
-        } else {
-          this.formsSnapshot = snapshot;
-        }
-      });
   },
   mounted() {
     var doc = document.querySelector(".forms .form-contents");
