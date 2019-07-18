@@ -34,7 +34,10 @@
       <div id="user-dropdown" class="dropdown-content">
         <ul v-if="user">
           <li>
-            <a>{{ user.email }}</a>
+            <a>
+              {{ user.email }}
+              <span v-if="user.isAdmin">(Admin)</span>
+            </a>
           </li>
           <li>
             <a @click="logout">Logout</a>
@@ -46,7 +49,10 @@
       <img src="@/assets/temp_bg_side.jpg" alt />
       <div id="email-wrapper" v-if="user">
         <p class="center" id="email-label">You are logged in as</p>
-        <p class="center" id="email">{{ user.email }}</p>
+        <p class="center" id="email">
+          {{ user.email }}
+          <span v-if="user.isAdmin">(Admin)</span>
+        </p>
       </div>
       <div id="email-wrapper" v-else>
         <p class="center" id="email-label">You are not logged in.</p>
@@ -75,6 +81,7 @@
 
 <script>
 import firebase from "@/firebase/init";
+import utils from "@/constants";
 import ScrollTo from "vue-scrollto";
 export default {
   name: "Navbar",
@@ -90,12 +97,18 @@ export default {
   created() {
     firebase.auth.onAuthStateChanged(user => {
       this.user = user;
+      this.user.isAdmin = false;
       var navbar = document.querySelector(".navbar");
       if (!navbar) return;
       var sidenav = navbar.querySelector(".sidenav");
       if (sidenav && !M.Sidenav.getInstance(sidenav)) {
         this.sideNav = M.Sidenav.init(sidenav, {});
       }
+      utils.admin.forEach(email => {
+        if (email === user.email) {
+          this.user.isAdmin = true;
+        }
+      });
     });
     // firebase.db
     //   .collection("form")
