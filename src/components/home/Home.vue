@@ -74,8 +74,7 @@ export default {
   font-weight: 600;
 }
 .home #main-text-wrapper img {
-  width: 50%;
-  max-width: 200px;
+  display: none !important;
 }
 @media only screen and (min-width: 373px) {
   .home #video-container .col#video {
@@ -99,11 +98,15 @@ export default {
     padding-left: 0;
     height: 70%;
   }
-
   .home #video-container .col#text {
     height: 100% !important;
     padding-right: 0;
     height: 30%;
+  }
+  .home #main-text-wrapper img {
+    display: block !important;
+    width: 50%;
+    max-width: 200px;
   }
 }
 </style>
