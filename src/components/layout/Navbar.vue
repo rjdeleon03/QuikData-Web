@@ -97,7 +97,6 @@ export default {
   created() {
     firebase.auth.onAuthStateChanged(user => {
       this.user = user;
-      this.user.isAdmin = false;
       var navbar = document.querySelector(".navbar");
       if (!navbar) return;
       var sidenav = navbar.querySelector(".sidenav");

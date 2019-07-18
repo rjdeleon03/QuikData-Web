@@ -15,16 +15,15 @@
     </div>
     <div class="form" v-if="formDetailsSection != null">
       <h2 class="center teal-text text-darken-1">Damage, Needs, and Capacities Assessment Form</h2>
-      <div id="options" class="center">
-        <a @click="print">Print</a>
-        <template v-if="isAdmin">
-          &nbsp;|&nbsp;
-          <a @click="confirmDelete(formId)">Delete</a>
-        </template>
-      </div>
       <p
         class="center subtitle"
       >Assessed on {{ constants.convertDate(formDetailsSection.formDetails.assessmentDate) }} by {{ formDetailsSection.baselineData.organization }}</p>
+      <div id="options" class="center">
+        <a @click="print" class="btn-flat blue darken-3 waves-effect waves-light">Print</a>
+        <template v-if="isAdmin">
+          <a @click="confirmDelete(formId)" class="btn-flat red waves-effect waves-light">Delete</a>
+        </template>
+      </div>
       <div class="form-details card-panel" id="details">
         <div class="form-header">
           <p class="center">Form Details</p>
@@ -205,6 +204,12 @@ export default {
   margin: 30px 30px 5px 30px;
 }
 .form #options {
+  margin-top: -5px;
+  margin-bottom: 15px;
+}
+.form #options .btn-flat {
+  margin-left: 3px;
+  margin-right: 3px;
 }
 .form .collapsible.card {
   border: none;
@@ -246,6 +251,7 @@ export default {
 
 .form p.subtitle {
   margin-bottom: 20px;
+  margin-top: 0;
   font-weight: 600;
 }
 

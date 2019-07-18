@@ -292,6 +292,12 @@ export default {
 </script>
 
 <style>
+.btn-flat {
+  border-radius: 8px !important;
+  text-align: center;
+  color: white !important;
+  font-weight: 600;
+}
 .forms h6 {
   font-size: 1em;
   text-transform: uppercase;
@@ -299,9 +305,6 @@ export default {
 }
 .forms .forms-list .btn-flat {
   width: 100% !important;
-  border-radius: 8px;
-  text-align: center;
-  color: white;
 }
 .forms .forms-list .btn-flat:first-child {
   margin-bottom: 5px !important;

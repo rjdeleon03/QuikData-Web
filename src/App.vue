@@ -33,7 +33,7 @@ body {
   color: #424242;
 }
 body h2 {
-  font-size: 2.4em;
+  font-size: 2.2em;
   margin: 30px;
 }
 body h4 {
