@@ -82,6 +82,7 @@
 <script>
 import firebase from "@/firebase/init";
 import utils from "@/constants";
+import firebaseData from "@/firebaseData";
 import ScrollTo from "vue-scrollto";
 export default {
   name: "Navbar",
@@ -103,23 +104,12 @@ export default {
       if (sidenav && !M.Sidenav.getInstance(sidenav)) {
         this.sideNav = M.Sidenav.init(sidenav, {});
       }
-      utils.admin.forEach(email => {
-        if (email === user.email) {
+      firebaseData.admin.forEach(email => {
+        if (user && email === user.email) {
           this.user.isAdmin = true;
         }
       });
     });
-    // firebase.db
-    //   .collection("form")
-    //   .orderBy("form.dateModified", "desc")
-    //   .onSnapshot(snapshot => {
-    //     if (this.formsSnapshot) {
-    //       try {
-    //         this.needsRefresh = true;
-    //       } catch (ex) {}
-    //     }
-    //     this.formsSnapshot = snapshot;
-    //   });
   },
   mounted() {
     var navbar = document.querySelector(".navbar");
@@ -147,9 +137,13 @@ export default {
     },
     logout() {
       if (this.sideNav) this.sideNav.close();
-      firebase.auth.signOut().then(() => {
-        this.$router.push({ name: "Login" });
-      });
+      if (firebaseData.firebaseSub) firebaseData.firebaseSub();
+      firebase.auth
+        .signOut()
+        .then(() => {
+          this.$router.push({ name: "Login" });
+        })
+        .catch(err => {});
     },
     goToDncaForms() {
       if (this.sideNav) this.sideNav.close();

@@ -108,7 +108,7 @@
 <script>
 import firebase from "@/firebase/init";
 import utils from "@/constants";
-import constants from "@/constants";
+import firebaseData from "@/firebaseData";
 import GeneralInformation from "@/components/form/GeneralInformation";
 import ShelterInformation from "@/components/form/ShelterInformation";
 import FoodSecurity from "@/components/form/FoodSecurity";
@@ -131,7 +131,7 @@ export default {
   },
   data() {
     return {
-      constants: constants,
+      constants: utils,
       formId: this.$route.params.form_id,
       formDetailsSection: null,
       formMetadata: null,
@@ -148,14 +148,12 @@ export default {
       window.print();
     },
     confirmDelete(id) {
-      console.log(this.deleteFormModal);
       if (this.deleteFormModal) {
         const modal = M.Modal.getInstance(this.deleteFormModal);
         modal.open();
       }
     },
     deleteForm(id) {
-      console.log(id);
       utils.deleteForm(id);
       this.$router.push({ name: "Forms", params: { page_index: 1 } });
     }
@@ -172,7 +170,7 @@ export default {
         return;
       }
 
-      utils.admin.forEach(email => {
+      firebaseData.admin.forEach(email => {
         if (email === user.email) {
           this.isAdmin = true;
         }

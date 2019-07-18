@@ -46,7 +46,7 @@
                         >View</router-link>
                         <a
                           @click="confirmDelete(form.form.id)"
-                          v-if="isAdmin"
+                          v-if="user.isAdmin"
                           class="btn-flat red waves-effect waves-light"
                         >Delete</a>
                       </div>
@@ -180,6 +180,7 @@
 <script>
 import firebase from "@/firebase/init";
 import utils from "@/constants";
+import firebaseData from "@/firebaseData";
 export default {
   name: "Forms",
   data() {
@@ -190,7 +191,7 @@ export default {
       pageNumber: this.$route.params.page_index,
       deleteFormModal: null,
       needsRefresh: false,
-      isAdmin: false
+      user: null
     };
   },
   methods: {
@@ -246,24 +247,25 @@ export default {
     firebase.auth.onAuthStateChanged(user => {
       if (!user) {
         this.$router.push("/");
-        this.isAdmin = false;
         return;
       }
 
-      utils.admin.forEach(email => {
-        if (email === user.email) {
-          this.isAdmin = true;
+      this.user = user;
+      firebaseData.admin.forEach(email => {
+        if (user && email === user.email) {
+          this.user.isAdmin = true;
         }
       });
 
-      firebase.db
+      firebaseData.firebaseSub = firebase.db
         .collection("form")
         .orderBy("form.dateModified", "desc")
         .onSnapshot(snapshot => {
-          /* Notify the user that they need to refresh to load new items in the page */
-          if (this.formsSnapshot && this.formsSnapshot.size < snapshot.size) {
-            this.needsRefresh = true;
-          }
+          if (!this.user)
+            if (this.formsSnapshot && this.formsSnapshot.size < snapshot.size) {
+              /* Notify the user that they need to refresh to load new items in the page */
+              this.needsRefresh = true;
+            }
 
           /* Update pagination information */
           this.pageCount = Math.ceil(snapshot.size / FORMS_PER_PAGE);

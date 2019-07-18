@@ -1,6 +1,5 @@
 import firebase from "@/firebase/init";
 export default {
-  admin: ["quikdata.dev@gmail.com", "quikdata.admin@gmail.com"],
   ageGroup: ["0 to 5", "6 to 9", "10 to 12", "13 to 17", "18 to 59", "60+"],
   infraType: [
     "School",

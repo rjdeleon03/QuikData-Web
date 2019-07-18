@@ -32,7 +32,7 @@ export default {
 
 <style>
 .home {
-  background-image: url("~@/assets/temp_bg.jpg");
+  background-image: url("~@/assets/temp_bg_side.jpg");
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: center center;
