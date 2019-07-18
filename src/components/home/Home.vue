@@ -2,6 +2,16 @@
   <div>
     <div id="home" class="home">
       <h2>Home</h2>
+      <div id="video-container">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/Jnv8aU3PyGg"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
     </div>
     <About />
   </div>
