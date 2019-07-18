@@ -16,8 +16,9 @@
           <div class="col s12 m12 l4 xl4" id="text">
             <div id="main-text-wrapper">
               <!-- <h2>Quik Data</h2> -->
+              <img src="@/assets/logo.png" style="margin-top: 20px; margin-bottom: -10px;" />
               <p>A Community-Based Disaster Reporting App by Ilocos Center for Research, Empowerment and Development (ICRED)</p>
-              <a href="#" class="btn-flat amber darken-2">Know More</a>
+              <a v-scroll-to="'#about'" class="btn-flat amber darken-2">Know More</a>
             </div>
           </div>
         </div>
@@ -71,6 +72,10 @@ export default {
 .home #main-text-wrapper p {
   font-size: 1.5em;
   font-weight: 600;
+}
+.home #main-text-wrapper img {
+  width: 50%;
+  max-width: 200px;
 }
 @media only screen and (min-width: 373px) {
   .home #video-container .col#video {
