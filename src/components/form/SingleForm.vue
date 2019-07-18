@@ -17,8 +17,10 @@
       <h2 class="center teal-text text-darken-1">Damage, Needs, and Capacities Assessment Form</h2>
       <div id="options" class="center">
         <a @click="print">Print</a>
-        &nbsp;|&nbsp;
-        <a @click="confirmDelete(formId)">Delete</a>
+        <template v-if="isAdmin">
+          &nbsp;|&nbsp;
+          <a @click="confirmDelete(formId)">Delete</a>
+        </template>
       </div>
       <p
         class="center subtitle"
@@ -135,7 +137,8 @@ export default {
       formDetailsSection: null,
       formMetadata: null,
       deleteFormModal: null,
-      isLoggedIn: false
+      isLoggedIn: false,
+      isAdmin: false
     };
   },
   methods: {
@@ -164,7 +167,17 @@ export default {
   created() {
     firebase.auth.onAuthStateChanged(user => {
       this.isLoggedIn = user;
-      if (!this.isLoggedIn) this.$router.push("/");
+      if (!this.isLoggedIn) {
+        this.$router.push("/");
+        this.isAdmin = false;
+        return;
+      }
+
+      utils.admin.forEach(email => {
+        if (email === user.email) {
+          this.isAdmin = true;
+        }
+      });
     });
     firebase.db
       .collection("form")

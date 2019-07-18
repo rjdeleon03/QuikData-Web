@@ -46,6 +46,7 @@
                         >View</router-link>
                         <a
                           @click="confirmDelete(form.form.id)"
+                          v-if="isAdmin"
                           class="btn-flat red waves-effect waves-light"
                         >Delete</a>
                       </div>
@@ -188,7 +189,8 @@ export default {
       pageCount: null,
       pageNumber: this.$route.params.page_index,
       deleteFormModal: null,
-      needsRefresh: false
+      needsRefresh: false,
+      isAdmin: false
     };
   },
   methods: {
@@ -211,8 +213,7 @@ export default {
       }
     },
     deleteForm(id) {
-      console.log(utils.deleteForm(id));
-      // utils.deleteForm(id);
+      utils.deleteForm(id);
     },
     getFormsAtPage(page) {
       const FORMS_PER_PAGE = 5;
@@ -245,8 +246,15 @@ export default {
     firebase.auth.onAuthStateChanged(user => {
       if (!user) {
         this.$router.push("/");
+        this.isAdmin = false;
         return;
       }
+
+      utils.admin.forEach(email => {
+        if (email === user.email) {
+          this.isAdmin = true;
+        }
+      });
 
       firebase.db
         .collection("form")
