@@ -16,7 +16,7 @@
           <div class="col s12 m12 l4 xl4" id="text">
             <div id="main-text-wrapper">
               <!-- <h2>Quik Data</h2> -->
-              <img src="@/assets/logo.png" style="margin-top: 20px; margin-bottom: -10px;" />
+              <img src="@/assets/logo_marginless.png" />
               <p>A Community-Based Disaster Reporting App by Ilocos Center for Research, Empowerment and Development (ICRED)</p>
               <a v-scroll-to="'#about'" class="btn-flat amber darken-2">Know More</a>
             </div>
@@ -104,9 +104,11 @@ export default {
     height: 30%;
   }
   .home #main-text-wrapper img {
+    margin-top: 20px;
+    margin-bottom: -10px;
     display: block !important;
-    width: 50%;
-    max-width: 200px;
+    width: 40%;
+    max-width: 120px;
   }
 }
 </style>
