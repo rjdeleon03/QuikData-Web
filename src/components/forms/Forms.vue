@@ -42,7 +42,13 @@
                       <div class="right">
                         <router-link
                           :to="{name: 'SingleForm', params : { form_id: form.form.id }}"
+                          v-if="user.isAdmin"
                           class="waves-effect waves-light btn-flat teal"
+                        >View</router-link>
+                        <router-link
+                          :to="{name: 'SingleForm', params : { form_id: form.form.id }}"
+                          v-else
+                          class="waves-effect waves-light btn-flat teal single"
                         >View</router-link>
                         <a
                           @click="confirmDelete(form.form.id)"
@@ -308,6 +314,9 @@ export default {
 .forms .forms-list .btn-flat {
   width: 100% !important;
 }
+.forms .forms-list .btn-flat.single {
+  margin-top: 8px;
+}
 .forms .forms-list .btn-flat:first-child {
   margin-bottom: 5px !important;
 }
@@ -395,6 +404,9 @@ export default {
     text-align: center;
     height: 35px;
     margin-left: 5px !important;
+  }
+  .forms .forms-list .btn-flat.single {
+    margin-top: 0;
   }
   .forms .forms-list .btn-flat:first-child {
     margin-bottom: 0 !important;
