@@ -43,7 +43,10 @@
               <div class="col s12">
                 <table>
                   <tr>
-                    <td>{{ calamityInfo.affectedAreaDescription }}</td>
+                    <td
+                      v-if="calamityInfo.affectedAreaDescription.trim().length === 0"
+                    >No description available.</td>
+                    <td v-else>{{ calamityInfo.affectedAreaDescription }}</td>
                   </tr>
                 </table>
               </div>
