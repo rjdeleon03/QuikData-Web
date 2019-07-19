@@ -13,7 +13,58 @@
       </p>
       <hr />
       <h2 class="center">Consortium</h2>
-      <p>Lorem ipsum dolor selet sit amet.</p>
+      <div class="row">
+        <table>
+          <tr>
+            <td>
+              <a href="https://plan-international.org/">
+                <img src="@/assets/consortium/logo_plan.png" />
+              </a>
+            </td>
+            <td>
+              <a href="https://www.actionagainsthunger.org/">
+                <img src="@/assets/consortium/logo_action.png" />
+              </a>
+            </td>
+            <td>
+              <a href="https://startnetwork.org/">
+                <img src="@/assets/consortium/logo_start.png" />
+              </a>
+            </td>
+            <td>
+              <a href="https://www.ukaiddirect.org/">
+                <img src="@/assets/consortium/logo_ukaid.png" />
+              </a>
+            </td>
+            <td>
+              <a href="https://www.care-international.org/">
+                <img src="@/assets/consortium/logo_care.png" />
+              </a>
+            </td>
+            <td>
+              <a href="https://www.cdrc-phil.com/">
+                <img src="@/assets/consortium/logo_cdrc.png" />
+              </a>
+            </td>
+            <td>
+              <a href="http://www.cdacnetwork.org/">
+                <img src="@/assets/consortium/logo_cdac.png" />
+              </a>
+            </td>
+          </tr>
+        </table>
+        <!-- <div class="col s12 m4 l4 xl2"></div>
+        <div class="col s12 m4 l4 xl1"></div>
+        <div class="col s12 m4 l4 xl2"></div>
+        <div class="col s12 m3 l3 xl2">
+        </div>
+        <div class="col s12 m3 l3 xl2">
+        </div>
+        <div class="col s12 m3 l3 xl1">
+        </div>
+        <div class="col s12 m3 l3 xl2">
+        </div>-->
+      </div>
     </div>
   </div>
 </template>
@@ -30,6 +81,15 @@ export default {
 <style>
 .about .container hr {
   margin-top: 40px;
+}
+.about .container .row table {
+  table-layout: fixed;
+}
+.about .container .row table tr {
+  border: none;
+}
+.about .container .row table tr td img {
+  width: 100%;
 }
 </style>
 
