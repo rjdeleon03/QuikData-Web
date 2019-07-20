@@ -1,6 +1,6 @@
 <template>
   <div class="forms container">
-    <h2 class="center teal-text text-darken-1">DNCA Forms</h2>
+    <h2 class="center teal-text text-darken-1">Damage, Needs, and Capacities Assessment (DNCA) Forms</h2>
     <div class="refresh-alert card-panel" v-if="needsRefresh">
       <div class="left">
         <p>The DNCA forms list has been updated. You may want to refresh the list.</p>
@@ -30,7 +30,10 @@
           </div>
         </div>
         <ul class="collapsible card">
-          <template v-for="form in forms">
+          <li v-if="!formsSnapshot || formsSnapshot.size == 0">
+            <p class="center">No forms have been submitted yet.</p>
+          </li>
+          <template v-for="form in forms" v-else>
             <li v-bind:key="form.id">
               <div class="form-header grey lighten-3">
                 <div class="container">
@@ -93,20 +96,8 @@
         </ul>
       </div>
     </div>
-    <div class="pages">
+    <div class="pages" v-if="formsSnapshot && formsSnapshot.size > 0">
       <ul>
-        <!-- <li v-for="page in pageCount" :key="page">
-          <router-link
-            :to="{name: 'Forms', params: { page_index: page }}"
-            v-if="page == pageNumber"
-            class="waves-effect waves-light btn-flat amber darken-2"
-          >{{ page }}</router-link>
-          <router-link
-            :to="{name: 'Forms', params: { page_index: page }}"
-            v-else
-            class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1"
-          >{{ page }}</router-link>
-        </li>-->
         <li>
           <router-link
             :to="{name: 'Forms', params: { page_index: 1 }}"

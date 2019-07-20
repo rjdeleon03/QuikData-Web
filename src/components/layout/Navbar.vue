@@ -81,9 +81,7 @@
 
 <script>
 import firebase from "@/firebase/init";
-import utils from "@/constants";
 import firebaseData from "@/firebaseData";
-import ScrollTo from "vue-scrollto";
 export default {
   name: "Navbar",
   data() {
@@ -138,12 +136,9 @@ export default {
     logout() {
       if (this.sideNav) this.sideNav.close();
       if (firebaseData.firebaseSub) firebaseData.firebaseSub();
-      firebase.auth
-        .signOut()
-        .then(() => {
-          this.$router.push({ name: "Login" });
-        })
-        .catch(err => {});
+      firebase.auth.signOut().then(() => {
+        this.$router.push({ name: "Login" });
+      });
     },
     goToDncaForms() {
       if (this.sideNav) this.sideNav.close();

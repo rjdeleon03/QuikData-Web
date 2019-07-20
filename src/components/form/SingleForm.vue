@@ -21,7 +21,7 @@
       <div id="options" class="center">
         <a @click="print" class="btn-flat blue darken-3 waves-effect waves-light">Print</a>
         <template v-if="isAdmin">
-          <a @click="confirmDelete(formId)" class="btn-flat red waves-effect waves-light">Delete</a>
+          <a @click="confirmDelete" class="btn-flat red waves-effect waves-light">Delete</a>
         </template>
       </div>
       <div class="form-details card-panel" id="details">
@@ -147,7 +147,7 @@ export default {
     print() {
       window.print();
     },
-    confirmDelete(id) {
+    confirmDelete() {
       if (this.deleteFormModal) {
         const modal = M.Modal.getInstance(this.deleteFormModal);
         modal.open();
