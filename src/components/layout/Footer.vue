@@ -3,7 +3,10 @@
     <div class="section">
       <div class="divider"></div>
     </div>
-    <p class="center">Quik Data (c) 2019</p>
+    <p class="center">
+      Copyright 2019 Ilocos Center for Research, Empowerment, and Development.
+      <br>All Rights Reserved.
+    </p>
   </div>
 </template>
 

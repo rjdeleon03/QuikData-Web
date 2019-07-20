@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Navbar />
-    <router-view />
+    <Navbar/>
+    <router-view/>
     <div class="modal alert">
       <div class="modal-content">
         <h4 class="teal-text text-darken-1">Delete DNCA Form</h4>
@@ -11,7 +11,7 @@
         <a href="#!" class="modal-close waves-effect waves-teal btn-flat amber darken-2">OK</a>
       </div>
     </div>
-    <Footer />
+    <Footer/>
   </div>
 </template>
 
@@ -34,7 +34,8 @@ body {
 }
 body h2 {
   font-size: 2.2em;
-  margin: 30px;
+  margin: 15px;
+  padding: 15px;
 }
 body h4 {
   font-size: 1.8em;

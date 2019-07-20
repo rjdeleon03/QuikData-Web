@@ -19,7 +19,7 @@
                 <table>
                   <tr>
                     <td v-for="(row, index) in caseStoriesImages" :key="index">
-                      <img class="card-panel" v-bind:src="row" alt />
+                      <img class="card-panel" v-bind:src="row" alt>
                     </td>
                   </tr>
                 </table>
@@ -36,7 +36,8 @@
               <div class="col s12">
                 <table>
                   <tr>
-                    <td>{{ caseStoriesText }}</td>
+                    <td v-if="caseStoriesText.trim().length === 0">No case stories.</td>
+                    <td v-else>{{ caseStoriesText }}</td>
                   </tr>
                 </table>
               </div>
