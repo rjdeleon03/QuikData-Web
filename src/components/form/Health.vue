@@ -4,10 +4,13 @@
       <li>
         <div class="form-header collapsible-header">
           <p class="center">Health</p>
+          <p class="right">
+            <i class="material-icons">expand_more</i>
+          </p>
         </div>
         <div class="collapsible-body health form-contents">
           <!-- Diseases -->
-          <div v-if="diseases != null">
+          <div class="subsection-wrapper" v-if="diseases != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Diseases and Critical Injuries</p>
             </div>
@@ -64,7 +67,7 @@
           </div>
 
           <!-- Special Needs -->
-          <div v-if="specialNeeds != null">
+          <div class="subsection-wrapper" v-if="specialNeeds != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">People with Special Needs</p>
             </div>
@@ -87,7 +90,7 @@
           </div>
 
           <!-- Psychosocial  -->
-          <div v-if="psychosocial != null">
+          <div class="subsection-wrapper" v-if="psychosocial != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Psychosocial</p>
             </div>
@@ -120,7 +123,7 @@
           </div>
 
           <!-- Coping  -->
-          <div v-if="healthCoping != null">
+          <div class="subsection-wrapper" v-if="healthCoping != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Coping</p>
             </div>
@@ -137,7 +140,10 @@
           </div>
 
           <!-- Assistance -->
-          <div v-if="healthAssistance != null && healthAssistance.length > 0">
+          <div
+            class="subsection-wrapper"
+            v-if="healthAssistance != null && healthAssistance.length > 0"
+          >
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Assistance</p>
             </div>
@@ -173,7 +179,7 @@
           </div>
 
           <!-- Gaps -->
-          <div v-if="healthGaps != null">
+          <div class="subsection-wrapper" v-if="healthGaps != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Gaps</p>
             </div>

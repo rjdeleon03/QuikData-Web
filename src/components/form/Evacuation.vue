@@ -1,16 +1,24 @@
 <template>
-  <div class="form-details card-panel" id="evacuation">
-    <div class="form-header">
+  <div
+    class="form-details card-panel"
+    id="evacuation"
+    v-if="evacuationSites != null && evacuationSites.length > 0"
+  >
+    <div class="form-header print-exclude">
       <p class="center">Evacuation Sites</p>
     </div>
     <div class="evacuation form-contents">
       <!-- Evacuation Sites -->
-      <div v-if="evacuationSites != null && evacuationSites.length > 0">
+      <div>
         <ul class="collapsible">
           <template v-for="(row, index) in evacuationSites">
-            <li :key="index" v-bind:id="'evacuation' + (index + 1)">
+            <li :key="index" v-bind:id="'evacuation' + (index + 1)" class="subsection-wrapper">
               <div class="collapsible-header">
-                <p class="center">Site / Shelter {{ index + 1 }}</p>
+                <p class="center print-exclude">Site / Shelter {{ index + 1 }}</p>
+                <p class="center print-include">Evacuation Site / Shelter {{ index + 1 }}</p>
+                <p class="right">
+                  <i class="material-icons">expand_more</i>
+                </p>
               </div>
               <div class="collapsible-body">
                 <div class="row">
@@ -345,6 +353,11 @@ export default {
   display: block;
   margin: auto;
   font-weight: 600;
+}
+.evacuation .collapsible .collapsible-header p.right i {
+  margin-top: 3px;
+  width: auto;
+  margin-right: -10px;
 }
 .evacuation .collapsible .collapsible-body {
   padding: 10px 0 15px 0;

@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar">
+  <div class="navbar" v-if="!mustHide">
     <nav class="teal darken-1">
       <div class="container">
         <router-link :to="{ name: 'Home'}" class="brand-logo left">Quik Data</router-link>
@@ -34,7 +34,10 @@
       <div id="user-dropdown" class="dropdown-content">
         <ul v-if="user">
           <li>
-            <a>{{ user.email }}</a>
+            <a>
+              {{ user.email }}
+              <span v-if="user.isAdmin">(Admin)</span>
+            </a>
           </li>
           <li>
             <a @click="logout">Logout</a>
@@ -42,31 +45,44 @@
         </ul>
       </div>
     </nav>
-    <ul id="slide-out" class="sidenav">
-      <li v-if="user">
-        <a>{{ user.email }}</a>
-      </li>
-      <li>
-        <hr />
-      </li>
-      <li v-if="user">
-        <router-link :to="{ name: 'Forms'}">DNCA Forms</router-link>
-      </li>
-      <li v-if="!user">
-        <router-link :to="{ name: 'SignUp'}">Sign Up</router-link>
-      </li>
-      <li v-if="!user">
-        <router-link :to="{ name: 'Login'}">Login</router-link>
-      </li>
-      <li v-if="user">
-        <a @click="logout">Logout</a>
-      </li>
-    </ul>
+    <div id="slide-out" class="sidenav">
+      <img src="@/assets/temp_bg_side.jpg" alt />
+      <div id="email-wrapper" v-if="user">
+        <p class="center" id="email-label">You are logged in as</p>
+        <p class="center" id="email">
+          {{ user.email }}
+          <span v-if="user.isAdmin">(Admin)</span>
+        </p>
+      </div>
+      <div id="email-wrapper" v-else>
+        <p class="center" id="email-label">You are not logged in.</p>
+      </div>
+      <hr />
+      <ul>
+        <li>
+          <a @click="goToHome">Home</a>
+        </li>
+        <li v-if="user">
+          <a @click="goToDncaForms">DNCA Forms</a>
+        </li>
+        <li v-if="!user">
+          <a @click="login">Login</a>
+        </li>
+        <li v-if="!user">
+          <a @click="signup">Sign Up</a>
+        </li>
+        <li v-if="user">
+          <a @click="logout">Logout</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
 import firebase from "@/firebase/init";
+import utils from "@/constants";
+import firebaseData from "@/firebaseData";
 import ScrollTo from "vue-scrollto";
 export default {
   name: "Navbar",
@@ -74,29 +90,26 @@ export default {
     return {
       user: false,
       formsSnapshot: null,
-      needsRefresh: false
+      needsRefresh: false,
+      mustHide: false,
+      sideNav: null
     };
   },
   created() {
     firebase.auth.onAuthStateChanged(user => {
       this.user = user;
       var navbar = document.querySelector(".navbar");
+      if (!navbar) return;
       var sidenav = navbar.querySelector(".sidenav");
       if (sidenav && !M.Sidenav.getInstance(sidenav)) {
-        M.Sidenav.init(sidenav, {});
+        this.sideNav = M.Sidenav.init(sidenav, {});
       }
+      firebaseData.admin.forEach(email => {
+        if (user && email === user.email) {
+          this.user.isAdmin = true;
+        }
+      });
     });
-    // firebase.db
-    //   .collection("form")
-    //   .orderBy("form.dateModified", "desc")
-    //   .onSnapshot(snapshot => {
-    //     if (this.formsSnapshot) {
-    //       try {
-    //         this.needsRefresh = true;
-    //       } catch (ex) {}
-    //     }
-    //     this.formsSnapshot = snapshot;
-    //   });
   },
   mounted() {
     var navbar = document.querySelector(".navbar");
@@ -114,10 +127,31 @@ export default {
     // if (!navbar) return;
   },
   methods: {
+    signup() {
+      if (this.sideNav) this.sideNav.close();
+      this.$router.push({ name: "SignUp" });
+    },
+    login() {
+      if (this.sideNav) this.sideNav.close();
+      this.$router.push({ name: "Login" });
+    },
     logout() {
-      firebase.auth.signOut().then(() => {
-        this.$router.push({ name: "Login" });
-      });
+      if (this.sideNav) this.sideNav.close();
+      if (firebaseData.firebaseSub) firebaseData.firebaseSub();
+      firebase.auth
+        .signOut()
+        .then(() => {
+          this.$router.push({ name: "Login" });
+        })
+        .catch(err => {});
+    },
+    goToDncaForms() {
+      if (this.sideNav) this.sideNav.close();
+      this.$router.push({ name: "Forms" });
+    },
+    goToHome() {
+      if (this.sideNav) this.sideNav.close();
+      this.$router.push({ name: "Home" });
     }
   }
 };
@@ -131,8 +165,7 @@ export default {
   display: flex;
 }
 .navbar .container ul li.expanded-item {
-  visibility: hidden;
-  width: 0;
+  display: none;
 }
 .navbar .container ul li a.material-icons#burger {
   margin-left: 0;
@@ -161,6 +194,23 @@ export default {
   margin-left: 3px;
   color: #ffa000;
 }
+.navbar #slide-out #email-wrapper {
+  background: #009688;
+  margin-top: -6px;
+  margin-bottom: -7px;
+  padding-bottom: 10px;
+  color: white;
+}
+.navbar #slide-out p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.navbar #slide-out p#email {
+  font-weight: 600;
+}
+.navbar #slide-out img {
+  width: 100%;
+}
 @media only screen and (min-width: 601px) {
   .navbar .container ul li a.material-icons {
     height: 64px;
@@ -171,15 +221,20 @@ export default {
     top: 64px !important;
   }
   .navbar .container ul li a.material-icons#burger {
-    visibility: hidden;
-    width: 0;
+    display: none;
   }
   .navbar .container ul li.expanded-item {
     visibility: visible;
     width: auto;
+    display: block;
   }
   .navbar .text-with-icon .material-icons {
     margin-top: -2px;
+  }
+}
+@media print {
+  .navbar {
+    display: none;
   }
 }
 </style>

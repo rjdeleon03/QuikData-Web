@@ -4,10 +4,13 @@
       <li>
         <div class="form-header collapsible-header">
           <p class="center">Food Security</p>
+          <p class="right">
+            <i class="material-icons">expand_more</i>
+          </p>
         </div>
         <div class="collapsible-body food-security form-contents">
           <!-- Impact on Food Security -->
-          <div v-if="foodImpact != null">
+          <div class="subsection-wrapper" v-if="foodImpact != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Impact on Food Security</p>
             </div>
@@ -74,7 +77,7 @@
           </div>
 
           <!-- Coping  -->
-          <div v-if="foodCoping != null">
+          <div class="subsection-wrapper" v-if="foodCoping != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Coping</p>
             </div>
@@ -91,7 +94,7 @@
           </div>
 
           <!-- Needs -->
-          <div v-if="foodNeeds != null">
+          <div class="subsection-wrapper" v-if="foodNeeds != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Needs</p>
             </div>
@@ -112,7 +115,10 @@
           </div>
 
           <!-- Assistance -->
-          <div v-if="foodAssistance != null && foodAssistance.length > 0">
+          <div
+            class="subsection-wrapper"
+            v-if="foodAssistance != null && foodAssistance.length > 0"
+          >
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Assistance</p>
             </div>
@@ -148,7 +154,7 @@
           </div>
 
           <!-- Gaps  -->
-          <div v-if="foodGaps != null">
+          <div class="subsection-wrapper" v-if="foodGaps != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Gaps</p>
             </div>

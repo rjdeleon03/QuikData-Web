@@ -1,9 +1,12 @@
 <template>
-  <div class="container footer">
+  <div class="container footer" v-if="!mustHide">
     <div class="section">
       <div class="divider"></div>
     </div>
-    <p class="center">Quik Data (c) 2019</p>
+    <p class="center">
+      Copyright 2019 Ilocos Center for Research, Empowerment, and Development.
+      <br>All Rights Reserved.
+    </p>
   </div>
 </template>
 
@@ -11,7 +14,9 @@
 export default {
   name: "Footer",
   data() {
-    return {};
+    return {
+      mustHide: false
+    };
   }
 };
 </script>
@@ -20,6 +25,12 @@ export default {
 .footer.container {
   margin-top: 30px;
   margin-bottom: 60px;
+}
+@media print {
+  .footer.container {
+    visibility: collapse;
+    height: 0;
+  }
 }
 </style>
 

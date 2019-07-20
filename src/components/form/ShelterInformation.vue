@@ -4,10 +4,13 @@
       <li>
         <div class="form-header collapsible-header">
           <p class="center">Shelter and Non-Food Items</p>
+          <p class="right">
+            <i class="material-icons">expand_more</i>
+          </p>
         </div>
         <div class="collapsible-body shelter-information form-contents">
           <!-- House Damage -->
-          <div v-if="houseDamage != null && houseDamage.length > 0">
+          <div class="subsection-wrapper" v-if="houseDamage != null && houseDamage.length > 0">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Damage to Houses</p>
             </div>
@@ -52,7 +55,7 @@
           </div>
 
           <!-- Coping  -->
-          <div v-if="shelterCoping != null">
+          <div class="subsection-wrapper" v-if="shelterCoping != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Coping</p>
             </div>
@@ -81,7 +84,7 @@
           </div>
 
           <!-- Needs -->
-          <div v-if="shelterNeeds != null && shelterNeeds.length > 0">
+          <div class="subsection-wrapper" v-if="shelterNeeds != null && shelterNeeds.length > 0">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Needs</p>
             </div>
@@ -104,7 +107,10 @@
           </div>
 
           <!-- Assistance -->
-          <div v-if="shelterAssistance != null && shelterAssistance.length > 0">
+          <div
+            class="subsection-wrapper"
+            v-if="shelterAssistance != null && shelterAssistance.length > 0"
+          >
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Assistance</p>
             </div>
@@ -140,7 +146,7 @@
           </div>
 
           <!-- Gaps  -->
-          <div v-if="shelterGaps != null">
+          <div class="subsection-wrapper" v-if="shelterGaps != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Gaps</p>
             </div>

@@ -1,16 +1,30 @@
 <template>
-  <div class="container">
+  <div class="container" id="form-container">
+    <div class="modal">
+      <div class="modal-content">
+        <h4 class="teal-text text-darken-1">Delete DNCA Form</h4>
+        <p>Are you sure you want to delete this DNCA form?</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-teal btn-flat amber darken-2">Cancel</a>
+        <a
+          @click="deleteForm(formId)"
+          class="modal-close waves-effect waves-red btn-flat amber darken-2"
+        >OK</a>
+      </div>
+    </div>
     <div class="form" v-if="formDetailsSection != null">
       <h2 class="center teal-text text-darken-1">Damage, Needs, and Capacities Assessment Form</h2>
-      <div id="options" class="center">
-        <a href>Print</a>
-        &nbsp;|&nbsp;
-        <a href>Delete</a>
-      </div>
       <p
         class="center subtitle"
       >Assessed on {{ constants.convertDate(formDetailsSection.formDetails.assessmentDate) }} by {{ formDetailsSection.baselineData.organization }}</p>
-      <div class="form-details card-panel">
+      <div id="options" class="center">
+        <a @click="print" class="btn-flat blue darken-3 waves-effect waves-light">Print</a>
+        <template v-if="isAdmin">
+          <a @click="confirmDelete(formId)" class="btn-flat red waves-effect waves-light">Delete</a>
+        </template>
+      </div>
+      <div class="form-details card-panel" id="details">
         <div class="form-header">
           <p class="center">Form Details</p>
         </div>
@@ -93,7 +107,8 @@
 
 <script>
 import firebase from "@/firebase/init";
-import constants from "@/constants";
+import utils from "@/constants";
+import firebaseData from "@/firebaseData";
 import GeneralInformation from "@/components/form/GeneralInformation";
 import ShelterInformation from "@/components/form/ShelterInformation";
 import FoodSecurity from "@/components/form/FoodSecurity";
@@ -116,16 +131,31 @@ export default {
   },
   data() {
     return {
-      constants: constants,
+      constants: utils,
       formId: this.$route.params.form_id,
       formDetailsSection: null,
       formMetadata: null,
-      isLoggedIn: false
+      deleteFormModal: null,
+      isLoggedIn: false,
+      isAdmin: false
     };
   },
   methods: {
     updateId() {
       this.formId = this.$route.params.form_id;
+    },
+    print() {
+      window.print();
+    },
+    confirmDelete(id) {
+      if (this.deleteFormModal) {
+        const modal = M.Modal.getInstance(this.deleteFormModal);
+        modal.open();
+      }
+    },
+    deleteForm(id) {
+      utils.deleteForm(id);
+      this.$router.push({ name: "Forms", params: { page_index: 1 } });
     }
   },
   watch: {
@@ -134,7 +164,17 @@ export default {
   created() {
     firebase.auth.onAuthStateChanged(user => {
       this.isLoggedIn = user;
-      if (!this.isLoggedIn) this.$router.push("/");
+      if (!this.isLoggedIn) {
+        this.$router.push("/");
+        this.isAdmin = false;
+        return;
+      }
+
+      firebaseData.admin.forEach(email => {
+        if (email === user.email) {
+          this.isAdmin = true;
+        }
+      });
     });
     firebase.db
       .collection("form")
@@ -149,6 +189,10 @@ export default {
           calamityInfo: data.calamityInfo[0]
         };
       });
+  },
+  mounted() {
+    this.deleteFormModal = document.querySelector("#form-container .modal");
+    M.Modal.init(this.deleteFormModal, {});
   }
 };
 </script>
@@ -158,6 +202,12 @@ export default {
   margin: 30px 30px 5px 30px;
 }
 .form #options {
+  margin-top: -5px;
+  margin-bottom: 15px;
+}
+.form #options .btn-flat {
+  margin-left: 3px;
+  margin-right: 3px;
 }
 .form .collapsible.card {
   border: none;
@@ -180,6 +230,17 @@ export default {
   margin: auto;
   width: 100%;
 }
+.form .collapsible .collapsible-header p.center {
+  margin-left: 40px;
+}
+.form .collapsible .collapsible-header p.right {
+  width: 40px !important;
+}
+.form .collapsible li.active .collapsible-header p.right i {
+  -ms-transform: rotate(180deg); /* IE 9 */
+  -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+  transform: rotate(180deg);
+}
 .form .form-details {
   border-radius: 8px;
   padding: 0px;
@@ -188,14 +249,19 @@ export default {
 
 .form p.subtitle {
   margin-bottom: 20px;
+  margin-top: 0;
   font-weight: 600;
 }
 
 .form .form-header {
   border-radius: 8px 8px 0 0;
   height: 40px;
-  background-color: #ffa000;
+  background-color: #ffa000 !important;
   margin-bottom: 0;
+}
+
+.form .form-details:nth-child(odd) .form-header {
+  background-color: #00897b !important;
 }
 
 .form .form-header p {
@@ -280,8 +346,7 @@ export default {
 
 .form table {
   border-collapse: collapse;
-  table-layout: fixed;
-  width: 100%;
+  width: inherit;
 }
 
 .form th,
@@ -312,6 +377,87 @@ export default {
 
 .form table tr .center {
   text-align: center;
+}
+.form .print-include {
+  display: none !important;
+}
+@media print {
+  body {
+    margin: 0 !important;
+    font-size: 0.8em;
+  }
+  .container#form-container {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+  .form .print-exclude {
+    display: none !important;
+  }
+  .form .print-include {
+    display: block !important;
+  }
+  .form #options {
+    display: none;
+  }
+  .form h2.teal-text.text-darken-1 {
+    font-size: 1.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: inherit !important;
+  }
+  .form .form-details#details {
+    page-break-after: avoid;
+  }
+  .form .form-details#case-stories {
+    page-break-after: avoid;
+  }
+  .form .form-details.card-panel {
+    box-shadow: none;
+    border-radius: 0;
+    page-break-after: always;
+  }
+  .form .subsection-wrapper {
+    page-break-inside: avoid;
+  }
+  .form .form-details.card-panel .form-header,
+  .form .form-details.card-panel .form-contents {
+    border-radius: 0;
+  }
+  .form .collapsible .collapsible-header {
+    margin: 0 22px;
+    border-bottom: 1px solid gray !important;
+    height: 30px;
+  }
+  .form .collapsible .collapsible-header p {
+    margin: 0 !important;
+  }
+  .form .collapsible .collapsible-header p.center {
+    margin-left: 0px !important;
+  }
+  .form .collapsible .collapsible-header p.right {
+    display: none !important;
+  }
+  .form .collapsible .collapsible-body {
+    border: 0 !important;
+  }
+  .form .row {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  .form .collapsible-body {
+    display: block !important;
+  }
+  .form .form-header p {
+    color: inherit;
+  }
+  .form .evacuation .collapsible-header p {
+    text-transform: uppercase;
+  }
+  .form .case-stories img {
+    border-radius: 0;
+    box-shadow: none;
+  }
 }
 </style>
 

@@ -4,10 +4,13 @@
       <li>
         <div class="form-header collapsible-header">
           <p class="center">Livelihoods</p>
+          <p class="right">
+            <i class="material-icons">expand_more</i>
+          </p>
         </div>
         <div class="collapsible-body livelihoods form-contents">
           <!-- Income Before -->
-          <div v-if="incomeBefore != null && incomeBefore.length > 0">
+          <div class="subsection-wrapper" v-if="incomeBefore != null && incomeBefore.length > 0">
             <div class="row subsection-container">
               <p
                 class="col s12 subsection-title"
@@ -49,7 +52,7 @@
           </div>
 
           <!-- Income After -->
-          <div v-if="incomeAfter != null && incomeAfter.length > 0">
+          <div class="subsection-wrapper" v-if="incomeAfter != null && incomeAfter.length > 0">
             <div class="row subsection-container">
               <p
                 class="col s12 subsection-title"
@@ -91,7 +94,7 @@
           </div>
 
           <!-- Estimated Damage  -->
-          <div v-if="estimatedDamage != null">
+          <div class="subsection-wrapper" v-if="estimatedDamage != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Estimated Cost of Damage to Livelihoods</p>
             </div>
@@ -121,7 +124,7 @@
           </div>
 
           <!-- Coping  -->
-          <div v-if="livelihoodsCoping != null">
+          <div class="subsection-wrapper" v-if="livelihoodsCoping != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Coping</p>
             </div>
@@ -146,7 +149,7 @@
           </div>
 
           <!-- Needs -->
-          <div v-if="livelihoodsNeeds != null">
+          <div class="subsection-wrapper" v-if="livelihoodsNeeds != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Needs</p>
             </div>
@@ -171,7 +174,10 @@
           </div>
 
           <!-- Assistance -->
-          <div v-if="livelihoodsAssistance != null && livelihoodsAssistance.length > 0">
+          <div
+            class="subsection-wrapper"
+            v-if="livelihoodsAssistance != null && livelihoodsAssistance.length > 0"
+          >
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Assistance</p>
             </div>
@@ -207,7 +213,7 @@
           </div>
 
           <!-- Gaps  -->
-          <div v-if="livelihoodsGaps != null">
+          <div class="subsection-wrapper" v-if="livelihoodsGaps != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Gaps</p>
             </div>

@@ -42,10 +42,17 @@
                       <div class="right">
                         <router-link
                           :to="{name: 'SingleForm', params : { form_id: form.form.id }}"
+                          v-if="user.isAdmin"
                           class="waves-effect waves-light btn-flat teal"
+                        >View</router-link>
+                        <router-link
+                          :to="{name: 'SingleForm', params : { form_id: form.form.id }}"
+                          v-else
+                          class="waves-effect waves-light btn-flat teal single"
                         >View</router-link>
                         <a
                           @click="confirmDelete(form.form.id)"
+                          v-if="user.isAdmin"
                           class="btn-flat red waves-effect waves-light"
                         >Delete</a>
                       </div>
@@ -179,7 +186,7 @@
 <script>
 import firebase from "@/firebase/init";
 import utils from "@/constants";
-import { constants } from "crypto";
+import firebaseData from "@/firebaseData";
 export default {
   name: "Forms",
   data() {
@@ -189,7 +196,8 @@ export default {
       pageCount: null,
       pageNumber: this.$route.params.page_index,
       deleteFormModal: null,
-      needsRefresh: false
+      needsRefresh: false,
+      user: null
     };
   },
   methods: {
@@ -212,187 +220,7 @@ export default {
       }
     },
     deleteForm(id) {
-      const db = firebase.db;
-      db.collection("form")
-        .doc(id)
-        .delete();
-
-      /* General Information */
-      db.collection("calamityInfo")
-        .where("formId", "==", id)
-        .get()
-        .then(doc => {
-          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
-        });
-      db.collection("population")
-        .doc(id)
-        .delete();
-      db.collection("families")
-        .where("formId", "==", id)
-        .get()
-        .then(doc => {
-          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
-        });
-      db.collection("vulnerable")
-        .doc(id)
-        .delete();
-      db.collection("casualties")
-        .doc(id)
-        .delete();
-      db.collection("causeOfDeath")
-        .doc(id)
-        .delete();
-      db.collection("infrastructureDamage")
-        .doc(id)
-        .delete();
-      /* Shelter Information */
-      db.collection("houseDamage")
-        .doc(id)
-        .delete();
-      db.collection("shelterCoping")
-        .where("formId", "==", id)
-        .get()
-        .then(doc => {
-          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
-        });
-      db.collection("shelterNeeds")
-        .doc(id)
-        .delete();
-      db.collection("shelterAssistance")
-        .doc(id)
-        .delete();
-      db.collection("shelterGaps")
-        .where("formId", "==", id)
-        .get()
-        .then(doc => {
-          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
-        });
-
-      /* Food Security */
-      db.collection("foodImpact")
-        .where("formId", "==", id)
-        .get()
-        .then(doc => {
-          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
-        });
-      db.collection("foodCoping")
-        .where("formId", "==", id)
-        .get()
-        .then(doc => {
-          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
-        });
-      db.collection("foodNeeds")
-        .where("formId", "==", id)
-        .get()
-        .then(doc => {
-          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
-        });
-      db.collection("foodAssistance")
-        .doc(id)
-        .delete();
-      db.collection("foodGaps")
-        .where("formId", "==", id)
-        .get()
-        .then(doc => {
-          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
-        });
-
-      /* Livelihoods */
-      db.collection("incomeBefore")
-        .doc(id)
-        .delete();
-      db.collection("incomeAfter")
-        .doc(id)
-        .delete();
-      db.collection("estimatedDamage")
-        .doc(id)
-        .delete();
-      db.collection("livelihoodsCoping")
-        .where("formId", "==", id)
-        .get()
-        .then(doc => {
-          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
-        });
-      db.collection("livelihoodsNeeds")
-        .where("formId", "==", id)
-        .get()
-        .then(doc => {
-          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
-        });
-      db.collection("livelihoodsAssistance")
-        .doc(id)
-        .delete();
-      db.collection("livelihoodsGaps")
-        .where("formId", "==", id)
-        .get()
-        .then(doc => {
-          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
-        });
-      /* Health */
-      db.collection("diseases")
-        .doc(id)
-        .delete();
-      db.collection("specialNeeds")
-        .doc(id)
-        .delete();
-      db.collection("psychosocial")
-        .doc(id)
-        .delete();
-      db.collection("healthCoping")
-        .where("formId", "==", id)
-        .get()
-        .then(doc => {
-          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
-        });
-      db.collection("healthAssistance")
-        .doc(id)
-        .delete();
-      db.collection("healthGaps")
-        .where("formId", "==", id)
-        .get()
-        .then(doc => {
-          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
-        });
-      /* Wash */
-      db.collection("washConditions")
-        .where("formId", "==", id)
-        .get()
-        .then(doc => {
-          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
-        });
-      db.collection("washCoping")
-        .where("formId", "==", id)
-        .get()
-        .then(doc => {
-          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
-        });
-      db.collection("washAssistance")
-        .doc(id)
-        .delete();
-      db.collection("washGaps")
-        .where("formId", "==", id)
-        .get()
-        .then(doc => {
-          if (doc && doc.docs.size >= 1) doc.docs[0].ref.delete();
-        });
-      /* Evacuation */
-      db.collection("evacuationSites")
-        .doc(id)
-        .delete();
-      /* Case Stories */
-      db.collection("caseStories")
-        .where("root.formId", "==", id)
-        .get()
-        .then(doc => {
-          var item = doc.docs[0];
-          item
-            .data()
-            .images.forEach(image =>
-              firebase.storage.ref("/images/" + image.id).delete()
-            );
-          item.ref.delete();
-        });
-      M.toast({ html: "Selected DNCA form has been deleted successfully." });
+      utils.deleteForm(id);
     },
     getFormsAtPage(page) {
       const FORMS_PER_PAGE = 5;
@@ -423,34 +251,45 @@ export default {
   created() {
     const FORMS_PER_PAGE = 5;
     firebase.auth.onAuthStateChanged(user => {
-      if (!user) this.$router.push("/");
-    });
+      if (!user) {
+        this.$router.push("/");
+        return;
+      }
 
-    firebase.db
-      .collection("form")
-      .orderBy("form.dateModified", "desc")
-      .onSnapshot(snapshot => {
-        /* Notify the user that they need to refresh to load new items in the page */
-        if (this.formsSnapshot) {
-          this.needsRefresh = true;
-        }
-
-        /* Update pagination information */
-        this.pageCount = Math.ceil(snapshot.size / FORMS_PER_PAGE);
-        if (!this.pageNumber || this.pageNumber < 1) {
-          this.pageNumber = 1;
-        } else if (this.pageNumber > this.pageCount) {
-          this.pageNumber = this.pageCount;
-        }
-
-        if (!this.formsSnapshot || this.formsSnapshot.size > snapshot.size) {
-          /* Refresh page when forms snapshot is null or a form item has been deleted */
-          this.formsSnapshot = snapshot;
-          this.getFormsAtPage(this.pageNumber - 1);
-        } else {
-          this.formsSnapshot = snapshot;
+      this.user = user;
+      firebaseData.admin.forEach(email => {
+        if (user && email === user.email) {
+          this.user.isAdmin = true;
         }
       });
+
+      firebaseData.firebaseSub = firebase.db
+        .collection("form")
+        .orderBy("form.dateModified", "desc")
+        .onSnapshot(snapshot => {
+          if (!this.user)
+            if (this.formsSnapshot && this.formsSnapshot.size < snapshot.size) {
+              /* Notify the user that they need to refresh to load new items in the page */
+              this.needsRefresh = true;
+            }
+
+          /* Update pagination information */
+          this.pageCount = Math.ceil(snapshot.size / FORMS_PER_PAGE);
+          if (!this.pageNumber || this.pageNumber < 1) {
+            this.pageNumber = 1;
+          } else if (this.pageNumber > this.pageCount) {
+            this.pageNumber = this.pageCount;
+          }
+
+          if (!this.formsSnapshot || this.formsSnapshot.size > snapshot.size) {
+            /* Refresh page when forms snapshot is null or a form item has been deleted */
+            this.formsSnapshot = snapshot;
+            this.getFormsAtPage(this.pageNumber - 1);
+          } else {
+            this.formsSnapshot = snapshot;
+          }
+        });
+    });
   },
   mounted() {
     var doc = document.querySelector(".forms .form-contents");
@@ -461,16 +300,25 @@ export default {
 </script>
 
 <style>
+.btn-flat {
+  border-radius: 8px !important;
+  text-align: center;
+  color: white !important;
+  font-weight: 600;
+}
 .forms h6 {
   font-size: 1em;
   text-transform: uppercase;
   font-weight: 700;
 }
 .forms .forms-list .btn-flat {
-  color: white;
-  height: 35px;
-  border-radius: 8px;
-  margin-left: 5px !important;
+  width: 100% !important;
+}
+.forms .forms-list .btn-flat.single {
+  margin-top: 8px;
+}
+.forms .forms-list .btn-flat:first-child {
+  margin-bottom: 5px !important;
 }
 .refresh-alert.card-panel {
   margin-bottom: 20px !important;
@@ -494,13 +342,6 @@ export default {
 }
 .refresh-alert .btn-flat.end {
   border-radius: 0 8px 8px 0;
-}
-.forms .modal .modal-content {
-  padding: 24px 24px 12px 24px;
-}
-.forms .modal .modal-footer {
-  padding: 12px 24px 24px 24px;
-  height: auto;
 }
 .forms .collapsible {
   box-shadow: none;
@@ -558,6 +399,18 @@ export default {
 }
 
 @media only screen and (min-width: 484px) {
+  .forms .forms-list .btn-flat {
+    width: inherit !important;
+    text-align: center;
+    height: 35px;
+    margin-left: 5px !important;
+  }
+  .forms .forms-list .btn-flat.single {
+    margin-top: 0;
+  }
+  .forms .forms-list .btn-flat:first-child {
+    margin-bottom: 0 !important;
+  }
   .refresh-alert.card-panel {
     height: 90px;
   }

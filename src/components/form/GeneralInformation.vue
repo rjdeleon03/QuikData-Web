@@ -4,10 +4,13 @@
       <li>
         <div class="form-header collapsible-header">
           <p class="center">General Information</p>
+          <p class="right">
+            <i class="material-icons">expand_more</i>
+          </p>
         </div>
         <div class="collapsible-body general-information form-contents">
           <!-- Calamity Description  -->
-          <div v-if="calamityInfo != null">
+          <div class="subsection-wrapper" v-if="calamityInfo != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Description of the Calamity</p>
             </div>
@@ -32,7 +35,7 @@
           </div>
 
           <!-- Affected Area -->
-          <div v-if="calamityInfo != null">
+          <div class="subsection-wrapper" v-if="calamityInfo != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Brief Description of the Affected Area</p>
             </div>
@@ -40,7 +43,10 @@
               <div class="col s12">
                 <table>
                   <tr>
-                    <td>{{ calamityInfo.affectedAreaDescription }}</td>
+                    <td
+                      v-if="calamityInfo.affectedAreaDescription.trim().length === 0"
+                    >No description available.</td>
+                    <td v-else>{{ calamityInfo.affectedAreaDescription }}</td>
                   </tr>
                 </table>
               </div>
@@ -48,7 +54,7 @@
           </div>
 
           <!-- Population -->
-          <div v-if="population != null">
+          <div class="subsection-wrapper" v-if="population != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Population</p>
             </div>
@@ -84,7 +90,7 @@
           </div>
 
           <!-- Families -->
-          <div v-if="families != null">
+          <div class="subsection-wrapper" v-if="families != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Family and Household Data</p>
             </div>
@@ -115,7 +121,7 @@
           </div>
 
           <!-- Vulnerable -->
-          <div v-if="vulnerable != null">
+          <div class="subsection-wrapper" v-if="vulnerable != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Vulnerable Population</p>
             </div>
@@ -161,7 +167,7 @@
           </div>
 
           <!-- Casualties -->
-          <div v-if="casualties != null">
+          <div class="subsection-wrapper" v-if="casualties != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Casualties</p>
             </div>
@@ -197,7 +203,7 @@
           </div>
 
           <!-- Cause of Death -->
-          <div v-if="causeOfDeath != null">
+          <div class="subsection-wrapper" v-if="causeOfDeath != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Cause of Death</p>
             </div>
@@ -250,7 +256,7 @@
           </div>
 
           <!-- Infrastructure -->
-          <div v-if="infrastructureDamage != null">
+          <div class="subsection-wrapper" v-if="infrastructureDamage != null">
             <div class="row subsection-container">
               <p class="col s12 subsection-title">Damage to Infrastructures</p>
             </div>
@@ -258,23 +264,17 @@
               <div class="col s12">
                 <table>
                   <tr class="topmost">
-                    <th rowspan="2">Infrastructure</th>
-                    <th rowspan="2">Number of Infrastructure</th>
-                    <th class="center" colspan="2">Status</th>
-                    <th rowspan="2" colspan="2">Remarks</th>
-                  </tr>
-                  <tr>
-                    <th class="exception">Functional</th>
-                    <th>Not Functional</th>
+                    <th>Infrastructure</th>
+                    <th>Number of Infrastructure</th>
+                    <th>Status (Functional?)</th>
+                    <th>Remarks</th>
                   </tr>
                   <tr v-for="row in infrastructureDamage" :key="row.type">
                     <td class="exception">{{ constants.infraType[row.type] }}</td>
                     <td>{{ row.numberOfInfrastructure }}</td>
                     <td>
-                      <span v-if="row.functional">O</span>
-                    </td>
-                    <td>
-                      <span v-if="!row.functional">O</span>
+                      <span v-if="row.functional">Yes</span>
+                      <span v-else>No</span>
                     </td>
                     <td colspan="2">{{ row.remarks }}</td>
                   </tr>
@@ -312,7 +312,10 @@ export default {
       "DOMNodeInserted",
       function() {
         var cards = doc.querySelectorAll(".form .collapsible.card");
-        cards.forEach(card => M.Collapsible.init(card, {}));
+        cards.forEach(card => {
+          if (M.Collapsible.getInstance(card)) return;
+          M.Collapsible.init(card, {});
+        });
       },
       false
     );
