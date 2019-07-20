@@ -99,7 +99,7 @@
         </ul>
       </div>
     </div>
-    <div class="pages" v-if="formsSnapshot && formsSnapshot.size > 0">
+    <div class="pages" v-if="forms.length > 0">
       <ul>
         <li>
           <router-link
@@ -218,7 +218,10 @@ export default {
     },
     getFormsAtPage(page) {
       const FORMS_PER_PAGE = 5;
-      if (this.formsSnapshot.size == 0) return;
+      if (this.formsSnapshot.size == 0) {
+        this.forms = [];
+        return;
+      }
       firebase.db
         .collection("form")
         .orderBy("form.dateModified", "desc")
@@ -238,7 +241,8 @@ export default {
             this.forms.push(data);
           });
         });
-    }
+    },
+    setupPagination(formCount) {}
   },
   watch: {
     $route: "updatePage"
@@ -269,11 +273,12 @@ export default {
 
           /* Update pagination information */
           this.pageCount = Math.ceil(snapshot.size / FORMS_PER_PAGE);
-          if (!this.pageNumber || this.pageNumber < 1) {
-            this.pageNumber = 1;
-          } else if (this.pageNumber > this.pageCount) {
-            this.pageNumber = this.pageCount;
-          }
+          if (snapshot.size)
+            if (!this.pageNumber || this.pageNumber < 1) {
+              this.pageNumber = 1;
+            } else if (this.pageNumber > this.pageCount) {
+              this.pageNumber = this.pageCount;
+            }
 
           if (!this.formsSnapshot) {
             /* Refresh page when forms snapshot is null or a form item has been deleted */
@@ -293,7 +298,6 @@ export default {
     document.addEventListener(
       "DOMNodeInserted",
       function() {
-        console.log(self.deleteFormModal);
         if (self.deleteFormModal) return;
         var doc = document.querySelector(".forms .form-contents");
         self.deleteFormModal = doc.querySelector(".modal");
