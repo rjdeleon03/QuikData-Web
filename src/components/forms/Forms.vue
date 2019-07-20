@@ -289,9 +289,18 @@ export default {
     });
   },
   mounted() {
-    var doc = document.querySelector(".forms .form-contents");
-    this.deleteFormModal = doc.querySelector(".modal");
-    M.Modal.init(this.deleteFormModal, {});
+    let self = this;
+    document.addEventListener(
+      "DOMNodeInserted",
+      function() {
+        console.log(self.deleteFormModal);
+        if (self.deleteFormModal) return;
+        var doc = document.querySelector(".forms .form-contents");
+        self.deleteFormModal = doc.querySelector(".modal");
+        M.Modal.init(self.deleteFormModal, {});
+      },
+      false
+    );
   }
 };
 </script>

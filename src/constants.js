@@ -267,6 +267,7 @@ export default {
       .where("root.formId", "==", id)
       .get()
       .then(doc => {
+        if (!doc.docs[0]) return;
         var item = doc.docs[0];
         item
           .data()
