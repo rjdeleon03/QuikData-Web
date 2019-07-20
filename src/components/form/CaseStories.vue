@@ -19,7 +19,7 @@
                 <table>
                   <tr>
                     <td v-for="(row, index) in caseStoriesImages" :key="index">
-                      <img class="card-panel" v-bind:src="row" alt>
+                      <img class="card-panel" v-bind:src="row" alt />
                     </td>
                   </tr>
                 </table>
@@ -78,22 +78,6 @@ export default {
           });
         });
       });
-    var doc = document.querySelectorAll(".container")[1];
-    doc.addEventListener(
-      "DOMNodeInserted",
-      function() {
-        // var carousel = doc
-        //   .querySelector(".form #case-stories .form-contents")
-        //   .querySelectorAll(".row")[1]
-        //   .querySelector(".col .carousel");
-        // M.Carousel.init(carousel, {
-        //   indicators: true,
-        //   noWrap: true,
-        //   fullWidth: true
-        // });
-      },
-      false
-    );
   }
 };
 </script>

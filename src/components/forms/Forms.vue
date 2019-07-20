@@ -30,7 +30,10 @@
           </div>
         </div>
         <ul class="collapsible card">
-          <li v-if="!formsSnapshot || formsSnapshot.size == 0">
+          <li v-if="!formsSnapshot">
+            <p class="center">Loading submitted forms...</p>
+          </li>
+          <li v-else-if="formsSnapshot.size == 0">
             <p class="center">No forms have been submitted yet.</p>
           </li>
           <template v-for="form in forms" v-else>
@@ -215,6 +218,7 @@ export default {
     },
     getFormsAtPage(page) {
       const FORMS_PER_PAGE = 5;
+      if (this.formsSnapshot.size == 0) return;
       firebase.db
         .collection("form")
         .orderBy("form.dateModified", "desc")
@@ -258,11 +262,10 @@ export default {
         .collection("form")
         .orderBy("form.dateModified", "desc")
         .onSnapshot(snapshot => {
-          if (!this.user)
-            if (this.formsSnapshot && this.formsSnapshot.size < snapshot.size) {
-              /* Notify the user that they need to refresh to load new items in the page */
-              this.needsRefresh = true;
-            }
+          if (this.formsSnapshot && this.formsSnapshot.size < snapshot.size) {
+            /* Notify the user that they need to refresh to load new items in the page */
+            this.needsRefresh = true;
+          }
 
           /* Update pagination information */
           this.pageCount = Math.ceil(snapshot.size / FORMS_PER_PAGE);
@@ -272,8 +275,11 @@ export default {
             this.pageNumber = this.pageCount;
           }
 
-          if (!this.formsSnapshot || this.formsSnapshot.size > snapshot.size) {
+          if (!this.formsSnapshot) {
             /* Refresh page when forms snapshot is null or a form item has been deleted */
+            this.formsSnapshot = snapshot;
+            this.getFormsAtPage(this.pageNumber - 1);
+          } else if (this.formsSnapshot.size > snapshot.size) {
             this.formsSnapshot = snapshot;
             this.getFormsAtPage(this.pageNumber - 1);
           } else {
@@ -331,8 +337,11 @@ export default {
   border-radius: 0;
   font-weight: 700;
 }
+.refresh-alert .btn-flat {
+  border-radius: 0 !important;
+}
 .refresh-alert .btn-flat.end {
-  border-radius: 0 8px 8px 0;
+  border-radius: 0 8px 8px 0 !important;
 }
 .forms .collapsible {
   box-shadow: none;
