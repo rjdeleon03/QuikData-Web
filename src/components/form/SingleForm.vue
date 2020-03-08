@@ -6,22 +6,41 @@
         <p>Are you sure you want to delete this DNCA form?</p>
       </div>
       <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-teal btn-flat amber darken-2">Cancel</a>
+        <a
+          href="#!"
+          class="modal-close waves-effect waves-teal btn-flat amber darken-2"
+          >Cancel</a
+        >
         <a
           @click="deleteForm(formId)"
           class="modal-close waves-effect waves-red btn-flat amber darken-2"
-        >OK</a>
+          >OK</a
+        >
       </div>
     </div>
     <div class="form" v-if="formDetailsSection != null">
-      <h2 class="center teal-text text-darken-1">Damage, Needs, and Capacities Assessment Form</h2>
-      <p
-        class="center subtitle"
-      >Assessed on {{ constants.convertDate(formDetailsSection.formDetails.assessmentDate) }} by {{ formDetailsSection.baselineData.organization }}</p>
+      <h2 class="center teal-text text-darken-1">
+        Damage, Needs, and Capacities Assessment Form
+      </h2>
+      <p class="center subtitle">
+        Assessed on
+        {{
+          constants.convertDate(formDetailsSection.formDetails.assessmentDate)
+        }}
+        by {{ formDetailsSection.baselineData.organization }}
+      </p>
       <div id="options" class="center">
-        <a @click="print" class="btn-flat blue darken-3 waves-effect waves-light">Print</a>
+        <a
+          @click="print"
+          class="btn-flat blue darken-3 waves-effect waves-light"
+          >Print</a
+        >
         <template v-if="isAdmin">
-          <a @click="confirmDelete" class="btn-flat red waves-effect waves-light">Delete</a>
+          <a
+            @click="confirmDelete"
+            class="btn-flat red waves-effect waves-light"
+            >Delete</a
+          >
         </template>
       </div>
       <div class="form-details card-panel" id="details">
@@ -31,40 +50,62 @@
         <div class="form-contents default-row">
           <div class="row">
             <div class="col s12 m6 l2 field-label">Sitio / Purok / Zone:</div>
-            <div class="col s12 m6 l4">{{ formDetailsSection.baselineData.sitio }}</div>
+            <div class="col s12 m6 l4">
+              {{ formDetailsSection.baselineData.sitio }}
+            </div>
             <div class="col s12 m6 l2 field-label">Barangay:</div>
-            <div class="col s12 m6 l4">{{ formDetailsSection.baselineData.barangay }}</div>
+            <div class="col s12 m6 l4">
+              {{ formDetailsSection.baselineData.barangay }}
+            </div>
           </div>
           <div class="row">
             <div class="col s12 m6 l2 field-label">City / Municipality:</div>
-            <div class="col s12 m6 l4">{{ formDetailsSection.baselineData.city }}</div>
+            <div class="col s12 m6 l4">
+              {{ formDetailsSection.baselineData.city }}
+            </div>
             <div class="col s12 m6 l2 field-label">Province:</div>
-            <div class="col s12 m6 l4">{{ formDetailsSection.baselineData.province }}</div>
+            <div class="col s12 m6 l4">
+              {{ formDetailsSection.baselineData.province }}
+            </div>
           </div>
           <div class="section">
             <div class="divider"></div>
           </div>
           <div class="row">
             <div class="col s12 m6 l2 field-label">Interviewer's Name:</div>
-            <div class="col s12 m6 l4">{{ formDetailsSection.formDetails.interviewer }}</div>
-            <div class="col s12 m6 l2 field-label">Interviewer's Contact Number:</div>
-            <div class="col s12 m6 l4">{{ formDetailsSection.formDetails.interviewerContact }}</div>
+            <div class="col s12 m6 l4">
+              {{ formDetailsSection.formDetails.interviewer }}
+            </div>
+            <div class="col s12 m6 l2 field-label">
+              Interviewer's Contact Number:
+            </div>
+            <div class="col s12 m6 l4">
+              {{ formDetailsSection.formDetails.interviewerContact }}
+            </div>
           </div>
           <div class="section">
             <div class="divider"></div>
           </div>
           <div class="row">
             <div class="col s12 m6 l2 field-label">Interviewees' Names:</div>
-            <div class="col s12 m6 l4">{{ formDetailsSection.formDetails.interviewee }}</div>
-            <div class="col s12 m6 l2 field-label">Interviewees' Contact Numbers:</div>
-            <div class="col s12 m6 l4">{{ formDetailsSection.formDetails.intervieweeContact }}</div>
+            <div class="col s12 m6 l4">
+              {{ formDetailsSection.formDetails.interviewee }}
+            </div>
+            <div class="col s12 m6 l2 field-label">
+              Interviewees' Contact Numbers:
+            </div>
+            <div class="col s12 m6 l4">
+              {{ formDetailsSection.formDetails.intervieweeContact }}
+            </div>
           </div>
           <div class="section">
             <div class="divider"></div>
           </div>
           <div class="row">
             <div class="col s6 m6 l2 field-label">Sources of Information:</div>
-            <div class="col s6 m6 l2">{{ formDetailsSection.formDetails.sourcesOfInformation }}</div>
+            <div class="col s6 m6 l2">
+              {{ formDetailsSection.formDetails.sourcesOfInformation }}
+            </div>
           </div>
         </div>
       </div>
@@ -117,6 +158,7 @@ import Health from "@/components/form/Health";
 import Wash from "@/components/form/Wash";
 import Evacuation from "@/components/form/Evacuation";
 import CaseStories from "@/components/form/CaseStories";
+import M from "materialize-css";
 export default {
   name: "SingleForm",
   components: {
@@ -460,5 +502,3 @@ export default {
   }
 }
 </style>
-
-

@@ -12,7 +12,11 @@
       </div>
       <div class="field">
         <label for="confirmPassword">Confirm Password:</label>
-        <input type="password" name="confirmPassword" v-model="confirmPassword" />
+        <input
+          type="password"
+          name="confirmPassword"
+          v-model="confirmPassword"
+        />
       </div>
       <!-- <div class="field">
         <label for="firstName">First Name:</label>
@@ -24,7 +28,7 @@
       </div>-->
       <p class="center">
         Already have an account?
-        <router-link :to="{ name: 'Login'}">Login</router-link>&nbsp;instead.
+        <router-link :to="{ name: 'Login' }">Login</router-link>&nbsp;instead.
       </p>
       <div class="field center submit">
         <button class="btn amber darken-2">Sign Up</button>
@@ -35,6 +39,7 @@
 
 <script>
 import firebase from "@/firebase/init";
+import M from "materialize-css";
 export default {
   name: "SignUp",
   data() {
@@ -107,5 +112,3 @@ export default {
   margin-top: 30px;
 }
 </style>
-
-

@@ -12,7 +12,8 @@
       </div>
       <p class="center">
         Don't have an account yet?
-        <router-link :to="{ name: 'SignUp'}">Sign Up</router-link>&nbsp;instead.
+        <router-link :to="{ name: 'SignUp' }">Sign Up</router-link
+        >&nbsp;instead.
       </p>
       <div class="field center submit">
         <button class="btn amber darken-2">Login</button>
@@ -23,6 +24,7 @@
 
 <script>
 import firebase from "@/firebase/init";
+import M from "materialize-css";
 export default {
   name: "Login",
   data() {
@@ -66,7 +68,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
-
-
+<style></style>

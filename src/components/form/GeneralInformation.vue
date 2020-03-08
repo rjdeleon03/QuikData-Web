@@ -12,7 +12,9 @@
           <!-- Calamity Description  -->
           <div class="subsection-wrapper" v-if="calamityInfo != null">
             <div class="row subsection-container">
-              <p class="col s12 subsection-title">Description of the Calamity</p>
+              <p class="col s12 subsection-title">
+                Description of the Calamity
+              </p>
             </div>
             <div class="row">
               <div class="col s12">
@@ -23,7 +25,9 @@
                   </tr>
                   <tr>
                     <th>Date of Occurrence:</th>
-                    <td>{{ constants.convertDate(calamityInfo.occurrenceDate) }}</td>
+                    <td>
+                      {{ constants.convertDate(calamityInfo.occurrenceDate) }}
+                    </td>
                   </tr>
                   <tr>
                     <th>Description of the Event:</th>
@@ -37,15 +41,21 @@
           <!-- Affected Area -->
           <div class="subsection-wrapper" v-if="calamityInfo != null">
             <div class="row subsection-container">
-              <p class="col s12 subsection-title">Brief Description of the Affected Area</p>
+              <p class="col s12 subsection-title">
+                Brief Description of the Affected Area
+              </p>
             </div>
             <div class="row">
               <div class="col s12">
                 <table>
                   <tr>
                     <td
-                      v-if="calamityInfo.affectedAreaDescription.trim().length === 0"
-                    >No description available.</td>
+                      v-if="
+                        calamityInfo.affectedAreaDescription.trim().length === 0
+                      "
+                    >
+                      No description available.
+                    </td>
                     <td v-else>{{ calamityInfo.affectedAreaDescription }}</td>
                   </tr>
                 </table>
@@ -63,7 +73,9 @@
                 <table>
                   <tr class="topmost">
                     <th rowspan="2">Age</th>
-                    <th class="center" colspan="2">Total Population (Baseline)</th>
+                    <th class="center" colspan="2">
+                      Total Population (Baseline)
+                    </th>
                     <th class="center" colspan="2">Affected Population</th>
                     <th class="center" colspan="2">Displaced Population</th>
                   </tr>
@@ -76,7 +88,9 @@
                     <th>Female</th>
                   </tr>
                   <tr v-for="row in population" :key="row.type">
-                    <td class="exception">{{ constants.ageGroup[row.type] }}</td>
+                    <td class="exception">
+                      {{ constants.ageGroup[row.type] }}
+                    </td>
                     <td>{{ row.affectedMale }}</td>
                     <td>{{ row.affectedFemale }}</td>
                     <td>{{ row.affectedMale }}</td>
@@ -105,15 +119,15 @@
                   </tr>
                   <tr>
                     <td>Families</td>
-                    <td>{{form.baselineData.totalFamilies}}</td>
-                    <td>{{families.affectedFamilies}}</td>
-                    <td>{{families.displacedFamilies}}</td>
+                    <td>{{ form.baselineData.totalFamilies }}</td>
+                    <td>{{ families.affectedFamilies }}</td>
+                    <td>{{ families.displacedFamilies }}</td>
                   </tr>
                   <tr>
                     <td>Households</td>
-                    <td>{{form.baselineData.totalHouseholds}}</td>
-                    <td>{{families.affectedHouseholds}}</td>
-                    <td>{{families.displacedHouseholds}}</td>
+                    <td>{{ form.baselineData.totalHouseholds }}</td>
+                    <td>{{ families.affectedHouseholds }}</td>
+                    <td>{{ families.displacedHouseholds }}</td>
                   </tr>
                 </table>
               </div>
@@ -136,7 +150,9 @@
                     <th rowspan="2">Female-headed Households</th>
                     <th class="center" colspan="2">Child-headed Households</th>
                     <th class="center" colspan="2">Indigenous People</th>
-                    <th class="center" colspan="2">Persons with Disabilities</th>
+                    <th class="center" colspan="2">
+                      Persons with Disabilities
+                    </th>
                     <th rowspan="2" colspan="2">Remarks</th>
                   </tr>
                   <tr>
@@ -148,7 +164,9 @@
                     <th>Female</th>
                   </tr>
                   <tr v-for="row in vulnerable" :key="row.type">
-                    <td class="exception">{{ constants.ageGroup[row.type] }}</td>
+                    <td class="exception">
+                      {{ constants.ageGroup[row.type] }}
+                    </td>
                     <td>{{ row.pregnant }}</td>
                     <td>{{ row.lactating }}</td>
                     <td>{{ row.lgbt }}</td>
@@ -189,7 +207,9 @@
                     <th>Female</th>
                   </tr>
                   <tr v-for="row in casualties" :key="row.type">
-                    <td class="exception">{{ constants.ageGroup[row.type] }}</td>
+                    <td class="exception">
+                      {{ constants.ageGroup[row.type] }}
+                    </td>
                     <td>{{ row.deadMale }}</td>
                     <td>{{ row.deadFemale }}</td>
                     <td>{{ row.missingMale }}</td>
@@ -225,7 +245,9 @@
                   </tr>
                   <template v-for="row in causeOfDeath">
                     <tr v-bind:key="`${row.type}-001`">
-                      <td class="exception" rowspan="2">{{ constants.ageGroup[row.type] }}</td>
+                      <td class="exception" rowspan="2">
+                        {{ constants.ageGroup[row.type] }}
+                      </td>
                       <td>Male</td>
                       <td>{{ row.measlesMale }}</td>
                       <td>{{ row.diarrheaMale }}</td>
@@ -270,7 +292,9 @@
                     <th>Remarks</th>
                   </tr>
                   <tr v-for="row in infrastructureDamage" :key="row.type">
-                    <td class="exception">{{ constants.infraType[row.type] }}</td>
+                    <td class="exception">
+                      {{ constants.infraType[row.type] }}
+                    </td>
                     <td>{{ row.numberOfInfrastructure }}</td>
                     <td>
                       <span v-if="row.functional">Yes</span>
@@ -291,6 +315,7 @@
 <script>
 import firebase from "@/firebase/init";
 import constants from "@/constants";
+import M from "materialize-css";
 export default {
   name: "GeneralInformation",
   props: ["formId", "form"],

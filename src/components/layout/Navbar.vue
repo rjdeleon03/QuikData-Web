@@ -2,32 +2,49 @@
   <div class="navbar" v-if="!mustHide">
     <nav class="teal darken-1">
       <div class="container">
-        <router-link :to="{ name: 'Home'}" class="brand-logo left">Quik Data</router-link>
+        <router-link :to="{ name: 'Home' }" class="brand-logo left"
+          >Quik Data</router-link
+        >
         <ul class="right" id="menu">
           <li>
-            <a id="burger" class="sidenav-trigger material-icons" data-target="slide-out">menu</a>
+            <a
+              id="burger"
+              class="sidenav-trigger material-icons"
+              data-target="slide-out"
+              >menu</a
+            >
           </li>
           <li v-if="user" class="expanded-item">
-            <router-link :to="{ name: 'Forms', params : { page_index: 1 }}" v-if="needsRefresh">
+            <router-link
+              :to="{ name: 'Forms', params: { page_index: 1 } }"
+              v-if="needsRefresh"
+            >
               <div class="text-with-icon">
                 <div>DNCA Forms</div>
                 <div class="material-icons">error</div>
               </div>
             </router-link>
-            <router-link :to="{ name: 'Forms', params : { page_index: 1 }}" v-else>
+            <router-link
+              :to="{ name: 'Forms', params: { page_index: 1 } }"
+              v-else
+            >
               <div class="text-with-icon">
                 <div>DNCA Forms</div>
               </div>
             </router-link>
           </li>
           <li v-if="!user" class="expanded-item">
-            <router-link :to="{ name: 'SignUp'}">Sign Up</router-link>
+            <router-link :to="{ name: 'SignUp' }">Sign Up</router-link>
           </li>
           <li v-if="!user" class="expanded-item">
-            <router-link :to="{ name: 'Login'}">Login</router-link>
+            <router-link :to="{ name: 'Login' }">Login</router-link>
           </li>
           <li v-if="user" class="expanded-item">
-            <a class="dropdown-trigger material-icons" data-target="user-dropdown">account_circle</a>
+            <a
+              class="dropdown-trigger material-icons"
+              data-target="user-dropdown"
+              >account_circle</a
+            >
           </li>
         </ul>
       </div>
@@ -82,6 +99,7 @@
 <script>
 import firebase from "@/firebase/init";
 import firebaseData from "@/firebaseData";
+import M from "materialize-css";
 export default {
   name: "Navbar",
   data() {
@@ -233,5 +251,3 @@ export default {
   }
 }
 </style>
-
-

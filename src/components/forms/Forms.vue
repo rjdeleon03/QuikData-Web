@@ -1,15 +1,26 @@
 <template>
   <div class="forms container">
-    <h2 class="center teal-text text-darken-1">Damage, Needs, and Capacities Assessment (DNCA) Forms</h2>
+    <h2 class="center teal-text text-darken-1">
+      Damage, Needs, and Capacities Assessment (DNCA) Forms
+    </h2>
     <div class="refresh-alert card-panel" v-if="needsRefresh">
       <div class="left">
-        <p>The DNCA forms list has been updated. You may want to refresh the list.</p>
+        <p>
+          The DNCA forms list has been updated. You may want to refresh the
+          list.
+        </p>
       </div>
       <div class="right">
-        <a @click="refreshAlertRefresh" class="btn-flat amber darken-2 waves-effect waves-light">
+        <a
+          @click="refreshAlertRefresh"
+          class="btn-flat amber darken-2 waves-effect waves-light"
+        >
           <p class="material-icons">refresh</p>
         </a>
-        <a @click="refreshAlertClose" class="btn-flat red waves-effect waves-light end">
+        <a
+          @click="refreshAlertClose"
+          class="btn-flat red waves-effect waves-light end"
+        >
           <p class="material-icons">close</p>
         </a>
       </div>
@@ -22,11 +33,16 @@
             <p>Are you sure you want to delete the selected DNCA form?</p>
           </div>
           <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-teal btn-flat amber darken-2">Cancel</a>
+            <a
+              href="#!"
+              class="modal-close waves-effect waves-teal btn-flat amber darken-2"
+              >Cancel</a
+            >
             <a
               @click="deleteForm(deleteFormModal.selectedFormId)"
               class="modal-close waves-effect waves-red btn-flat amber darken-2"
-            >OK</a>
+              >OK</a
+            >
           </div>
         </div>
         <ul class="collapsible card">
@@ -42,25 +58,34 @@
                 <div class="container">
                   <div class="row">
                     <div class="col s6 m6 l6 xl6">
-                      <p class="left">Assessed on {{form.stringDate}}</p>
+                      <p class="left">Assessed on {{ form.stringDate }}</p>
                     </div>
                     <div class="col s6 m6 l6 xl6">
                       <div class="right">
                         <router-link
-                          :to="{name: 'SingleForm', params : { form_id: form.form.id }}"
+                          :to="{
+                            name: 'SingleForm',
+                            params: { form_id: form.form.id }
+                          }"
                           v-if="user.isAdmin"
                           class="waves-effect waves-light btn-flat teal"
-                        >View</router-link>
+                          >View</router-link
+                        >
                         <router-link
-                          :to="{name: 'SingleForm', params : { form_id: form.form.id }}"
+                          :to="{
+                            name: 'SingleForm',
+                            params: { form_id: form.form.id }
+                          }"
                           v-else
                           class="waves-effect waves-light btn-flat teal single"
-                        >View</router-link>
+                          >View</router-link
+                        >
                         <a
                           @click="confirmDelete(form.form.id)"
                           v-if="user.isAdmin"
                           class="btn-flat red waves-effect waves-light"
-                        >Delete</a>
+                          >Delete</a
+                        >
                       </div>
                     </div>
                   </div>
@@ -70,27 +95,39 @@
                 <div class="container">
                   <div class="row">
                     <div class="col s12 m3 label">Sitio:</div>
-                    <div class="col s12 m9">{{form.baselineData[0].sitio}}&nbsp;</div>
+                    <div class="col s12 m9">
+                      {{ form.baselineData[0].sitio }}&nbsp;
+                    </div>
                   </div>
                   <div class="row">
                     <div class="col s12 m3 label">Barangay:</div>
-                    <div class="col s12 m9">{{form.baselineData[0].barangay}}&nbsp;</div>
+                    <div class="col s12 m9">
+                      {{ form.baselineData[0].barangay }}&nbsp;
+                    </div>
                   </div>
                   <div class="row">
                     <div class="col s12 m3 label">City / Municipality:</div>
-                    <div class="col s12 m9">{{form.baselineData[0].city}}&nbsp;</div>
+                    <div class="col s12 m9">
+                      {{ form.baselineData[0].city }}&nbsp;
+                    </div>
                   </div>
                   <div class="row">
                     <div class="col s12 m3 label">Province:</div>
-                    <div class="col s12 m9">{{form.baselineData[0].province}}&nbsp;</div>
+                    <div class="col s12 m9">
+                      {{ form.baselineData[0].province }}&nbsp;
+                    </div>
                   </div>
                   <div class="row">
                     <div class="col s12 m3 label">Calamity:</div>
-                    <div class="col s12 m9">{{form.baselineData[0].calamityType}}&nbsp;</div>
+                    <div class="col s12 m9">
+                      {{ form.baselineData[0].calamityType }}&nbsp;
+                    </div>
                   </div>
                   <div class="row">
                     <div class="col s12 m3 label">Last Modified:</div>
-                    <div class="col s12 m9">{{form.stringDateModified}}&nbsp;</div>
+                    <div class="col s12 m9">
+                      {{ form.stringDateModified }}&nbsp;
+                    </div>
                   </div>
                 </div>
               </div>
@@ -103,14 +140,14 @@
       <ul>
         <li>
           <router-link
-            :to="{name: 'Forms', params: { page_index: 1 }}"
+            :to="{ name: 'Forms', params: { page_index: 1 } }"
             v-if="pageNumber > 1"
             class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1"
           >
             <i class="material-icons">first_page</i>
           </router-link>
           <router-link
-            :to="{name: 'Forms', params: { page_index: 1 }}"
+            :to="{ name: 'Forms', params: { page_index: 1 } }"
             v-else
             class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1 disabled"
           >
@@ -119,14 +156,14 @@
         </li>
         <li>
           <router-link
-            :to="{name: 'Forms', params: { page_index: pageNumber - 1 }}"
+            :to="{ name: 'Forms', params: { page_index: pageNumber - 1 } }"
             v-if="pageNumber > 1"
             class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1"
           >
             <i class="material-icons">navigate_before</i>
           </router-link>
           <router-link
-            :to="{name: 'Forms', params: { page_index: pageNumber - 1 }}"
+            :to="{ name: 'Forms', params: { page_index: pageNumber - 1 } }"
             v-else
             class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1 disabled"
           >
@@ -135,20 +172,21 @@
         </li>
         <li>
           <router-link
-            :to="{name: 'Forms', params: { page_index: pageNumber }}"
+            :to="{ name: 'Forms', params: { page_index: pageNumber } }"
             class="waves-effect waves-light btn-flat amber darken-2"
-          >{{ pageNumber }}</router-link>
+            >{{ pageNumber }}</router-link
+          >
         </li>
         <li>
           <router-link
-            :to="{name: 'Forms', params: { page_index: pageNumber + 1 }}"
+            :to="{ name: 'Forms', params: { page_index: pageNumber + 1 } }"
             v-if="pageNumber < pageCount"
             class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1"
           >
             <i class="material-icons">navigate_next</i>
           </router-link>
           <router-link
-            :to="{name: 'Forms', params: { page_index: pageNumber + 1 }}"
+            :to="{ name: 'Forms', params: { page_index: pageNumber + 1 } }"
             v-else
             class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1 disabled"
           >
@@ -157,14 +195,14 @@
         </li>
         <li>
           <router-link
-            :to="{name: 'Forms', params: { page_index: pageCount }}"
+            :to="{ name: 'Forms', params: { page_index: pageCount } }"
             v-if="pageNumber < pageCount"
             class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1"
           >
             <i class="material-icons">last_page</i>
           </router-link>
           <router-link
-            :to="{name: 'Forms', params: { page_index: pageCount }}"
+            :to="{ name: 'Forms', params: { page_index: pageCount } }"
             v-else
             class="waves-effect waves-light btn-flat grey lighten-2 grey-text text-darken-1 disabled"
           >
@@ -181,6 +219,7 @@
 import firebase from "@/firebase/init";
 import utils from "@/constants";
 import firebaseData from "@/firebaseData";
+import M from "materialize-css";
 export default {
   name: "Forms",
   data() {
@@ -241,8 +280,7 @@ export default {
             this.forms.push(data);
           });
         });
-    },
-    setupPagination(formCount) {}
+    }
   },
   watch: {
     $route: "updatePage"
@@ -458,5 +496,3 @@ export default {
   }
 }
 </style>
-
-
